@@ -1,6 +1,6 @@
 {  
-  "extends": ["airbnb", "prettier", "eslint:recommended", "plugins:react/jsx-runtime"],  
-  "plugins": ["prettier"],  
+  "extends": ["airbnb", "prettier"],  
+  "plugins": ["prettier", "react/jsx-runtime"],  
   "rules": {  
     "prettier/prettier": ["error"]  
   }
