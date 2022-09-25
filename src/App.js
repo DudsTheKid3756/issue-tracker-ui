@@ -1,5 +1,6 @@
 import { Component } from 'react';
-import { Route, Router, Routes } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import Issues from './Components/Issues/Issues';
 
 class App extends Component {
   render() {
