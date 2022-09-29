@@ -1,19 +1,23 @@
 import './Issues.component.css';
+import constants from '../../constants';
 import { Card, CardContent, Typography } from '@mui/material';
-import getIssues from '../../Services/IssueService';
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 function Issues() {
-  const [issues, setIssues] = useState({});
+  const [issues, setIssues] = useState([]);
+
+  const getIssues = () => {
+    axios.get(`${constants.BASE_URL}issue`)
+      .then(response => {
+    const allIssues = response.data;
+    setIssues(allIssues);
+    })
+    .catch((error) => console.error(`Error: ${error}`));
+  }
 
   useEffect(() => {
-    let mounted = true;
-    getIssues().then((i) => {
-      if (mounted) {
-        setIssues(i);
-      }
-    });
-    return () => (mounted = false);
+    getIssues();
   }, []);
 
   return (
@@ -21,14 +25,22 @@ function Issues() {
       <Card className="card" sx={{ maxWidth: '50%', display: 'inline-block' }}>
         <CardContent className="content" sx={{ backgroundColor: 'lightgray' }}>
           <Typography>
-            <ul>
-              {issues.map((issue) => (
-                <li key={issue.Id}>
-                  {issue.Title} {issue.Comment} {issue.Created} {issue.isCompleted}{' '}
-                  {issue.hasReminder}
-                </li>
+              {issues.map((issue, index) => (
+                <div key={issue.id}>
+                  <h3>
+                    {issue.title}
+                    {' '}
+                  </h3>
+                  <p>
+                    {issue.comment}
+                    {' '}
+                  </p>
+                  <p>
+                    {issue.created}
+                    {' '}
+                  </p>
+              </div>
               ))}
-            </ul>
           </Typography>
         </CardContent>
       </Card>
