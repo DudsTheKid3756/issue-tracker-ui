@@ -57,6 +57,7 @@ function Issues() {
                     {issue.created}
                     {' '}
                   </p>
+                  <button>New Issue</button>
               </div>
               ))}
           </Typography>
