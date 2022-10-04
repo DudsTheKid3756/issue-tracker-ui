@@ -3,8 +3,13 @@ import constants from '../../constants';
 import { Card, CardContent, CardHeader, Typography } from '@mui/material';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-function Issues() {
+const Issues = () => {
+  const navigate = useNavigate();
+
+  const testState = "Test test";
+
   const [issues, setIssues] = useState([]);
   const [apiError, setApiError] = useState(false);
 
@@ -25,6 +30,10 @@ function Issues() {
   useEffect(() => {
     getIssues();
   }, []);
+
+  const handleClick = () => {
+    navigate("/create", {state: testState});  // test to check passing state to create component
+  }
 
   return (
     <div className="container">
@@ -57,7 +66,7 @@ function Issues() {
                     {issue.created}
                     {' '}
                   </p>
-                  <button>New Issue</button>
+                  <button onClick={ handleClick }>New Issue</button>
               </div>
               ))}
           </Typography>

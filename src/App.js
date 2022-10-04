@@ -1,12 +1,14 @@
 import React from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import Issues from './Components/Issues/Issues';
+import CreateIssue from './Components/CreateIssue/CreateIssue';
 
-function App() {
+const App = () => {
   return (
     <Router>
       <Routes>
         <Route exact path="/" element={<Issues />} />
+        <Route exact path="/create" element={ <CreateIssue /> } />
       </Routes>
     </Router>
   );
