@@ -1,8 +1,8 @@
 import './Issues.component.css';
 import constants from '../../constants';
+import { getIssues } from '../../Services/IssueServices';
 import { Card, CardContent, CardHeader, Typography } from '@mui/material';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const Issues = () => {
@@ -13,22 +13,8 @@ const Issues = () => {
   const [issues, setIssues] = useState([]);
   const [apiError, setApiError] = useState(false);
 
-  const getIssues = () => {
-    axios.get(`${constants.BASE_URL}issue`)
-      .then(response => {
-        const allIssues = response.data;
-        setIssues(allIssues);
-      })
-      .catch((error) => {
-        if (error) {
-          console.error(`Error: ${error}`);
-          setApiError(true);
-        }
-      })
-  }
-
   useEffect(() => {
-    getIssues();
+    getIssues(setIssues, setApiError);
   }, []);
 
   const handleClick = () => {
@@ -61,8 +47,6 @@ const Issues = () => {
                   <p>
                     {issue.comment}
                     {' '}
-                  </p>
-                  <p>
                     {issue.created}
                     {' '}
                   </p>
