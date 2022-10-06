@@ -1,4 +1,4 @@
-import style from "./Issues.component.css";
+import "./Issues.component.css";
 import constants from "../../constants";
 import { getIssues } from "../../Services/IssueServices";
 import { Card, CardContent, CardHeader, Typography } from "@mui/material";
@@ -8,8 +8,6 @@ import { useNavigate } from "react-router-dom";
 const Issues = () => {
   const navigate = useNavigate();
 
-  const testState = "Test test";
-
   const [issues, setIssues] = useState([]);
   const [apiError, setApiError] = useState(false);
 
@@ -18,7 +16,7 @@ const Issues = () => {
   }, []);
 
   const handleClick = () => {
-    navigate("/create", { state: testState }); // test to check passing state to create component
+    navigate("/create", { state: setApiError });
   };
 
   return (
@@ -36,18 +34,18 @@ const Issues = () => {
         <CardHeader title="Issue Tracker" />
         <CardContent className="content">
           <Typography>
+            {issues.map((issue, index) => (
+              <div key={issue.id}>
+                <h3>{issue.title} </h3>
+                <p>
+                  {issue.comment} {issue.created}{" "}
+                </p>
+              </div>
+            ))}
             {apiError ? (
-              <p className={style.error}>{constants.API_ERROR}</p>
+              <p className="error">{constants.API_ERROR}</p>
             ) : (
-              issues.map((issue, index) => (
-                <div key={issue.id}>
-                  <h3>{issue.title} </h3>
-                  <p>
-                    {issue.comment} {issue.created}{" "}
-                  </p>
-                  <button onClick={handleClick}>New Issue</button>
-                </div>
-              ))
+              <button onClick={handleClick}>New Issue</button>
             )}
           </Typography>
         </CardContent>

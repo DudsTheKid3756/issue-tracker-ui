@@ -13,7 +13,7 @@ const getIssues = async (setIssues, setApiError) => {
     .catch(() => setApiError(true));
 };
 
-const addIssue = async (newIssue, setIssues, setApiError) => {
+const addIssue = async (newIssue, setApiError) => {
   await httpHelper("issue", "POST", newIssue)
     .then((response) => {
       if (!response.ok) {
@@ -21,7 +21,6 @@ const addIssue = async (newIssue, setIssues, setApiError) => {
       }
       return response.json();
     })
-    .then((data) => setIssues(data))
     .catch(() => setApiError(true));
 };
 
