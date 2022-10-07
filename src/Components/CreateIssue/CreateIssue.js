@@ -1,15 +1,16 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { addIssue } from "../../Services/IssueServices";
+import validateStrings from "../../validation";
 import Form from "./Form";
 
 const CreateIssue = () => {
   const navigate = useNavigate();
   const [apiError, setApiError] = useState(false);
+  const [errors, setErrors] = useState({});
   const [newIssueStrings, setNewIssueStrings] = useState({
     title: "",
     comment: "",
-    created: "",
   });
   
   const onStringChange = (e) => {
@@ -27,21 +28,18 @@ const CreateIssue = () => {
     setNewIssueBools(values => ({ ...values, [name]: checked }));
   }
 
-  // add validation next
-  const issueToAdd = {
-    title: newIssueStrings.title,
-    comment: newIssueStrings.comment,
-    hasReminder: newIssueBools.hasReminder,
-    isCompleted: newIssueBools.isCompleted,
-  };
+  const strErrors = validateStrings({ ...newIssueStrings });
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    addIssue(issueToAdd, setApiError);
+    if (Object.keys(strErrors).length != 0) {
+      e.preventDefault();
+      setErrors(strErrors);
+    }
+    addIssue({ ...newIssueStrings, ...newIssueBools }, setApiError);
   }
 
   const handleBack = () => {
-    navigate(-1);
+    navigate("/");
   };
 
   return (
@@ -51,6 +49,7 @@ const CreateIssue = () => {
         onChanges={[onStringChange, onBoolChange]}
         onSubmit={handleSubmit}
         apiError={apiError}
+        errors={errors}
       />
       <button onClick={handleBack}>Go Back</button>
     </div>

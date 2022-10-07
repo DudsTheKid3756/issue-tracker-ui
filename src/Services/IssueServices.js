@@ -5,7 +5,7 @@ const getIssues = async (setIssues, setApiError) => {
   await httpHelper("issue", "GET")
     .then((response) => {
       if (!response.ok) {
-        throw new Error(constants.API_ERROR);
+        throw new Error(constants.API_ERROR); // implement toast comp here
       }
       return response.json();
     })
@@ -17,11 +17,11 @@ const addIssue = async (newIssue, setApiError) => {
   await httpHelper("issue", "POST", newIssue)
     .then((response) => {
       if (!response.ok) {
-        throw new Error(constants.API_ERROR);
+        throw new Error("Bad request"); // implement toast comp here
       }
       return response.json();
     })
-    .catch(() => setApiError(true));
+    .catch(() => null);
 };
 
 export { getIssues, addIssue };

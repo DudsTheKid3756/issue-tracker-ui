@@ -1,7 +1,7 @@
 import constants from "../../constants";
 import "../Issues.component.css";
 
-const Form = ({ values, onChanges, onSubmit, apiError }) => {
+const Form = ({ values, onChanges, onSubmit, apiError, errors }) => {
   return (
     <>
       <form className="form-container" onSubmit={onSubmit}>
@@ -18,6 +18,7 @@ const Form = ({ values, onChanges, onSubmit, apiError }) => {
           value={values[0].title}
           onChange={onChanges[0]}
         />
+        {errors.title && <p className="error">{errors.title}</p>}
         <label className="form-label" htmlFor="comment">
           Comment
         </label>
@@ -30,6 +31,7 @@ const Form = ({ values, onChanges, onSubmit, apiError }) => {
           value={values[0].comment}
           onChange={onChanges[0]}
         />
+        {errors.comment && <p className="error">{errors.comment}</p>}
         <label className="form-label" htmlFor="reminder">
           Reminder
         </label>
@@ -56,7 +58,7 @@ const Form = ({ values, onChanges, onSubmit, apiError }) => {
           Submit
         </button>
       </form>
-      { apiError && <p className="error">{ constants.API_ERROR }</p> }
+      {apiError && <p className="error">{constants.API_ERROR}</p>}
     </>
   );
 };
