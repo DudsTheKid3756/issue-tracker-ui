@@ -6,7 +6,6 @@ import Form from "./Form";
 
 const CreateIssue = () => {
   const navigate = useNavigate();
-  const [apiError, setApiError] = useState(false);
   const [errors, setErrors] = useState({});
   const [newIssueStrings, setNewIssueStrings] = useState({
     title: "",
@@ -35,7 +34,7 @@ const CreateIssue = () => {
       e.preventDefault();
       setErrors(strErrors);
     }
-    addIssue({ ...newIssueStrings, ...newIssueBools }, setApiError);
+    addIssue({ ...newIssueStrings, ...newIssueBools });
   }
 
   const handleBack = () => {
@@ -48,7 +47,6 @@ const CreateIssue = () => {
         values={[newIssueStrings, newIssueBools]}
         onChanges={[onStringChange, onBoolChange]}
         onSubmit={handleSubmit}
-        apiError={apiError}
         errors={errors}
       />
       <button onClick={handleBack}>Go Back</button>

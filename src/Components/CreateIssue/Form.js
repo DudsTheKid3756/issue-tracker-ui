@@ -1,7 +1,7 @@
 import constants from "../../constants";
 import "../Issues.component.css";
 
-const Form = ({ values, onChanges, onSubmit, apiError, errors }) => {
+const Form = ({ values, onChanges, onSubmit, errors }) => {
   return (
     <>
       <form className="form-container" onSubmit={onSubmit}>
@@ -58,7 +58,6 @@ const Form = ({ values, onChanges, onSubmit, apiError, errors }) => {
           Submit
         </button>
       </form>
-      {apiError && <p className="error">{constants.API_ERROR}</p>}
     </>
   );
 };
