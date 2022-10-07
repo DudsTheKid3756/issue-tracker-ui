@@ -1,4 +1,4 @@
-import "./Issues.component.css";
+import "../Issues.component.css";
 import constants from "../../constants";
 import { getIssues } from "../../Services/IssueServices";
 import { Card, CardContent, CardHeader, Typography } from "@mui/material";
@@ -16,7 +16,7 @@ const Issues = () => {
   }, []);
 
   const handleClick = () => {
-    navigate("/create", { state: setApiError });
+    navigate("/create");
   };
 
   return (
