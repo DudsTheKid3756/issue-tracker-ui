@@ -22,7 +22,7 @@ const addIssue = async (newIssue, setIsFulfilled) => {
     .then((response) => {
       if (!response.ok) {
         toaster(
-          "Unable to submit request. Please fix errors and submit again",
+          constants.BAD_REQUEST_ERROR,
           "error"
         );
         throw new Error("Bad request");
@@ -30,7 +30,7 @@ const addIssue = async (newIssue, setIsFulfilled) => {
       return response.json();
     })
     .then(() => {
-      toaster("New Issue successfully added!", "success");
+      toaster(constants.SUCCESS_MESSAGE, "success");
       setIsFulfilled(true);
     })
     .catch(() => null);
