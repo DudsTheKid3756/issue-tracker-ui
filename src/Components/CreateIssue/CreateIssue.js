@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import { addIssue } from "../../Services/IssueServices";
-import validateStrings from "../../validation";
+import validateStrings from "../../Utils/validation";
 import Form from "./Form";
 
 const CreateIssue = () => {
   const navigate = useNavigate();
   const [errors, setErrors] = useState({});
+  const [isFulfilled, setIsFulfilled] = useState(false);
   const [newIssueStrings, setNewIssueStrings] = useState({
     title: "",
     comment: "",
@@ -34,7 +36,8 @@ const CreateIssue = () => {
       e.preventDefault();
       setErrors(strErrors);
     }
-    addIssue({ ...newIssueStrings, ...newIssueBools });
+    addIssue({ ...newIssueStrings, ...newIssueBools }, setIsFulfilled);
+    if (isFulfilled) navigate("/");
   }
 
   const handleBack = () => {
@@ -50,6 +53,7 @@ const CreateIssue = () => {
         errors={errors}
       />
       <button onClick={handleBack}>Go Back</button>
+      <ToastContainer />
     </div>
   );
 };

@@ -1,4 +1,3 @@
-import constants from "../../constants";
 import "../Issues.component.css";
 
 const Form = ({ values, onChanges, onSubmit, errors }) => {

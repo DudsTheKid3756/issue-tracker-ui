@@ -1,18 +1,21 @@
 import "../Issues.component.css";
-import constants from "../../constants";
+import constants from "../../Utils/constants";
 import { getIssues } from "../../Services/IssueServices";
+import toaster from "../../Utils/toaster";
 import { Card, CardContent, CardHeader, Typography } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
 const Issues = () => {
   const navigate = useNavigate();
 
   const [issues, setIssues] = useState([]);
   const [apiError, setApiError] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(true);
 
   useEffect(() => {
-    getIssues(setIssues, setApiError);
+    getIssues(setIssues, setApiError, setIsDisabled);
   }, []);
 
   const handleClick = () => {
@@ -32,6 +35,9 @@ const Issues = () => {
         }}
       >
         <CardHeader title="Issue Tracker" />
+        <button onClick={handleClick} disabled={isDisabled}>
+          New Issue
+        </button>
         <CardContent className="content">
           <Typography>
             {issues.map((issue, index) => (
@@ -42,14 +48,11 @@ const Issues = () => {
                 </p>
               </div>
             ))}
-            {apiError ? (
-              <p className="error">{constants.API_ERROR}</p>
-            ) : (
-              <button onClick={handleClick}>New Issue</button>
-            )}
+            {apiError ? toaster(constants.API_ERROR, "error") : null}
           </Typography>
         </CardContent>
       </Card>
+      <ToastContainer />
     </div>
   );
 };
