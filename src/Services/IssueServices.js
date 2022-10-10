@@ -14,26 +14,37 @@ const getIssues = async (setIssues, setApiError, setIsDisabled) => {
       setIssues(data);
       setIsDisabled(false);
     })
-    .catch(() => setApiError(true));
+    .catch((error) => {
+      setApiError(true);
+      console.error(error);
+    });
 };
 
-const addIssue = async (newIssue, setIsFulfilled) => {
+const addIssue = async (newIssue, navigate) => {
   await httpHelper("issue", "POST", newIssue)
     .then((response) => {
       if (!response.ok) {
-        toaster(
-          constants.BAD_REQUEST_ERROR,
-          "error"
-        );
+        toaster(constants.BAD_REQUEST_ERROR, "error");
         throw new Error("Bad request");
       }
       return response.json();
     })
     .then(() => {
       toaster(constants.SUCCESS_MESSAGE, "success");
-      setIsFulfilled(true);
+      setTimeout(() => navigate("/"), 2000);
     })
-    .catch(() => null);
+    .catch((error) => console.error(error));
 };
 
-export { getIssues, addIssue };
+const deleteIssue = async (issueId) => {
+  await httpHelper(`issue/${issueId}`, "DELETE")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(constants.API_ERROR);
+      }
+      return response;
+    })
+    .catch((error) => console.error(error));
+};
+
+export { getIssues, addIssue, deleteIssue };

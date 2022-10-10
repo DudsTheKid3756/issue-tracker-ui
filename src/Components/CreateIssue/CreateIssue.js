@@ -8,12 +8,12 @@ import Form from "./Form";
 const CreateIssue = () => {
   const navigate = useNavigate();
   const [errors, setErrors] = useState({});
-  const [isFulfilled, setIsFulfilled] = useState(false);
+
   const [newIssueStrings, setNewIssueStrings] = useState({
     title: "",
     comment: "",
   });
-  
+
   const onStringChange = (e) => {
     const { name, value } = e.target;
     setNewIssueStrings((values) => ({ ...values, [name]: value }));
@@ -26,19 +26,18 @@ const CreateIssue = () => {
 
   const onBoolChange = (e) => {
     const { name, checked } = e.target;
-    setNewIssueBools(values => ({ ...values, [name]: checked }));
-  }
+    setNewIssueBools((values) => ({ ...values, [name]: checked }));
+  };
 
   const strErrors = validateStrings({ ...newIssueStrings });
 
   const handleSubmit = (e) => {
+    e.preventDefault();
     if (Object.keys(strErrors).length != 0) {
-      e.preventDefault();
       setErrors(strErrors);
     }
-    addIssue({ ...newIssueStrings, ...newIssueBools }, setIsFulfilled);
-    if (isFulfilled) navigate("/");
-  }
+    addIssue({ ...newIssueStrings, ...newIssueBools }, navigate);
+  };
 
   const handleBack = () => {
     navigate("/");

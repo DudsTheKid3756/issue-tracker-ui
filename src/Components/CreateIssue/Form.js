@@ -31,22 +31,22 @@ const Form = ({ values, onChanges, onSubmit, errors }) => {
           onChange={onChanges[0]}
         />
         {errors.comment && <p className="error">{errors.comment}</p>}
-        <label className="form-label" htmlFor="reminder">
+        <label className="form-label" htmlFor="hasReminder">
           Reminder
         </label>
         <input
-          id="reminder"
+          id="hasReminder"
           className="form-input"
           type="checkbox"
           name="hasReminder"
           defaultChecked={values[1].hasReminder}
           onChange={onChanges[1]}
         />
-        <label className="form-label" htmlFor="completed">
+        <label className="form-label" htmlFor="isCompleted">
           Completed
         </label>
         <input
-          id="completed"
+          id="isCompleted"
           className="form-input"
           type="checkbox"
           name="isCompleted"

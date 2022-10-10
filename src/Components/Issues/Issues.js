@@ -1,6 +1,6 @@
 import "../Issues.component.css";
 import constants from "../../Utils/constants";
-import { getIssues } from "../../Services/IssueServices";
+import { deleteIssue, getIssues } from "../../Services/IssueServices";
 import toaster from "../../Utils/toaster";
 import { Card, CardContent, CardHeader, Typography } from "@mui/material";
 import { useState, useEffect } from "react";
@@ -14,11 +14,15 @@ const Issues = () => {
   const [apiError, setApiError] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
 
+  const handleDelete = (id) => {
+    deleteIssue(id, setApiError);
+  };
+
   useEffect(() => {
     getIssues(setIssues, setApiError, setIsDisabled);
-  }, []);
+  }, [handleDelete]);
 
-  const handleClick = () => {
+  const handleRedirect = () => {
     navigate("/create");
   };
 
@@ -35,17 +39,18 @@ const Issues = () => {
         }}
       >
         <CardHeader title="Issue Tracker" />
-        <button onClick={handleClick} disabled={isDisabled}>
+        <button onClick={handleRedirect} disabled={isDisabled}>
           New Issue
         </button>
         <CardContent className="content">
-          <Typography>
+          <Typography component="span">
             {issues.map((issue, index) => (
               <div key={issue.id}>
                 <h3>{issue.title} </h3>
                 <p>
                   {issue.comment} {issue.created}{" "}
                 </p>
+                <button onClick={() => handleDelete(issue.id)}>Delete</button>
               </div>
             ))}
             {apiError ? toaster(constants.API_ERROR, "error") : null}
