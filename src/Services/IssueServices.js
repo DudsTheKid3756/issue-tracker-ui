@@ -36,7 +36,7 @@ const addIssue = async (newIssue, navigate) => {
     .catch((error) => console.error(error));
 };
 
-const deleteIssue = async (issueId) => {
+const deleteIssue = async (issueId, setIsDeleted) => {
   await httpHelper(`issue/${issueId}`, "DELETE")
     .then((response) => {
       if (!response.ok) {
@@ -44,6 +44,7 @@ const deleteIssue = async (issueId) => {
       }
       return response;
     })
+    .then(() => setIsDeleted(true))
     .catch((error) => console.error(error));
 };
 

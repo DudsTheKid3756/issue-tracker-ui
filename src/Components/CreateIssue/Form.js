@@ -1,62 +1,45 @@
-import "../Issues.component.css";
+import FormComponent from "../FormComponent";
+import classes from "../Issues.module.css";
 
 const Form = ({ values, onChanges, onSubmit, errors }) => {
   return (
     <>
-      <form className="form-container" onSubmit={onSubmit}>
-        <h1 className="form-header">New Issue</h1>
-        <label className="form-label" htmlFor="title">
-          Title
-        </label>
-        <input
-          id="title"
-          className="form-input"
-          type="text"
-          name="title"
-          placeholder="New Issue"
-          value={values[0].title}
-          onChange={onChanges[0]}
-        />
-        {errors.title && <p className="error">{errors.title}</p>}
-        <label className="form-label" htmlFor="comment">
-          Comment
-        </label>
-        <input
-          id="comment"
-          className="form-input"
-          type="text"
-          name="comment"
-          placeholder="Comment"
-          value={values[0].comment}
-          onChange={onChanges[0]}
-        />
-        {errors.comment && <p className="error">{errors.comment}</p>}
-        <label className="form-label" htmlFor="hasReminder">
-          Reminder
-        </label>
-        <input
-          id="hasReminder"
-          className="form-input"
-          type="checkbox"
-          name="hasReminder"
-          defaultChecked={values[1].hasReminder}
-          onChange={onChanges[1]}
-        />
-        <label className="form-label" htmlFor="isCompleted">
-          Completed
-        </label>
-        <input
-          id="isCompleted"
-          className="form-input"
-          type="checkbox"
-          name="isCompleted"
-          defaultChecked={values[1].isCompleted}
-          onChange={onChanges[1]}
-        />
-        <button className="submit-button" type="submit">
-          Submit
-        </button>
-      </form>
+      <h1 className={classes.formHeader}>New Issue</h1>
+      <FormComponent
+        label="Title"
+        field="title"
+        type="text"
+        placeholder="New Issue"
+        values={values}
+        onChanges={onChanges}
+        errors={errors}
+      />
+      <FormComponent
+        label="Comment"
+        field="comment"
+        type="text"
+        placeholder="Comment"
+        values={values}
+        onChanges={onChanges}
+        errors={errors}
+      />
+      <FormComponent
+        label="Reminder"
+        field="hasReminder"
+        type="checkbox"
+        values={values}
+        onChanges={onChanges}
+      />
+      <FormComponent
+        label="Completed"
+        field="isCompleted"
+        type="checkbox"
+        values={values}
+        onChanges={onChanges}
+      />
+      <button className={classes.button} type="submit" onClick={onSubmit}>
+        Submit
+      </button>
     </>
   );
 };
