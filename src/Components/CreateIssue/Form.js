@@ -1,9 +1,9 @@
 import FormComponent from "../FormComponent";
-import classes from "../Issues.module.css";
+import classes from "./Create.module.css";
 
 const Form = ({ values, onChanges, onSubmit, errors, handleCancel }) => {
   return (
-    <>
+    <div className={classes.formContainer}>
       <h1 className={classes.formHeader}>New Issue</h1>
       <div className={classes.textInputs}>
         <FormComponent
@@ -44,14 +44,14 @@ const Form = ({ values, onChanges, onSubmit, errors, handleCancel }) => {
         />
       </div>
       <div className={classes.buttonDiv}>
-        <button className={classes.button} onClick={handleCancel}>
+        <button className={`${classes.button} ${classes.cancel}`} onClick={handleCancel}>
           Cancel
         </button>
-        <button className={classes.button} type="submit" onClick={onSubmit}>
+        <button className={`${classes.button} ${classes.submit}`} type="submit" onClick={onSubmit}>
           Submit
         </button>
       </div>
-    </>
+    </div>
   );
 };
 

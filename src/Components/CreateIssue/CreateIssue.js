@@ -4,7 +4,6 @@ import { ToastContainer } from "react-toastify";
 import { addIssue } from "../../Services/IssueServices";
 import validateStrings from "../../Utils/validation";
 import Form from "./Form";
-import classes from "../Issues.module.css";
 
 const CreateIssue = () => {
   const navigate = useNavigate();

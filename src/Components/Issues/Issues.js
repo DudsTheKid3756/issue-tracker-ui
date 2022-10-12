@@ -33,7 +33,7 @@ const Issues = () => {
       <div className={classes.headContainer}>
         <h1 className={classes.header}>Issue Tracker</h1>
         <button
-          className={classes.button}
+          className={`${classes.button} ${classes.head}`}
           onClick={handleRedirect}
           disabled={isDisabled}
         >
@@ -42,7 +42,7 @@ const Issues = () => {
       </div>
       <div className={classes.issues}>
         <span className={classes.issuesContainer}>
-          {issues.map((issue) => (
+          {issues.length > 0 ? issues.map((issue) => (
             <div key={issue.id} className={classes.item}>
               <div className={classes.titleContainer}>
                 <h3 className={classes.title}>
@@ -57,7 +57,7 @@ const Issues = () => {
               </div>
               <p className={classes.comment}>{issue.comment}</p>
             </div>
-          ))}
+          )) : <p className={classes.noIssues}>No issues to show. Add a new one!</p>}
           {apiError ? toaster(constants.API_ERROR, "error") : null}
         </span>
       </div>

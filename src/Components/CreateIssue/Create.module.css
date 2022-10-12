@@ -1,0 +1,64 @@
+.buttonDiv {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.cancel {
+  background-color: rgb(186, 14, 14);
+  border-color: black;
+}
+
+.cancel:hover {
+  background-color: rgb(116, 6, 6);
+}
+
+.checkboxInput1 {
+  display: inline-block;
+}
+
+.checkboxInput2 {
+  display: inline-block;
+  margin-bottom: 5px;
+}
+
+.error {
+  color: red;
+}
+
+.formComponent {
+  display: inline;
+}
+
+.formContainer {
+  width: 50%;
+}
+
+.formHeader {
+  margin: 5px;
+}
+
+.formInput[type="text"] {
+  margin-left: 5px;
+  width: 40%;
+}
+
+.formInput[type="text"]:focus {
+  border: 3px solid #555;
+}
+
+.formInput[type="checkbox"] {
+  margin-left: 5px;
+}
+
+.formLabel {
+  margin-left: 5px;
+}
+
+.submit {
+  background-color: rgb(15, 174, 15);
+  border-color: black;
+}
+
+.submit:hover {
+  background-color: rgb(6, 78, 6);
+}
