@@ -4,6 +4,7 @@ import { ToastContainer } from "react-toastify";
 import { addIssue } from "../../Services/IssueServices";
 import validateStrings from "../../Utils/validation";
 import Form from "./Form";
+import classes from "../Issues.module.css";
 
 const CreateIssue = () => {
   const navigate = useNavigate();
@@ -39,7 +40,7 @@ const CreateIssue = () => {
     addIssue({ ...newIssueStrings, ...newIssueBools }, navigate);
   };
 
-  const handleBack = () => {
+  const handleCancel = () => {
     navigate("/");
   };
 
@@ -50,8 +51,8 @@ const CreateIssue = () => {
         onChanges={[onStringChange, onBoolChange]}
         onSubmit={handleSubmit}
         errors={errors}
+        handleCancel={handleCancel}
       />
-      <button onClick={handleBack}>Go Back</button>
       <ToastContainer />
     </div>
   );

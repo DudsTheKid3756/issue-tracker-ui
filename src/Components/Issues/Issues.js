@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import classes from "../Issues.module.css";
+import trashcan from "../../Utils/delete.svg"
 
 const Issues = () => {
   const navigate = useNavigate();
@@ -28,30 +29,33 @@ const Issues = () => {
   };
 
   return (
-    <div className={classes.container}>
-      <h1 className={classes.header}>Issue Tracker</h1>
-      <button
-        className={classes.button}
-        onClick={handleRedirect}
-        disabled={isDisabled}
-      >
-        New Issue
-      </button>
-      <div className={classes.content}>
-        <span>
-          {issues.map((issue, index) => (
-            <div key={issue.id}>
-              <h3 className={classes.title}>
-                {issue.id}: {issue.title}
-              </h3>
-              <p className={classes.comment}>{issue.comment} </p>
-              <span className={classes.created}>{issue.created}</span>
-              <button
-                className={classes.button}
-                onClick={() => handleDelete(issue.id)}
-              >
-                Delete
-              </button>
+    <div className={classes.page}>
+      <div className={classes.headContainer}>
+        <h1 className={classes.header}>Issue Tracker</h1>
+        <button
+          className={classes.button}
+          onClick={handleRedirect}
+          disabled={isDisabled}
+        >
+          New Issue
+        </button>
+      </div>
+      <div className={classes.issues}>
+        <span className={classes.issuesContainer}>
+          {issues.map((issue) => (
+            <div key={issue.id} className={classes.item}>
+              <div className={classes.titleContainer}>
+                <h3 className={classes.title}>
+                  {issue.id}: {issue.title}
+                </h3>
+                <span className={classes.created}>{issue.created}</span>
+                <img
+                  className={classes.delete}
+                  src={trashcan}
+                  onClick={() => handleDelete(issue.id)}
+                />
+              </div>
+              <p className={classes.comment}>{issue.comment}</p>
             </div>
           ))}
           {apiError ? toaster(constants.API_ERROR, "error") : null}
