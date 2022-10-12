@@ -27,8 +27,9 @@
 }
 
 .head {
-  position: fixed;
-  right: 24%;
+  position: sticky;
+  left: 100%;
+  bottom: 500%;
 }
 
 .headContainer {
@@ -47,6 +48,8 @@
 @media screen and (max-width: 45em) {
   .head {
     position: sticky;
+    bottom: 0;
+    left: 0;
   }
   .headContainer {
     display: inline;

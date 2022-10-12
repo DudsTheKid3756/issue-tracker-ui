@@ -4,7 +4,7 @@ import toaster from "../../Utils/toaster";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import classes from "../Issues.module.css";
+import classes from "./Issues.module.css";
 import trashcan from "../../Utils/delete.svg"
 
 const Issues = () => {
@@ -57,7 +57,7 @@ const Issues = () => {
               </div>
               <p className={classes.comment}>{issue.comment}</p>
             </div>
-          )) : <p className={classes.noIssues}>No issues to show. Add a new one!</p>}
+          )) : apiError ? null : <p className={classes.noIssues}>No issues to show. Add a new one!</p>}
           {apiError ? toaster(constants.API_ERROR, "error") : null}
         </span>
       </div>
