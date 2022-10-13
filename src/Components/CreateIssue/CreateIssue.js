@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState} from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { addIssue } from "../../Services/IssueServices";
@@ -8,6 +8,7 @@ import Form from "./Form";
 const CreateIssue = () => {
   const navigate = useNavigate();
   const [errors, setErrors] = useState({});
+  const [errLength, setErrLength] = useState(0);
 
   const [newIssueStrings, setNewIssueStrings] = useState({
     title: "",
@@ -35,6 +36,7 @@ const CreateIssue = () => {
     e.preventDefault();
     if (Object.keys(strErrors).length != 0) {
       setErrors(strErrors);
+      setErrLength(strErrors.length);
     }
     addIssue({ ...newIssueStrings, ...newIssueBools }, navigate);
   };
@@ -50,6 +52,7 @@ const CreateIssue = () => {
         onChanges={[onStringChange, onBoolChange]}
         onSubmit={handleSubmit}
         errors={errors}
+        errLength={errLength}
         handleCancel={handleCancel}
       />
       <ToastContainer />

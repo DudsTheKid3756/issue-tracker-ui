@@ -9,6 +9,7 @@ const FormComponent = ({
   values,
   onChanges,
   errors,
+  errLength
 }) => {
   return (
     <>
@@ -18,7 +19,7 @@ const FormComponent = ({
         </label>
         {type == "text" ? <br /> : null}
         <input
-          className={classes.formInput}
+          className={`${classes.formInput} ${errLength != 0 ? classes.errBorder : ""}`}
           id={field}
           name={field}
           type={type}
@@ -28,9 +29,12 @@ const FormComponent = ({
           onChange={type == "text" ? onChanges[0] : onChanges[1]}
         />
       </form>
-      {type == "text" && errors.length != 0 ? (
-        <p className={classes.error}>{errors[field]}</p>
-      ) : null}
+      <div className={classes.errorContainer}>
+        {type == "text" && errLength != 0 ? (
+          <p className={classes.error}>{errors[field]}</p>
+        ) : null}
+      </div>
+      <br />
     </>
   );
 };

@@ -23,6 +23,16 @@
 
 .error {
   color: red;
+  display: inline;
+  margin-left: 10px;
+}
+
+.errBorder[type="text"] {
+  border-color: red;
+}
+
+.errorContainer {
+  display: inline;
 }
 
 .formComponent {
@@ -30,7 +40,7 @@
 }
 
 .formContainer {
-  width: 50%;
+  width: 75%;
 }
 
 .formHeader {
@@ -39,6 +49,7 @@
 
 .formInput[type="text"] {
   margin-left: 5px;
+  margin-bottom: 10px;
   width: 40%;
 }
 

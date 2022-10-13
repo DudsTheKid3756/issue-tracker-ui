@@ -1,7 +1,7 @@
 import FormComponent from "../FormComponent";
 import classes from "./Create.module.css";
 
-const Form = ({ values, onChanges, onSubmit, errors, handleCancel }) => {
+const Form = ({ values, onChanges, onSubmit, errors, handleCancel, errLength }) => {
   return (
     <div className={classes.formContainer}>
       <h1 className={classes.formHeader}>New Issue</h1>
@@ -14,6 +14,7 @@ const Form = ({ values, onChanges, onSubmit, errors, handleCancel }) => {
           values={values}
           onChanges={onChanges}
           errors={errors}
+          errLength={errLength}
         />
         <FormComponent
           label="Comment"
@@ -23,6 +24,7 @@ const Form = ({ values, onChanges, onSubmit, errors, handleCancel }) => {
           values={values}
           onChanges={onChanges}
           errors={errors}
+          errLength={errLength}
         />
       </div>
       <div className={classes.checkboxInput1}>
