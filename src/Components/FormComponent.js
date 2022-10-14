@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "../Components/CreateIssue/Create.module.css";
+import classes from "./Form.module.css";
 
 const FormComponent = ({
   label,

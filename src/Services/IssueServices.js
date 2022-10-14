@@ -30,7 +30,23 @@ const addIssue = async (newIssue, navigate) => {
       return response.json();
     })
     .then(() => {
-      toaster(constants.SUCCESS_MESSAGE, "success");
+      toaster(constants.NEW_ISSUE_SUCCESS_MESSAGE, "success");
+      setTimeout(() => navigate("/"), 2000);
+    })
+    .catch((error) => console.error(error));
+};
+
+const updateIssue = async (issueId, updatedIssue, navigate) => {
+  await httpHelper(`issue/${issueId}`, 'PUT', updatedIssue)
+    .then((response) => {
+      if (!response.ok) {
+        toaster(constants.BAD_REQUEST_ERROR, "error");
+        throw new Error("Bad request");
+      }
+      return response.json();
+    })
+    .then(() => {
+      toaster(constants.UPDATE_SUCCESS_MESSAGE, "success");
       setTimeout(() => navigate("/"), 2000);
     })
     .catch((error) => console.error(error));
@@ -48,4 +64,4 @@ const deleteIssue = async (issueId, setIsDeleted) => {
     .catch((error) => console.error(error));
 };
 
-export { getIssues, addIssue, deleteIssue };
+export { getIssues, addIssue, updateIssue, deleteIssue };

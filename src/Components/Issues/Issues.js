@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import classes from "./Issues.module.css";
 import trashcan from "../../Utils/delete.svg"
+import pencil from "../../Utils/edit.svg";
 
 const Issues = () => {
   const navigate = useNavigate();
@@ -28,6 +29,10 @@ const Issues = () => {
     navigate("/create");
   };
 
+  const toEdit = (issue) => {
+    navigate(`/${issue.id}`, { state: issue })
+  }
+
   return (
     <div className={classes.page}>
       <div className={classes.headContainer}>
@@ -49,6 +54,11 @@ const Issues = () => {
                   {issue.id}: {issue.title}
                 </h3>
                 <span className={classes.created}>{issue.created}</span>
+                <img
+                  className={classes.edit}
+                  src={pencil}
+                  onClick={() => toEdit(issue)}
+                />
                 <img
                   className={classes.delete}
                   src={trashcan}

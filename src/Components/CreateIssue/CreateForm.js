@@ -1,0 +1,74 @@
+import FormComponent from "../FormComponent";
+import classes from "../Form.module.css";
+
+const CreateForm = ({
+  values,
+  onChanges,
+  onSubmit,
+  errors,
+  handleCancel,
+  errLength,
+}) => {
+  return (
+    <div className={classes.formContainer}>
+      <h1 className={classes.formHeader}>New Issue</h1>
+      <div className={classes.textInputs}>
+        <FormComponent
+          label="Title"
+          field="title"
+          type="text"
+          placeholder="New Issue"
+          values={values}
+          onChanges={onChanges}
+          errors={errors}
+          errLength={errLength}
+        />
+        <FormComponent
+          label="Comment"
+          field="comment"
+          type="text"
+          placeholder="Comment"
+          values={values}
+          onChanges={onChanges}
+          errors={errors}
+          errLength={errLength}
+        />
+      </div>
+      <div className={classes.checkboxInput1}>
+        <FormComponent
+          label="Reminder"
+          field="hasReminder"
+          type="checkbox"
+          values={values}
+          onChanges={onChanges}
+        />
+      </div>
+      <div className={classes.checkboxInput2}>
+        <FormComponent
+          label="Completed"
+          field="isCompleted"
+          type="checkbox"
+          values={values}
+          onChanges={onChanges}
+        />
+      </div>
+      <div className={classes.buttonDiv}>
+        <button
+          className={`${classes.button} ${classes.cancel}`}
+          onClick={handleCancel}
+        >
+          Cancel
+        </button>
+        <button
+          className={`${classes.button} ${classes.submit}`}
+          type="submit"
+          onClick={onSubmit}
+        >
+          Submit
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default CreateForm;

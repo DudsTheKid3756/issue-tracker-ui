@@ -1,16 +1,23 @@
+import React from "react";
 import FormComponent from "../FormComponent";
-import classes from "./Create.module.css";
+import classes from "../Form.module.css";
 
-const Form = ({ values, onChanges, onSubmit, errors, handleCancel, errLength }) => {
+const UpdateForm = ({
+  values,
+  onChanges,
+  handleUpdate,
+  errors,
+  errLength,
+  handleCancel,
+}) => {
   return (
-    <div className={classes.formContainer}>
-      <h1 className={classes.formHeader}>New Issue</h1>
+    <div className={classes.formComponent}>
+      <h1 className={classes.formHeader}>Edit Issue</h1>
       <div className={classes.textInputs}>
         <FormComponent
           label="Title"
           field="title"
           type="text"
-          placeholder="New Issue"
           values={values}
           onChanges={onChanges}
           errors={errors}
@@ -20,7 +27,6 @@ const Form = ({ values, onChanges, onSubmit, errors, handleCancel, errLength }) 
           label="Comment"
           field="comment"
           type="text"
-          placeholder="Comment"
           values={values}
           onChanges={onChanges}
           errors={errors}
@@ -46,15 +52,22 @@ const Form = ({ values, onChanges, onSubmit, errors, handleCancel, errLength }) 
         />
       </div>
       <div className={classes.buttonDiv}>
-        <button className={`${classes.button} ${classes.cancel}`} onClick={handleCancel}>
+        <button
+          className={`${classes.button} ${classes.cancel}`}
+          onClick={handleCancel}
+        >
           Cancel
         </button>
-        <button className={`${classes.button} ${classes.submit}`} type="submit" onClick={onSubmit}>
-          Submit
+        <button
+          className={`${classes.button} ${classes.submit}`}
+          type="submit"
+          onClick={handleUpdate}
+        >
+          Update
         </button>
       </div>
     </div>
   );
 };
 
-export default Form;
+export default UpdateForm;

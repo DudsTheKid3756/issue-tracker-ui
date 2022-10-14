@@ -1,9 +1,10 @@
-import { useState} from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { addIssue } from "../../Services/IssueServices";
 import validateStrings from "../../Utils/validation";
-import Form from "./Form";
+import CreateForm from "./CreateForm";
+import classes from "../Form.module.css";
 
 const CreateIssue = () => {
   const navigate = useNavigate();
@@ -46,8 +47,8 @@ const CreateIssue = () => {
   };
 
   return (
-    <div>
-      <Form
+    <div className={classes.formContainer}>
+      <CreateForm
         values={[newIssueStrings, newIssueBools]}
         onChanges={[onStringChange, onBoolChange]}
         onSubmit={handleSubmit}
