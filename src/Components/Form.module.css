@@ -21,9 +21,8 @@
   margin-bottom: 5px;
 }
 
-.error {
+.errorBase {
   color: red;
-  display: inline;
   margin-left: 10px;
 }
 
@@ -65,6 +64,10 @@
   margin-left: 5px;
 }
 
+.normErr {
+  display: inline;
+}
+
 .submit {
   background-color: rgb(15, 174, 15);
   border-color: black;
@@ -72,4 +75,20 @@
 
 .submit:hover {
   background-color: rgb(6, 78, 6);
+}
+
+.textAreaErrBorder {
+  border: 2px solid red;
+}
+
+.textAreaErr {
+  display: inline-table;
+  margin-bottom: 0px;
+  margin-top: 0px;
+  position: absolute;
+  word-break: break-all;
+}
+
+.textInputs {
+  width: 150%;
 }

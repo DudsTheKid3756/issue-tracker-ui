@@ -6,5 +6,5 @@ export default Object.freeze({
   BAD_REQUEST_ERROR: "Unable to submit request. Please fix errors and submit again",
   NEW_ISSUE_SUCCESS_MESSAGE: "New Issue successfully added!",
   UPDATE_SUCCESS_MESSAGE: "Issue updated successfully!",
-  ALPHANUMERIC_REGEX: /^([\d\w\-'_][\s]*)+\s*$/,
+  ALPHANUMERIC_REGEX: /^([\d\w-'_,.][\s]*)+\s*$/,
 });

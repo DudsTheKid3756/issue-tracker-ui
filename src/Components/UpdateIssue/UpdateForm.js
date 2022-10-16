@@ -31,6 +31,7 @@ const UpdateForm = ({
           onChanges={onChanges}
           errors={errors}
           errLength={errLength}
+          isMultiline={true}
         />
       </div>
       <div className={classes.checkboxInput1}>

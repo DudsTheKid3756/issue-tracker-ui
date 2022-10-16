@@ -27,11 +27,12 @@ const CreateForm = ({
           label="Comment"
           field="comment"
           type="text"
-          placeholder="Comment"
+          placeholder=""
           values={values}
           onChanges={onChanges}
           errors={errors}
           errLength={errLength}
+          isMultiline={true}
         />
       </div>
       <div className={classes.checkboxInput1}>
