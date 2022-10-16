@@ -44,15 +44,6 @@ const CreateForm = ({
           onChanges={onChanges}
         />
       </div>
-      <div className={classes.checkboxInput2}>
-        <FormComponent
-          label="Completed"
-          field="isCompleted"
-          type="checkbox"
-          values={values}
-          onChanges={onChanges}
-        />
-      </div>
       <div className={classes.buttonDiv}>
         <button
           className={`${classes.button} ${classes.cancel}`}

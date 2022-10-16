@@ -5,8 +5,9 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import classes from "./Issues.module.css";
-import trashcan from "../../Utils/delete.svg"
+import trashcan from "../../Utils/delete.svg";
 import pencil from "../../Utils/edit.svg";
+import check from "../../Utils/check.svg";
 
 const Issues = () => {
   const navigate = useNavigate();
@@ -30,8 +31,8 @@ const Issues = () => {
   };
 
   const toEdit = (issue) => {
-    navigate(`/${issue.id}`, { state: issue })
-  }
+    navigate(`/${issue.id}`, { state: issue });
+  };
 
   return (
     <div className={classes.page}>
@@ -47,27 +48,35 @@ const Issues = () => {
       </div>
       <div className={classes.issues}>
         <span className={classes.issuesContainer}>
-          {issues.length > 0 ? issues.map((issue) => (
-            <div key={issue.id} className={classes.item}>
-              <div className={classes.titleContainer}>
-                <h3 className={classes.title}>
-                  {issue.id}: {issue.title}
-                </h3>
-                <span className={classes.created}>{issue.created}</span>
-                <img
-                  className={classes.edit}
-                  src={pencil}
-                  onClick={() => toEdit(issue)}
-                />
-                <img
-                  className={classes.delete}
-                  src={trashcan}
-                  onClick={() => handleDelete(issue.id)}
-                />
+          {issues.length > 0 ? (
+            issues.map((issue) => (
+              <div key={issue.id} className={classes.item}>
+                <div className={classes.titleContainer}>
+                  <h3 className={classes.title}>{issue.title}</h3>
+                  <span className={classes.created}>{issue.created}</span>
+                  <img
+                    className={classes.edit}
+                    src={pencil}
+                    onClick={() => toEdit(issue)}
+                  />
+                  <img
+                    className={classes.delete}
+                    src={trashcan}
+                    onClick={() => handleDelete(issue.id)}
+                  />
+                  <img
+                    className={issue.isCompleted ? classes.checked : classes.unchecked} // fix the coloring
+                    src={check}
+                  />
+                </div>
+                <p className={classes.comment}>{issue.comment}</p>
               </div>
-              <p className={classes.comment}>{issue.comment}</p>
-            </div>
-          )) : apiError ? null : <p className={classes.noIssues}>No issues to show. Add a new one!</p>}
+            ))
+          ) : apiError ? null : (
+            <p className={classes.noIssues}>
+              No issues to show. Add a new one!
+            </p>
+          )}
           {apiError ? toaster(constants.API_ERROR, "error") : null}
         </span>
       </div>

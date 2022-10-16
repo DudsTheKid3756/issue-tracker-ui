@@ -6,6 +6,10 @@
   transform: none;
 }
 
+.checked {
+  fill: green;
+}
+
 .created {
   font-size: 11px;
   display: inline;
@@ -69,8 +73,13 @@
 
 .title {
   display: inline;
+  margin-left: 5px;
 }
 
 .titleContainer {
   margin-left: 5px;
+}
+
+.unchecked {
+  fill: grey;
 }

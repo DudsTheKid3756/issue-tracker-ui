@@ -30,6 +30,7 @@ const FormComponent = ({
               type={type}
               placeholder={placeholder}
               value={values[0][field]}
+              checked={values[1][field]}
               defaultChecked={values[1][field]}
               onChange={type == "text" ? onChanges[0] : onChanges[1]}
             />
