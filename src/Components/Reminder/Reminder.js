@@ -3,8 +3,8 @@ import ReminderForm from "./ReminderForm";
 
 const Reminder = ({ onRequestClose }) => {
   const [reminder, setReminder] = useState({
-    date: new Date().getUTCMonth().toString(),
-    time: new Date().getTime().toString(),
+    date: "",
+    time: "",
     alert: "---Select an option---",
   });
 
@@ -13,13 +13,17 @@ const Reminder = ({ onRequestClose }) => {
     setReminder((values) => ({ ...values, [name]: value }));
   };
 
+  const handleSubmit = () => {
+    console.log(reminder);
+  };
+
   return (
     <div>
       <ReminderForm
         onRequestClose={onRequestClose}
-        value={reminder}
+        values={reminder}
         onChanges={[null, onChange]}
-        handleSubmit={() => console.log("submitted")}
+        handleSubmit={handleSubmit}
       />
     </div>
   );

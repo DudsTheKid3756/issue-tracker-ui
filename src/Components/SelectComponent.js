@@ -1,8 +1,7 @@
 import React from "react";
 import classes from "../Components/Form.module.css";
 
-const SelectComponent = ({ label, field, onChanges, value, options }) => {
-    console.log(value[field]);
+const SelectComponent = ({ label, field, onChanges, values, options }) => {
   return (
     <div>
       <label className={classes.formLabel} htmlFor={field}>
@@ -12,11 +11,11 @@ const SelectComponent = ({ label, field, onChanges, value, options }) => {
         id={field}
         className={classes.formInput}
         name={field}
-        value={value[field]}
         onChange={onChanges[1]}
       >
+        <option>{values[field]}</option>
         {options.map((option, index) => (
-          <option key={index}>{option.optStr}</option>
+          <option key={index} defaultValue={option.id}>{option.optStr}</option>
         ))}
       </select>
     </div>
