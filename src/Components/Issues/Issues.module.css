@@ -6,8 +6,9 @@
   transform: none;
 }
 
-.checked {
-  fill: green;
+.check {
+  display: inline-block;
+  margin-bottom: -8px;
 }
 
 .created {
@@ -23,14 +24,7 @@
   margin: 8px;
 }
 
-.delete {
-  cursor: pointer;
-  display: inline;
-  vertical-align: middle;
-  margin-left: 5px;
-}
-
-.edit {
+.icon {
   cursor: pointer;
   display: inline;
   vertical-align: middle;
@@ -78,8 +72,4 @@
 
 .titleContainer {
   margin-left: 5px;
-}
-
-.unchecked {
-  fill: grey;
 }

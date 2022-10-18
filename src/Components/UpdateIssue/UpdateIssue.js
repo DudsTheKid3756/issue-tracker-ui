@@ -56,7 +56,7 @@ const UpdateIssue = () => {
   return (
     <div className={classes.formContainer}>
       <UpdateForm
-        values={[strsToUpdate, boolsToUpdate]}
+        values={{...strsToUpdate, ...boolsToUpdate}}
         onChanges={[onStringChange, onBoolChange]}
         handleUpdate={handleUpdate}
         errors={errors}

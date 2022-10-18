@@ -29,9 +29,8 @@ const FormComponent = ({
               name={field}
               type={type}
               placeholder={placeholder}
-              value={values[0][field]}
-              checked={values[1][field]}
-              defaultChecked={values[1][field]}
+              defaultValue={values[field]}
+              checked={values[field]}
               onChange={type == "text" ? onChanges[0] : onChanges[1]}
             />
             <div className={classes.errorContainer}>
@@ -50,7 +49,7 @@ const FormComponent = ({
               id={field}
               name={field}
               placeholder={placeholder}
-              value={values[0][field]}
+              defaultValue={values[field]}
               onChange={onChanges[0]}
             ></textarea>
             <div className={classes.errorContainer}>

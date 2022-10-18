@@ -7,7 +7,7 @@ import { ToastContainer } from "react-toastify";
 import classes from "./Issues.module.css";
 import trashcan from "../../Utils/delete.svg";
 import pencil from "../../Utils/edit.svg";
-import check from "../../Utils/check.svg";
+import Check from "../../Utils/Check";
 
 const Issues = () => {
   const navigate = useNavigate();
@@ -55,18 +55,19 @@ const Issues = () => {
                   <h3 className={classes.title}>{issue.title}</h3>
                   <span className={classes.created}>{issue.created}</span>
                   <img
-                    className={classes.edit}
+                    className={classes.icon}
                     src={pencil}
                     onClick={() => toEdit(issue)}
                   />
                   <img
-                    className={classes.delete}
+                    className={classes.icon}
                     src={trashcan}
                     onClick={() => handleDelete(issue.id)}
                   />
-                  <img
-                    className={issue.isCompleted ? classes.checked : classes.unchecked} // fix the coloring
-                    src={check}
+                  <span style={{ marginLeft: "48%" }}></span>
+                  <Check
+                    color={issue.isCompleted ? "green" : "grey"}
+                    title={issue.isCompleted ? "Completed!" : "Incomplete"}
                   />
                 </div>
                 <p className={classes.comment}>{issue.comment}</p>

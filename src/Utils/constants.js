@@ -7,4 +7,11 @@ export default Object.freeze({
   NEW_ISSUE_SUCCESS_MESSAGE: "New Issue successfully added!",
   UPDATE_SUCCESS_MESSAGE: "Issue updated successfully!",
   ALPHANUMERIC_REGEX: /^([\d\w-'_,.][\s]*)+\s*$/,
+  NOTIF_OPTIONS: [
+    { id: 0, optStr: "No alert" },
+    { id: 1, optStr: "Half hour" },
+    { id: 2, optStr: "1 hour" },
+    { id: 3, optStr: "1 day" },
+    { id: 4, optStr: "2 days" },
+  ],
 });

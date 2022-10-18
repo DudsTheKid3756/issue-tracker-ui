@@ -30,6 +30,10 @@ const CreateIssue = () => {
     const { name, checked } = e.target;
     setNewIssueBools((values) => ({ ...values, [name]: checked }));
   };
+  
+  const handleCloseModal = () => {
+    setNewIssueBools(newIssueBools.hasReminder);
+  };
 
   const strErrors = validateStrings({ ...newIssueStrings });
 
@@ -49,12 +53,14 @@ const CreateIssue = () => {
   return (
     <div className={classes.formContainer}>
       <CreateForm
-        values={[newIssueStrings, newIssueBools]}
+        values={{...newIssueStrings, ...newIssueBools}}
         onChanges={[onStringChange, onBoolChange]}
         onSubmit={handleSubmit}
         errors={errors}
         errLength={errLength}
         handleCancel={handleCancel}
+        showModal={newIssueBools.hasReminder}
+        onRequestClose={handleCloseModal}
       />
       <ToastContainer />
     </div>

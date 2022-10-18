@@ -46,8 +46,11 @@
   margin: 5px;
 }
 
-.formInput[type="text"] {
+.formInput {
   margin-left: 5px;
+}
+
+.formInput[type="text"] {
   margin-bottom: 10px;
   width: 40%;
 }
@@ -56,8 +59,12 @@
   border: 3px solid #555;
 }
 
-.formInput[type="checkbox"] {
-  margin-left: 5px;
+.formInput[type="date"] {
+  margin-bottom: 10px;
+}
+
+.formInput[type="time"] {
+  margin-bottom: 5px;
 }
 
 .formLabel {
@@ -66,6 +73,11 @@
 
 .normErr {
   display: inline;
+}
+
+select.formInput {
+  width: 40%;
+  margin-bottom: 10px;
 }
 
 .submit {
@@ -91,4 +103,11 @@
 
 .textInputs {
   width: 150%;
+}
+
+.x {
+  cursor: pointer;
+  display: inline;
+  margin-left: 5px;
+  vertical-align: middle;
 }
