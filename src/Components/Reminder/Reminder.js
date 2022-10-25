@@ -1,21 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import ReminderForm from "./ReminderForm";
 
-const Reminder = ({ onRequestClose }) => {
-  const [reminder, setReminder] = useState({
-    date: "",
-    time: "",
-    alert: "---Select an option---",
-  });
-
+const Reminder = ({ onRequestClose, reminder, setReminder, hasReminder }) => {
   const onChange = (e) => {
     const { name, value } = e.target;
     setReminder((values) => ({ ...values, [name]: value }));
   };
 
   const handleSubmit = () => {
-    console.log(reminder);
-  };
+    hasReminder = true;
+    onRequestClose();
+  }
 
   return (
     <div>

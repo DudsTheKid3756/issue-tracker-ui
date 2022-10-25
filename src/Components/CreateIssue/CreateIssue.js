@@ -5,11 +5,19 @@ import { addIssue } from "../../Services/IssueServices";
 import validateStrings from "../../Utils/validation";
 import CreateForm from "./CreateForm";
 import classes from "../Form.module.css";
+import constants from "../../Utils/constants";
 
 const CreateIssue = () => {
   const navigate = useNavigate();
   const [errors, setErrors] = useState({});
   const [errLength, setErrLength] = useState(0);
+  const [reminder, setReminder] = useState({
+    date: "",
+    time: "",
+    alert: "---Select an option---",
+  });
+
+  
 
   const [newIssueStrings, setNewIssueStrings] = useState({
     title: "",
@@ -43,7 +51,7 @@ const CreateIssue = () => {
       setErrors(strErrors);
       setErrLength(strErrors.length);
     }
-    addIssue({ ...newIssueStrings, ...newIssueBools }, navigate);
+    addIssue({ ...newIssueStrings, ...newIssueBools, reminder }, navigate);
   };
 
   const handleCancel = () => {
@@ -61,6 +69,8 @@ const CreateIssue = () => {
         handleCancel={handleCancel}
         showModal={newIssueBools.hasReminder}
         onRequestClose={handleCloseModal}
+        reminder={reminder}
+        setReminder={setReminder}
       />
       <ToastContainer />
     </div>
