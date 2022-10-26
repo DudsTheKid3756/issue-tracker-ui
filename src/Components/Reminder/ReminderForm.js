@@ -4,7 +4,7 @@ import classes from "../Form.module.css";
 import SelectComponent from "../SelectComponent";
 import constants from "../../Utils/constants";
 
-const ReminderForm = ({ onRequestClose, values, onChanges, handleSubmit }) => {
+const ReminderForm = ({ closeModal, values, onChanges }) => {
   return (
     <div>
       <FormComponent
@@ -26,16 +26,12 @@ const ReminderForm = ({ onRequestClose, values, onChanges, handleSubmit }) => {
         field="alert"
         values={values}
         onChanges={onChanges}
-        options={constants.NOTIF_OPTIONS}
+        options={constants.ALERT_OPTIONS}
       />
-      <button className={classes.cancel} onClick={onRequestClose}>
+      <button className={classes.cancel} onClick={closeModal}>
         Cancel
       </button>
-      <button
-        className={classes.submit}
-        type="submit"
-        onClick={handleSubmit}
-      >
+      <button className={classes.submit} type="submit" onClick={closeModal}>
         Set Reminder
       </button>
     </div>

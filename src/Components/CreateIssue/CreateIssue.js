@@ -5,19 +5,11 @@ import { addIssue } from "../../Services/IssueServices";
 import validateStrings from "../../Utils/validation";
 import CreateForm from "./CreateForm";
 import classes from "../Form.module.css";
-import constants from "../../Utils/constants";
 
 const CreateIssue = () => {
   const navigate = useNavigate();
   const [errors, setErrors] = useState({});
   const [errLength, setErrLength] = useState(0);
-  const [reminder, setReminder] = useState({
-    date: "",
-    time: "",
-    alert: "---Select an option---",
-  });
-
-  
 
   const [newIssueStrings, setNewIssueStrings] = useState({
     title: "",
@@ -37,10 +29,21 @@ const CreateIssue = () => {
   const onBoolChange = (e) => {
     const { name, checked } = e.target;
     setNewIssueBools((values) => ({ ...values, [name]: checked }));
+    if (name == "hasReminder" && checked == true) setShowModal(true);
   };
-  
-  const handleCloseModal = () => {
-    setNewIssueBools(newIssueBools.hasReminder);
+
+  const [reminder, setReminder] = useState({
+    date: "",
+    time: "",
+    alert: "---Select an option---",
+  });
+
+  const [showModal, setShowModal] = useState(false);
+
+  const closeModal = () => {
+    if (Object.values(reminder).some((prop) => prop == ""))
+      setNewIssueBools((values) => ({ ...values, ["hasReminder"]: false }));
+    setShowModal(false);
   };
 
   const strErrors = validateStrings({ ...newIssueStrings });
@@ -51,7 +54,10 @@ const CreateIssue = () => {
       setErrors(strErrors);
       setErrLength(strErrors.length);
     }
-    addIssue({ ...newIssueStrings, ...newIssueBools, reminder }, navigate);
+    addIssue(
+      { ...newIssueStrings, ...newIssueBools, reminder: { reminder } },
+      navigate
+    );
   };
 
   const handleCancel = () => {
@@ -61,16 +67,16 @@ const CreateIssue = () => {
   return (
     <div className={classes.formContainer}>
       <CreateForm
-        values={{...newIssueStrings, ...newIssueBools}}
+        values={{ ...newIssueStrings, ...newIssueBools }}
         onChanges={[onStringChange, onBoolChange]}
         onSubmit={handleSubmit}
         errors={errors}
         errLength={errLength}
         handleCancel={handleCancel}
-        showModal={newIssueBools.hasReminder}
-        onRequestClose={handleCloseModal}
         reminder={reminder}
         setReminder={setReminder}
+        showModal={showModal}
+        closeModal={closeModal}
       />
       <ToastContainer />
     </div>

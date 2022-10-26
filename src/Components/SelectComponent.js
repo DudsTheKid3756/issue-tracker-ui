@@ -15,7 +15,7 @@ const SelectComponent = ({ label, field, onChanges, values, options }) => {
       >
         <option>{values[field]}</option>
         {options.map((option, index) => (
-          <option key={index} defaultValue={option.id}>{option.optStr}</option>
+          <option key={index} defaultValue={option}>{option}</option>
         ))}
       </select>
     </div>

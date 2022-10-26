@@ -10,10 +10,10 @@ const CreateForm = ({
   errors,
   handleCancel,
   errLength,
-  showModal,
-  onRequestClose,
   reminder,
   setReminder,
+  showModal,
+  closeModal
 }) => {
   return (
     <div className={classes.formContainer}>
@@ -51,15 +51,14 @@ const CreateForm = ({
         />
         <ModalComponent
           isOpen={showModal}
-          onRequestClose={onRequestClose}
+          onRequestClose={closeModal}
           label="Create Reminder"
           header="Create Reminder"
           component={
             <Reminder
-              onRequestClose={onRequestClose}
+              closeModal={closeModal}
               reminder={reminder}
               setReminder={setReminder}
-              hasReminder={values.hasReminder}
             />
           }
         />
