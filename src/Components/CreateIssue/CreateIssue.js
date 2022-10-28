@@ -55,7 +55,7 @@ const CreateIssue = () => {
       setErrLength(strErrors.length);
     }
     addIssue(
-      { ...newIssueStrings, ...newIssueBools, reminder: { reminder } },
+      { ...newIssueStrings, ...newIssueBools, reminder },
       navigate
     );
   };
