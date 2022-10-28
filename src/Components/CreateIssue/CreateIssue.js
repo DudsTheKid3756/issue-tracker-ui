@@ -54,8 +54,10 @@ const CreateIssue = () => {
       setErrors(strErrors);
       setErrLength(strErrors.length);
     }
+    const reminderToAdd = reminder.time == "" ? null : reminder;
+
     addIssue(
-      { ...newIssueStrings, ...newIssueBools, reminder },
+      { ...newIssueStrings, ...newIssueBools, reminder: { ...reminderToAdd } },
       navigate
     );
   };
