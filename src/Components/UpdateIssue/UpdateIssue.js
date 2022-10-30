@@ -10,7 +10,8 @@ const UpdateIssue = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const currentIssue = useRef(location.state);
+  const currentIssue = useRef(location.state.issue);
+  const currentReminder = useRef(location.state.issue);
   const [errors, setErrors] = useState({});
   const [errLength, setErrLength] = useState(0);
 
@@ -33,6 +34,18 @@ const UpdateIssue = () => {
     const { name, checked } = e.target;
     setBoolsToUpdate((values) => ({ ...values, [name]: checked }));
   };
+
+  const [reminder, setReminder] = useState({
+    time: currentReminder.current.time,
+    date: currentReminder.current.date,
+    alert: currentReminder.current.alert,
+  });
+
+  const [showModal, setShowModal] = useState(false);
+
+  const closeModal = () => {
+    
+  }
 
   const strErrors = validateStrings({ ...strsToUpdate });
 
@@ -62,6 +75,8 @@ const UpdateIssue = () => {
         errors={errors}
         errLength={errLength}
         handleCancel={handleCancel}
+        reminder={reminder}
+        setReminder={setReminder}
       />
       <ToastContainer />
     </div>

@@ -8,6 +8,7 @@ import classes from "../Form.module.css";
 
 const CreateIssue = () => {
   const navigate = useNavigate();
+
   const [errors, setErrors] = useState({});
   const [errLength, setErrLength] = useState(0);
 
@@ -29,14 +30,21 @@ const CreateIssue = () => {
   const onBoolChange = (e) => {
     const { name, checked } = e.target;
     setNewIssueBools((values) => ({ ...values, [name]: checked }));
-    if (name == "hasReminder" && checked == true) setShowModal(true);
+    if (name == "hasReminder") {
+      if (checked == true) setShowModal(true);
+      else setReminder(initialReminder);
+    }
   };
 
-  const [reminder, setReminder] = useState({
+  const initialReminder = {
     date: "",
     time: "",
     alert: "---Select an option---",
-  });
+  };
+
+  const [reminder, setReminder] = useState(
+    JSON.parse(JSON.stringify(initialReminder))
+  );
 
   const [showModal, setShowModal] = useState(false);
 
@@ -54,7 +62,9 @@ const CreateIssue = () => {
       setErrors(strErrors);
       setErrLength(strErrors.length);
     }
-    const reminderToAdd = reminder.time == "" ? null : reminder;
+    const reminderToAdd = Object.values(reminder).some((prop) => prop == "")
+      ? null
+      : reminder;
 
     addIssue(
       { ...newIssueStrings, ...newIssueBools, reminder: { ...reminderToAdd } },

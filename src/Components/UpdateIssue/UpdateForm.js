@@ -1,6 +1,8 @@
 import React from "react";
 import FormComponent from "../FormComponent";
 import classes from "../Form.module.css";
+import ModalComponent from "../ModalComponent";
+import Reminder from "../Reminder/Reminder";
 
 const UpdateForm = ({
   values,
@@ -9,6 +11,10 @@ const UpdateForm = ({
   errors,
   errLength,
   handleCancel,
+  reminder,
+  setReminder,
+  showModal,
+  closeModal
 }) => {
   return (
     <div className={classes.formComponent}>
@@ -41,6 +47,19 @@ const UpdateForm = ({
           type="checkbox"
           values={values}
           onChanges={onChanges}
+        />
+        <ModalComponent
+          isOpen={showModal}
+          onRequestClose={closeModal}
+          label="Update Reminder"
+          header="Update Reminder"
+          component={
+            <Reminder
+              closeModal={closeModal}
+              reminder={reminder}
+              setReminder={setReminder}
+            />
+          }
         />
       </div>
       <div className={classes.checkboxInput2}>

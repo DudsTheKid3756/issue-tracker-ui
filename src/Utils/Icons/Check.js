@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "../Components/Issues/Issues.module.css";
+import classes from "../../Components/Issues/Issues.module.css";
 
 const Check = ({ color, title }) => {
   return (

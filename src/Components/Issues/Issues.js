@@ -5,9 +5,10 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import classes from "./Issues.module.css";
-import trashcan from "../../Utils/delete.svg";
-import pencil from "../../Utils/edit.svg";
-import Check from "../../Utils/Check";
+import trashcan from "../../Utils/Icons/delete.svg";
+import pencil from "../../Utils/Icons/edit.svg";
+import Info from "../../Utils/Icons/Info";
+import Check from "../../Utils/Icons/Check";
 
 const Issues = () => {
   const navigate = useNavigate();
@@ -16,6 +17,7 @@ const Issues = () => {
   const [apiError, setApiError] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
   const [isDeleted, setIsDeleted] = useState(false);
+  const [showComment, setShowComment] = useState({});
 
   const handleDelete = (id) => {
     deleteIssue(id, setIsDeleted);
@@ -30,8 +32,12 @@ const Issues = () => {
     navigate("/create");
   };
 
-  const toEdit = (issue) => {
-    navigate(`/${issue.id}`, { state: issue });
+  const toEdit = (issue, reminder) => {
+    navigate(`/${issue.id}`, { state: { issue: issue, reminder: reminder } });
+  };
+
+  const toggleComment = (id) => {
+    setShowComment({ ...showComment, [id]: !showComment[id] });
   };
 
   return (
@@ -53,24 +59,31 @@ const Issues = () => {
               <div key={issue.id} className={classes.item}>
                 <div className={classes.titleContainer}>
                   <h3 className={classes.title}>{issue.title}</h3>
+                  <Info
+                    title="Issue Comment"
+                    onClick={() => toggleComment(issue.id)}
+                  />
                   <span className={classes.created}>{issue.created}</span>
                   <img
                     className={classes.icon}
                     src={pencil}
-                    onClick={() => toEdit(issue)}
+                    onClick={() => toEdit(issue, issue.reminder)}
                   />
                   <img
                     className={classes.icon}
                     src={trashcan}
                     onClick={() => handleDelete(issue.id)}
                   />
-                  <span style={{ marginLeft: "48%" }}></span>
                   <Check
                     color={issue.isCompleted ? "green" : "grey"}
                     title={issue.isCompleted ? "Completed!" : "Incomplete"}
                   />
                 </div>
-                <p className={classes.comment}>{issue.comment}</p>
+                {showComment[issue.id] ? (
+                  <p className={classes.comment}>{issue.comment}</p>
+                ) : (
+                  <p className={classes.spacer}></p>
+                )}
               </div>
             ))
           ) : apiError ? null : (

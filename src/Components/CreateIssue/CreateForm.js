@@ -13,7 +13,7 @@ const CreateForm = ({
   reminder,
   setReminder,
   showModal,
-  closeModal
+  closeModal,
 }) => {
   return (
     <div className={classes.formContainer}>
@@ -78,6 +78,23 @@ const CreateForm = ({
           Submit
         </button>
       </div>
+      {values.hasReminder ? (
+        <div className={classes.reminderContainer}>
+          <h3 className={classes.formHeader}>Reminder</h3>
+          <span className={classes.formLabel}>
+            Date: {reminder.date}
+            <br />
+          </span>
+          <span className={classes.formLabel}>
+            Time: {reminder.time}
+            <br />
+          </span>
+          <span className={classes.formLabel}>
+            Alert: {reminder.alert}
+            <br />
+          </span>
+        </div>
+      ) : null}
     </div>
   );
 };

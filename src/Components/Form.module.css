@@ -52,7 +52,7 @@
 
 .formInput[type="text"] {
   margin-bottom: 10px;
-  width: 40%;
+  width: 43%;
 }
 
 .formInput[type="text"]:focus {
@@ -73,6 +73,14 @@
 
 .normErr {
   display: inline;
+}
+
+.reminderContainer {
+  display: inline-block;
+  border: 1px solid black;
+  padding: 0px 5px 5px 5px;
+  margin-top: 5px;
+  width: 65%;
 }
 
 select.formInput {
