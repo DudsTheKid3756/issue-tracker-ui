@@ -5,6 +5,7 @@ import { addIssue } from "../../Services/IssueServices";
 import validateStrings from "../../Utils/validation";
 import CreateForm from "./CreateForm";
 import classes from "../Form.module.css";
+import constants from "../../Utils/constants";
 
 const CreateIssue = () => {
   const navigate = useNavigate();
@@ -27,24 +28,21 @@ const CreateIssue = () => {
     isCompleted: false,
   });
 
+  const defaultReminder = {
+    ...JSON.parse(JSON.stringify(constants.INITIAL_REMINDER)),
+    ["alert"]: "---Select an option---",
+  };
+
+  const [reminder, setReminder] = useState(defaultReminder);
+
   const onBoolChange = (e) => {
     const { name, checked } = e.target;
     setNewIssueBools((values) => ({ ...values, [name]: checked }));
     if (name == "hasReminder") {
       if (checked == true) setShowModal(true);
-      else setReminder(initialReminder);
+      else setReminder(defaultReminder);
     }
   };
-
-  const initialReminder = {
-    date: "",
-    time: "",
-    alert: "---Select an option---",
-  };
-
-  const [reminder, setReminder] = useState(
-    JSON.parse(JSON.stringify(initialReminder))
-  );
 
   const [showModal, setShowModal] = useState(false);
 

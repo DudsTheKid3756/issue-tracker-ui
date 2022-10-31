@@ -9,4 +9,9 @@ export default Object.freeze({
   UPDATE_SUCCESS_MESSAGE: "Issue updated successfully!",
   ALPHANUMERIC_REGEX: /^([\d\w-'_,.][\s]*)+\s*$/,
   ALERT_OPTIONS: ["No alert", "Half hour", "1 hour", "1 day", "2 days"],
+  INITIAL_REMINDER: {
+    date: "",
+    time: "",
+    alert: "",
+  },
 });

@@ -3,6 +3,7 @@ import FormComponent from "../FormComponent";
 import classes from "../Form.module.css";
 import ModalComponent from "../ModalComponent";
 import Reminder from "../Reminder/Reminder";
+import pencil from "../../Utils/Icons/edit.svg";
 
 const UpdateForm = ({
   values,
@@ -13,6 +14,7 @@ const UpdateForm = ({
   handleCancel,
   reminder,
   setReminder,
+  openModal,
   showModal,
   closeModal
 }) => {
@@ -62,6 +64,8 @@ const UpdateForm = ({
           }
         />
       </div>
+      {values.hasReminder ? <img className={classes.icon} src={pencil} onClick={openModal} /> : null}
+      {" | "}
       <div className={classes.checkboxInput2}>
         <FormComponent
           label="Completed"

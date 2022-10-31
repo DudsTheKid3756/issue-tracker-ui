@@ -1,9 +1,11 @@
+import { setSelectionRange } from "@testing-library/user-event/dist/utils";
 import { useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { updateIssue } from "../../Services/IssueServices";
 import validateStrings from "../../Utils/validation";
 import classes from "../Form.module.css";
+import ModalComponent from "../ModalComponent";
 import UpdateForm from "./UpdateForm";
 
 const UpdateIssue = () => {
@@ -11,9 +13,10 @@ const UpdateIssue = () => {
   const navigate = useNavigate();
 
   const currentIssue = useRef(location.state.issue);
-  const currentReminder = useRef(location.state.issue);
+  const currentReminder = useRef(location.state.reminder);
   const [errors, setErrors] = useState({});
   const [errLength, setErrLength] = useState(0);
+  const [removeReminderModal, setRemoveReminderModal] = useState(false);
 
   const [strsToUpdate, setStrsToUpdate] = useState({
     title: currentIssue.current.title,
@@ -33,19 +36,23 @@ const UpdateIssue = () => {
   const onBoolChange = (e) => {
     const { name, checked } = e.target;
     setBoolsToUpdate((values) => ({ ...values, [name]: checked }));
+    if (name == "hasReminder") {
+      if (checked == false) setRemoveReminderModal(!checked);
+    };
   };
 
   const [reminder, setReminder] = useState({
-    time: currentReminder.current.time,
     date: currentReminder.current.date,
+    time: currentReminder.current.time,
     alert: currentReminder.current.alert,
   });
 
-  const [showModal, setShowModal] = useState(false);
+  const [showReminderModal, setShowReminderModal] = useState(false);
 
-  const closeModal = () => {
-    
-  }
+  const closeRemoveReminderModal = () => {
+    setBoolsToUpdate(() => ({ ...boolsToUpdate, ["hasReminder"]: true }));
+    setRemoveReminderModal(false);
+  };
 
   const strErrors = validateStrings({ ...strsToUpdate });
 
@@ -77,6 +84,21 @@ const UpdateIssue = () => {
         handleCancel={handleCancel}
         reminder={reminder}
         setReminder={setReminder}
+        openModal={() => setShowReminderModal(true)}
+        showModal={showReminderModal}
+        closeModal={() => setShowReminderModal(false)}
+      />
+      <ModalComponent
+        isOpen={removeReminderModal}
+        onRequestClose={closeRemoveReminderModal}
+        label="Remove Reminder?"
+        header="Remove Reminder"
+        component={
+          <>
+            <button className={classes.cancel} onClick={closeRemoveReminderModal}>Cancel</button>
+            <button className={classes.submit}>Remove</button>
+          </>
+        }
       />
       <ToastContainer />
     </div>
