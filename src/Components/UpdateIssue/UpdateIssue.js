@@ -1,8 +1,8 @@
-import { setSelectionRange } from "@testing-library/user-event/dist/utils";
 import { useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { updateIssue } from "../../Services/IssueServices";
+import constants from "../../Utils/constants";
 import validateStrings from "../../Utils/validation";
 import classes from "../Form.module.css";
 import ModalComponent from "../ModalComponent";
@@ -17,6 +17,11 @@ const UpdateIssue = () => {
   const [errors, setErrors] = useState({});
   const [errLength, setErrLength] = useState(0);
   const [removeReminderModal, setRemoveReminderModal] = useState(false);
+
+  const defaultReminder = {
+    ...JSON.parse(JSON.stringify(constants.INITIAL_REMINDER)),
+    ["alert"]: "---Select an option---",
+  };
 
   const [strsToUpdate, setStrsToUpdate] = useState({
     title: currentIssue.current.title,
@@ -38,7 +43,11 @@ const UpdateIssue = () => {
     setBoolsToUpdate((values) => ({ ...values, [name]: checked }));
     if (name == "hasReminder") {
       if (checked == false) setRemoveReminderModal(!checked);
-    };
+      else {
+        setReminder(defaultReminder);
+        setShowReminderModal(checked);
+      }
+    }
   };
 
   const [reminder, setReminder] = useState({
@@ -48,6 +57,12 @@ const UpdateIssue = () => {
   });
 
   const [showReminderModal, setShowReminderModal] = useState(false);
+
+  const removeReminder = () => {
+    setReminder(constants.INITIAL_REMINDER);
+    setBoolsToUpdate(() => ({ ...boolsToUpdate, ["hasReminder"]: false }));
+    setRemoveReminderModal(false);
+  };
 
   const closeRemoveReminderModal = () => {
     setBoolsToUpdate(() => ({ ...boolsToUpdate, ["hasReminder"]: true }));
@@ -64,7 +79,7 @@ const UpdateIssue = () => {
     }
     updateIssue(
       currentIssue.current.id,
-      { ...strsToUpdate, ...boolsToUpdate },
+      { ...strsToUpdate, ...boolsToUpdate, reminder: { ...reminder } },
       navigate
     );
   };
@@ -76,7 +91,7 @@ const UpdateIssue = () => {
   return (
     <div className={classes.formContainer}>
       <UpdateForm
-        values={{...strsToUpdate, ...boolsToUpdate}}
+        values={{ ...strsToUpdate, ...boolsToUpdate }}
         onChanges={[onStringChange, onBoolChange]}
         handleUpdate={handleUpdate}
         errors={errors}
@@ -95,8 +110,15 @@ const UpdateIssue = () => {
         header="Remove Reminder"
         component={
           <>
-            <button className={classes.cancel} onClick={closeRemoveReminderModal}>Cancel</button>
-            <button className={classes.submit}>Remove</button>
+            <button
+              className={classes.cancel}
+              onClick={closeRemoveReminderModal}
+            >
+              Cancel
+            </button>
+            <button className={classes.submit} onClick={removeReminder}>
+              Remove
+            </button>
           </>
         }
       />
