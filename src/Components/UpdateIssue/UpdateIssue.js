@@ -58,8 +58,8 @@ const UpdateIssue = () => {
 
   const [showReminderModal, setShowReminderModal] = useState(false);
 
-  const removeReminder = () => {
-    setReminder(constants.INITIAL_REMINDER);
+  const removeReminder = (reminder) => {
+    setReminder(reminder);
     setBoolsToUpdate(() => ({ ...boolsToUpdate, ["hasReminder"]: false }));
     setRemoveReminderModal(false);
   };
@@ -101,13 +101,16 @@ const UpdateIssue = () => {
         setReminder={setReminder}
         openModal={() => setShowReminderModal(true)}
         showModal={showReminderModal}
-        closeModal={() => setShowReminderModal(false)}
+        closeModal={() => {
+          setBoolsToUpdate((values) => ({ ...values, ["hasReminder"]: values.hasReminder ? false : true }));
+          setShowReminderModal(false);
+        }}
       />
       <ModalComponent
         isOpen={removeReminderModal}
         onRequestClose={closeRemoveReminderModal}
-        label="Remove Reminder?"
-        header="Remove Reminder"
+        label="Remove Reminder"
+        header="Remove Reminder?"
         component={
           <>
             <button
@@ -116,7 +119,10 @@ const UpdateIssue = () => {
             >
               Cancel
             </button>
-            <button className={classes.submit} onClick={removeReminder}>
+            <button
+              className={classes.submit}
+              onClick={() => removeReminder(constants.INITIAL_REMINDER)}
+            >
               Remove
             </button>
           </>
