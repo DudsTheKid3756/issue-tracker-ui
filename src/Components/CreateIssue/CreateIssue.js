@@ -23,6 +23,10 @@ const CreateIssue = () => {
     setNewIssueStrings((values) => ({ ...values, [name]: value }));
   };
 
+  const [color, setColor] = useState("");
+
+  const onColorChange = (e) => setColor(e.target.value.hex);
+
   const [newIssueBools, setNewIssueBools] = useState({
     hasReminder: false,
     isCompleted: false,
@@ -78,7 +82,7 @@ const CreateIssue = () => {
     <div className={classes.formContainer}>
       <CreateForm
         values={{ ...newIssueStrings, ...newIssueBools }}
-        onChanges={[onStringChange, onBoolChange]}
+        onChanges={[onStringChange, onBoolChange, onColorChange]}
         onSubmit={handleSubmit}
         errors={errors}
         errLength={errLength}
