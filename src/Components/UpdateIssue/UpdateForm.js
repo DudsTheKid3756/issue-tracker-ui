@@ -4,6 +4,7 @@ import classes from "../Form.module.css";
 import ModalComponent from "../ModalComponent";
 import Reminder from "../Reminder/Reminder";
 import pencil from "../../Utils/Icons/edit.svg";
+import paintbrush from "../../Utils/Icons/paintbrush.svg";
 
 const UpdateForm = ({
   values,
@@ -16,7 +17,8 @@ const UpdateForm = ({
   setReminder,
   openModal,
   showModal,
-  closeModal
+  closeModal,
+  setShowColorPicker
 }) => {
   return (
     <div className={classes.formComponent}>
@@ -64,7 +66,9 @@ const UpdateForm = ({
           }
         />
       </div>
-      {values.hasReminder ? <img className={classes.icon} src={pencil} onClick={openModal} /> : null}
+      {values.hasReminder ? (
+        <img className={classes.icon} src={pencil} onClick={openModal} />
+      ) : null}
       {" | "}
       <div className={classes.checkboxInput2}>
         <FormComponent
@@ -75,6 +79,13 @@ const UpdateForm = ({
           onChanges={onChanges}
         />
       </div>
+      {" | "}
+      <label className={classes.label}>Color</label>
+      <img
+        className={classes.icon}
+        src={paintbrush}
+        onClick={() => setShowColorPicker((prevState) => !prevState)}
+      />
       <div className={classes.buttonDiv}>
         <button
           className={`${classes.button} ${classes.cancel}`}

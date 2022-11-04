@@ -39,6 +39,7 @@
 }
 
 .formContainer {
+  display: inline-block;
   width: 75%;
 }
 
@@ -79,7 +80,22 @@
   margin-left: 5px;
 }
 
+.label {
+  margin-left: 5px;
+}
+
 .normErr {
+  display: inline;
+}
+
+.picker {
+  display: block;
+}
+
+.pickerContainer {
+  left: 52%;
+  bottom: 73%;
+  position: fixed;
   display: inline;
 }
 

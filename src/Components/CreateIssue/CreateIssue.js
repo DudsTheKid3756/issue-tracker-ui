@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { addIssue } from "../../Services/IssueServices";
+import { TwitterPicker } from "react-color";
 import validateStrings from "../../Utils/validation";
 import CreateForm from "./CreateForm";
 import classes from "../Form.module.css";
@@ -23,9 +24,11 @@ const CreateIssue = () => {
     setNewIssueStrings((values) => ({ ...values, [name]: value }));
   };
 
-  const [color, setColor] = useState("");
+  const [showColorPicker, setShowColorPicker] = useState(false);
 
-  const onColorChange = (e) => setColor(e.target.value.hex);
+  const [color, setColor] = useState("#000000");
+
+  const onColorChange = (color) => setColor(color.hex);
 
   const [newIssueBools, setNewIssueBools] = useState({
     hasReminder: false,
@@ -68,8 +71,14 @@ const CreateIssue = () => {
       ? null
       : reminder;
 
+    console.log(color);
     addIssue(
-      { ...newIssueStrings, ...newIssueBools, reminder: { ...reminderToAdd } },
+      {
+        ...newIssueStrings,
+        ...newIssueBools,
+        color,
+        reminder: reminderToAdd ,
+      },
       navigate
     );
   };
@@ -91,7 +100,18 @@ const CreateIssue = () => {
         setReminder={setReminder}
         showModal={showModal}
         closeModal={closeModal}
+        setShowColorPicker={setShowColorPicker}
       />
+      <div className={classes.pickerContainer}>
+        {showColorPicker ? (
+          <TwitterPicker
+            className={classes.picker}
+            triangle="hide"
+            color={color}
+            onChangeComplete={onColorChange}
+          />
+        ) : null}
+      </div>
       <ToastContainer />
     </div>
   );

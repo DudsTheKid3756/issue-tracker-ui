@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { TwitterPicker } from "react-color";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { updateIssue } from "../../Services/IssueServices";
@@ -32,6 +33,15 @@ const UpdateIssue = () => {
     const { name, value } = e.target;
     setStrsToUpdate((values) => ({ ...values, [name]: value }));
   };
+
+  const [showColorPicker, setShowColorPicker] = useState(false);
+
+  const [colorToUpdate, setColorToUpdate] = useState({
+    color: currentIssue.current.color,
+  });
+
+  const onColorChange = (colorToUpdate) =>
+    setColorToUpdate(() => ({ ["color"]: colorToUpdate.hex }));
 
   const [boolsToUpdate, setBoolsToUpdate] = useState({
     hasReminder: currentIssue.current.hasReminder,
@@ -69,6 +79,16 @@ const UpdateIssue = () => {
     setRemoveReminderModal(false);
   };
 
+  const closeReminderModal = () => {
+    setBoolsToUpdate((values) => ({
+      ...values,
+      ["hasReminder"]: Object.values(reminder).some((prop) => prop == "")
+        ? false
+        : true,
+    }));
+    setShowReminderModal(false);
+  };
+
   const strErrors = validateStrings({ ...strsToUpdate });
 
   const handleUpdate = (e) => {
@@ -79,7 +99,12 @@ const UpdateIssue = () => {
     }
     updateIssue(
       currentIssue.current.id,
-      { ...strsToUpdate, ...boolsToUpdate, reminder: { ...reminder } },
+      {
+        ...strsToUpdate,
+        ...boolsToUpdate,
+        ...colorToUpdate,
+        reminder: reminder,
+      },
       navigate
     );
   };
@@ -101,16 +126,19 @@ const UpdateIssue = () => {
         setReminder={setReminder}
         openModal={() => setShowReminderModal(true)}
         showModal={showReminderModal}
-        closeModal={() => {
-          setBoolsToUpdate((values) => ({
-            ...values,
-            ["hasReminder"]: Object.values(reminder).some((prop) => prop == "")
-              ? false
-              : true,
-          }));
-          setShowReminderModal(false);
-        }}
+        closeModal={closeReminderModal}
+        setShowColorPicker={setShowColorPicker}
       />
+      <div className={classes.pickerContainer}>
+        {showColorPicker ? (
+          <TwitterPicker
+            className={classes.picker}
+            triangle="hide"
+            color={colorToUpdate.color}
+            onChangeComplete={onColorChange}
+          />
+        ) : null}
+      </div>
       <ModalComponent
         isOpen={removeReminderModal}
         onRequestClose={closeRemoveReminderModal}

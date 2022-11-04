@@ -80,9 +80,17 @@ const Issues = () => {
                   />
                 </div>
                 {showComment[issue.id] ? (
-                  <p className={classes.comment}>{issue.comment}</p>
+                  <p
+                    className={classes.comment}
+                    style={{ borderColor: issue.color }}
+                  >
+                    {issue.comment}
+                  </p>
                 ) : (
-                  <p className={classes.spacer}></p>
+                  <p
+                    className={classes.spacer}
+                    style={{ borderColor: issue.color }}
+                  ></p>
                 )}
               </div>
             ))

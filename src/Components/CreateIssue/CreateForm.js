@@ -1,8 +1,8 @@
 import FormComponent from "../FormComponent";
 import classes from "../Form.module.css";
 import ModalComponent from "../ModalComponent";
-import { TwitterPicker } from "react-color";
 import Reminder from "../Reminder/Reminder";
+import paintbrush from "../../Utils/Icons/paintbrush.svg";
 
 const CreateForm = ({
   values,
@@ -15,6 +15,7 @@ const CreateForm = ({
   setReminder,
   showModal,
   closeModal,
+  setShowColorPicker,
 }) => {
   return (
     <div className={classes.formContainer}>
@@ -64,8 +65,13 @@ const CreateForm = ({
           }
         />
       </div>
-      <TwitterPicker />
-      {/* TODO: Format Color Picker and set handler */}
+      {" | "}
+      <label className={classes.label}>Color</label>
+      <img
+        className={classes.icon}
+        src={paintbrush}
+        onClick={() => setShowColorPicker((prevState) => !prevState)}
+      />
       <div className={classes.buttonDiv}>
         <button
           className={`${classes.button} ${classes.cancel}`}
