@@ -1,10 +1,11 @@
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Notification from "../Components/Reminder/Notification";
 
 const toaster = (text, type) => {
   toast(text, {
     position: "top-right",
-    autoClose: 5000,
+    autoClose: 2000,
     hideProgressBar: false,
     closeOnClick: true,
     draggable: false,
@@ -14,4 +15,19 @@ const toaster = (text, type) => {
   });
 };
 
-export default toaster;
+const notificationToast = (info) => {
+  toast(<Notification info={info} />, {
+    position: "bottom-right",
+    autoClose: false,
+    hideProgressBar: true,
+    closeOnClick: false,
+    closeButton: ({ closeToast }) => (
+      <button onClick={closeToast}>Dismiss</button>
+    ),
+    draggable: false,
+    theme: "dark",
+    type: "info",
+  });
+};
+
+export { toaster, notificationToast };

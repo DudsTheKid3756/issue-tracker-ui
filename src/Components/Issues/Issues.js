@@ -1,7 +1,7 @@
 import constants from "../../Utils/constants";
 import { deleteIssue, getIssues } from "../../Services/IssueServices";
-import toaster from "../../Utils/toaster";
-import { useState, useEffect } from "react";
+import { toaster, notificationToast } from "../../Utils/toaster";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import classes from "./Issues.module.css";
@@ -12,6 +12,14 @@ import Check from "../../Utils/Icons/Check";
 
 const Issues = () => {
   const navigate = useNavigate();
+  const today = useRef(new Date());
+  const dateData = {
+    month: today.current.getMonth(),
+    day: today.current.getDate(),
+    year: today.current.getFullYear(),
+    hours: today.current.getHours(),
+    minutes: today.current.getMinutes(),
+  };
 
   const [issues, setIssues] = useState([]);
   const [apiError, setApiError] = useState(false);
@@ -23,6 +31,29 @@ const Issues = () => {
     deleteIssue(id, setIsDeleted);
     setIsDeleted(false);
   };
+
+  const handleNotification = () => {
+    issues.forEach((issue) => {
+      const { time, date, alert } = issue.reminder;
+      const option = constants.ALERT_OPTIONS.find(
+        (option) => option.text == alert
+      );
+
+      if (option.duration != null)
+        if (
+          time ==
+            `${dateData.hours}:${
+              Number.parseInt(dateData.minutes) + option.duration
+            }` &&
+          date == `${dateData.year}-${dateData.month}-${dateData.day}`
+        )
+          notificationToast(issue);
+    });
+  };
+
+  useEffect(() => {
+    handleNotification();
+  }, [dateData.minutes]);
 
   useEffect(() => {
     getIssues(setIssues, setApiError, setIsDisabled);

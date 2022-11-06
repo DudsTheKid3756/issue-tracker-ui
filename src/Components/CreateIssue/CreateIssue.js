@@ -70,14 +70,12 @@ const CreateIssue = () => {
     const reminderToAdd = Object.values(reminder).some((prop) => prop == "")
       ? null
       : reminder;
-
-    console.log(color);
     addIssue(
       {
         ...newIssueStrings,
         ...newIssueBools,
         color,
-        reminder: reminderToAdd ,
+        reminder: reminderToAdd,
       },
       navigate
     );

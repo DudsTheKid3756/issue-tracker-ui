@@ -8,7 +8,14 @@ export default Object.freeze({
   NEW_ISSUE_SUCCESS_MESSAGE: "New Issue successfully added!",
   UPDATE_SUCCESS_MESSAGE: "Issue updated successfully!",
   ALPHANUMERIC_REGEX: /^([\d\w-'_,.][\s]*)+\s*$/,
-  ALERT_OPTIONS: ["No alert", "Half hour", "1 hour", "1 day", "2 days"],
+  ALERT_OPTIONS: [
+    { text: "No alert", duration: null },
+    { text: "On time", duration: 0 },
+    { text: "Half hour", duration: 30 },
+    { text: "1 hour", duration: 60 },
+    { text: "1 day", duration: 1440 },
+    { text: "2 days", duration: 2880 },
+  ],
   INITIAL_REMINDER: {
     date: "",
     time: "",

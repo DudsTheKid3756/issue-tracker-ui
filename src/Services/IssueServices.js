@@ -1,6 +1,6 @@
 import constants from "../Utils/constants";
 import httpHelper from "../Utils/httpHelper";
-import toaster from "../Utils/toaster";
+import { toaster } from "../Utils/toaster";
 
 const getIssues = async (setIssues, setApiError, setIsDisabled) => {
   await httpHelper("issue", "GET")
@@ -37,7 +37,7 @@ const addIssue = async (newIssue, navigate) => {
 };
 
 const updateIssue = async (issueId, updatedIssue, navigate) => {
-  await httpHelper(`issue/${issueId}`, 'PUT', updatedIssue)
+  await httpHelper(`issue/${issueId}`, "PUT", updatedIssue)
     .then((response) => {
       if (!response.ok) {
         toaster(constants.BAD_REQUEST_ERROR, "error");

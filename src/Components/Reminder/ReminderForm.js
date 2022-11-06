@@ -5,6 +5,7 @@ import SelectComponent from "../SelectComponent";
 import constants from "../../Utils/constants";
 
 const ReminderForm = ({ closeModal, values, onChanges }) => {
+  const options = constants.ALERT_OPTIONS.map((option) => option.text);
   return (
     <div>
       <FormComponent
@@ -26,7 +27,7 @@ const ReminderForm = ({ closeModal, values, onChanges }) => {
         field="alert"
         values={values}
         onChanges={onChanges}
-        options={constants.ALERT_OPTIONS}
+        options={options}
       />
       <button className={classes.cancel} onClick={closeModal}>
         Cancel
