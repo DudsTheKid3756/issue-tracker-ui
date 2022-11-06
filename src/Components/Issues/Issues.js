@@ -1,7 +1,7 @@
 import constants from "../../Utils/constants";
 import { deleteIssue, getIssues } from "../../Services/IssueServices";
 import { toaster, notificationToast } from "../../Utils/toaster";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import classes from "./Issues.module.css";
@@ -12,52 +12,51 @@ import Check from "../../Utils/Icons/Check";
 
 const Issues = () => {
   const navigate = useNavigate();
-  const today = useRef(new Date());
-  const dateData = {
-    month: today.current.getMonth(),
-    day: today.current.getDate(),
-    year: today.current.getFullYear(),
-    hours: today.current.getHours(),
-    minutes: today.current.getMinutes(),
-  };
+  // const today = useRef(new Date());
+  // const dateData = {
+  //   month: today.current.getMonth(),
+  //   day: today.current.getDate(),
+  //   year: today.current.getFullYear(),
+  //   hours: today.current.getHours(),
+  //   minutes: today.current.getMinutes(),
+  // };
 
   const [issues, setIssues] = useState([]);
   const [apiError, setApiError] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
   const [isDeleted, setIsDeleted] = useState(false);
   const [showComment, setShowComment] = useState({});
+  // const min = useRef(0);
+  // if (dateData.minutes > min.current) min.current = dateData.minutes;
 
   const handleDelete = (id) => {
     deleteIssue(id, setIsDeleted);
     setIsDeleted(false);
   };
 
-  const handleNotification = () => {
-    issues.forEach((issue) => {
-      const { time, date, alert } = issue.reminder;
-      const option = constants.ALERT_OPTIONS.find(
-        (option) => option.text == alert
-      );
+  // const handleNotification = () => {
+  //   issues.forEach((issue) => {
+  //     const { time, date, alert } = issue.reminder;
+  //     const option = constants.ALERT_OPTIONS.find(
+  //       (option) => option.text == alert
+  //     );
 
-      if (option.duration != null)
-        if (
-          time ==
-            `${dateData.hours}:${
-              Number.parseInt(dateData.minutes) + option.duration
-            }` &&
-          date == `${dateData.year}-${dateData.month}-${dateData.day}`
-        )
-          notificationToast(issue);
-    });
-  };
-
-  useEffect(() => {
-    handleNotification();
-  }, [dateData.minutes]);
+  //     if (option.duration != null)
+  //       if (
+  //         time ==
+  //           `${dateData.hours}:${
+  //             Number.parseInt(dateData.minutes) + option.duration
+  //           }` &&
+  //         date == `${dateData.year}-${dateData.month}-${dateData.day}`
+  //       )
+  //         notificationToast(issue);
+  //   });
+  // };
 
   useEffect(() => {
     getIssues(setIssues, setApiError, setIsDisabled);
   }, [isDeleted]);
+
 
   const handleRedirect = () => {
     navigate("/create");
@@ -110,7 +109,7 @@ const Issues = () => {
                     title={issue.isCompleted ? "Completed!" : "Incomplete"}
                   />
                 </div>
-                {showComment[issue.id] ? (
+                {!showComment[issue.id] ? (
                   <p
                     className={classes.comment}
                     style={{ borderColor: issue.color }}
