@@ -4,7 +4,13 @@ const Notification = ({ info }) => {
   return (
     <>
       <h3>Issue Alert</h3>
-      <p>{info.title}</p>
+      <div>
+        <h5>{info.title}</h5>
+        <p>{info.comment}</p>
+        <span>
+          {info.reminder.date} {info.reminder.time}
+        </span>
+      </div>
     </>
   );
 };

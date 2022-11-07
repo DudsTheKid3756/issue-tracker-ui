@@ -61,9 +61,9 @@ const UpdateIssue = () => {
   };
 
   const [reminder, setReminder] = useState({
-    date: currentReminder.current.date,
-    time: currentReminder.current.time,
-    alert: currentReminder.current.alert,
+    date: currentReminder?.current?.date,
+    time: currentReminder?.current?.time,
+    alert: currentReminder?.current?.alert,
   });
 
   const [showReminderModal, setShowReminderModal] = useState(false);

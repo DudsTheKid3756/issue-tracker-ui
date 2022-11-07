@@ -66,7 +66,7 @@ const UpdateForm = ({
           }
         />
       </div>
-      {values.hasReminder ? (
+      {values?.hasReminder ? (
         <img className={classes.icon} src={pencil} onClick={openModal} />
       ) : null}
       {" | "}

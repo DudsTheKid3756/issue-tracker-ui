@@ -1,7 +1,7 @@
 import constants from "../../Utils/constants";
 import { deleteIssue, getIssues } from "../../Services/IssueServices";
-import { toaster, notificationToast } from "../../Utils/toaster";
-import { useState, useEffect, useRef, useMemo } from "react";
+import { toaster } from "../../Utils/toaster";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import classes from "./Issues.module.css";
@@ -9,54 +9,43 @@ import trashcan from "../../Utils/Icons/delete.svg";
 import pencil from "../../Utils/Icons/edit.svg";
 import Info from "../../Utils/Icons/Info";
 import Check from "../../Utils/Icons/Check";
+import handleNotification from "../../Utils/notificationHelper";
 
 const Issues = () => {
   const navigate = useNavigate();
-  // const today = useRef(new Date());
-  // const dateData = {
-  //   month: today.current.getMonth(),
-  //   day: today.current.getDate(),
-  //   year: today.current.getFullYear(),
-  //   hours: today.current.getHours(),
-  //   minutes: today.current.getMinutes(),
-  // };
+  const [today, setToday] = useState(new Date());
+  const dateData = new Map([
+    ["month", today.getMonth() + 1],
+    ["day", today.getDate()],
+    ["year", today.getFullYear()],
+    ["hours", today.getHours()],
+    ["minutes", today.getMinutes()],
+    ["seconds", today.getSeconds()],
+  ]);
 
   const [issues, setIssues] = useState([]);
   const [apiError, setApiError] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
   const [isDeleted, setIsDeleted] = useState(false);
   const [showComment, setShowComment] = useState({});
-  // const min = useRef(0);
-  // if (dateData.minutes > min.current) min.current = dateData.minutes;
+
+  const resetToday = () => setToday(new Date());
 
   const handleDelete = (id) => {
     deleteIssue(id, setIsDeleted);
     setIsDeleted(false);
   };
 
-  // const handleNotification = () => {
-  //   issues.forEach((issue) => {
-  //     const { time, date, alert } = issue.reminder;
-  //     const option = constants.ALERT_OPTIONS.find(
-  //       (option) => option.text == alert
-  //     );
-
-  //     if (option.duration != null)
-  //       if (
-  //         time ==
-  //           `${dateData.hours}:${
-  //             Number.parseInt(dateData.minutes) + option.duration
-  //           }` &&
-  //         date == `${dateData.year}-${dateData.month}-${dateData.day}`
-  //       )
-  //         notificationToast(issue);
-  //   });
-  // };
-
   useEffect(() => {
     getIssues(setIssues, setApiError, setIsDisabled);
   }, [isDeleted]);
 
+  useEffect(() => {
+    const timerId = setInterval(resetToday, 1000);
+    return () => {
+      clearInterval(timerId);
+    };
+  }, []);
 
   const handleRedirect = () => {
     navigate("/create");
@@ -69,6 +58,8 @@ const Issues = () => {
   const toggleComment = (id) => {
     setShowComment({ ...showComment, [id]: !showComment[id] });
   };
+
+  handleNotification(issues, dateData);
 
   return (
     <div className={classes.page}>
@@ -104,12 +95,9 @@ const Issues = () => {
                     src={trashcan}
                     onClick={() => handleDelete(issue.id)}
                   />
-                  <Check
-                    color={issue.isCompleted ? "green" : "grey"}
-                    title={issue.isCompleted ? "Completed!" : "Incomplete"}
-                  />
+                  {issue.isCompleted ? <Check /> : null}
                 </div>
-                {!showComment[issue.id] ? (
+                {showComment[issue.id] ? (
                   <p
                     className={classes.comment}
                     style={{ borderColor: issue.color }}

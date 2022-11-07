@@ -87,7 +87,7 @@ const CreateForm = ({
           Submit
         </button>
       </div>
-      {values.hasReminder ? (
+      {values?.hasReminder ? (
         <div className={classes.reminderContainer}>
           <h3 className={classes.formHeader}>Reminder</h3>
           <span className={classes.formLabel}>
