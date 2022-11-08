@@ -25,7 +25,6 @@ const CreateIssue = () => {
   };
 
   const [showColorPicker, setShowColorPicker] = useState(false);
-
   const [color, setColor] = useState("#000000");
 
   const onColorChange = (color) => setColor(color.hex);
@@ -53,8 +52,8 @@ const CreateIssue = () => {
 
   const [showModal, setShowModal] = useState(false);
 
-  const closeModal = () => {
-    if (Object.values(reminder).some((prop) => prop == ""))
+  const closeModal = (event) => {
+    if (event.currentTarget.innerHTML == "Cancel")
       setNewIssueBools((values) => ({ ...values, ["hasReminder"]: false }));
     setShowModal(false);
   };

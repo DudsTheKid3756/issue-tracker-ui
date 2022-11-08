@@ -107,6 +107,11 @@
   width: 65%;
 }
 
+.reminderInput {
+  padding: 1px;
+  width: 75%;
+}
+
 select.formInput {
   width: 40%;
   margin-bottom: 10px;

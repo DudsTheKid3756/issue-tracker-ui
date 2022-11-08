@@ -11,6 +11,7 @@ const FormComponent = ({
   errors,
   errLength,
   isMultiline,
+  min
 }) => {
   return (
     <>
@@ -31,6 +32,7 @@ const FormComponent = ({
               placeholder={placeholder}
               defaultValue={values[field]}
               checked={values[field]}
+              min={min}
               onChange={type == "text" ? onChanges[0] : onChanges[1]}
             />
             <div className={classes.errorContainer}>

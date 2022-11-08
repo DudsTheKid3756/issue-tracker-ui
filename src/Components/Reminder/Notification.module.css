@@ -1,0 +1,25 @@
+.toastHeader {
+  padding: 1px;
+  margin: 5px;
+}
+
+.toastContainer {
+  border: 1px solid antiquewhite;
+  display: block;
+  margin: 5px;
+  width: 175%;
+}
+
+.title {
+  color: greenyellow;
+  font-size: medium;
+  margin: 5px;
+}
+
+.comment {
+  margin: 5px;
+}
+
+.reminderInfo {
+  margin: 5px;
+}

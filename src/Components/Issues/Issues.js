@@ -58,7 +58,7 @@ const Issues = () => {
   const toggleComment = (id) => {
     setShowComment({ ...showComment, [id]: !showComment[id] });
   };
-
+  
   handleNotification(issues, dateData);
 
   return (

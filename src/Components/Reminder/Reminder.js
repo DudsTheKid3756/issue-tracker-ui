@@ -4,7 +4,7 @@ import ReminderForm from "./ReminderForm";
 const Reminder = ({
   closeModal,
   reminder,
-  setReminder
+  setReminder,
 }) => {
   const onChange = (e) => {
     const { name, value } = e.target;
