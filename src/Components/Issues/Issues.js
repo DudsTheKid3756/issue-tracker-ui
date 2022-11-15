@@ -41,11 +41,13 @@ const Issues = () => {
   }, [isDeleted]);
 
   useEffect(() => {
-    const timerId = setInterval(resetToday, 1000);
-    return () => {
-      clearInterval(timerId);
-    };
-  }, []);
+    while (issues.length > 0) {
+      const timerId = setInterval(resetToday, 1000);
+      return () => {
+        clearInterval(timerId);
+      };
+    }
+  }, [issues]);
 
   const handleRedirect = () => {
     navigate("/create");
@@ -58,7 +60,7 @@ const Issues = () => {
   const toggleComment = (id) => {
     setShowComment({ ...showComment, [id]: !showComment[id] });
   };
-  
+
   handleNotification(issues, dateData);
 
   return (
@@ -112,7 +114,9 @@ const Issues = () => {
                 )}
               </div>
             ))
-          ) : apiError ? null : (
+          ) : apiError ? (
+            <p className={classes.noIssues}>{constants.API_ERROR}</p>
+          ) : (
             <p className={classes.noIssues}>
               No issues to show. Add a new one!
             </p>

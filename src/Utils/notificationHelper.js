@@ -27,8 +27,9 @@ const handleNotification = (issues, dateData) => {
           Number.parseInt(
             `${_minutes.toString().length == 2 ? _minutes : `0${_minutes}`}`
           ) + option.duration
-        }:${_seconds.toString().length == 2 ? _seconds : `0${_seconds}`}`;
-        if (`${time}:00` == _time && date == _date) notificationToast(issue);
+          }:${_seconds.toString().length == 2 ? _seconds : `0${_seconds}`}`;
+        const t = time.length != 7 ? time.toString() : `${time}:00`;
+        if (t == _time && date == _date) notificationToast(issue);
       }
     }
   });
