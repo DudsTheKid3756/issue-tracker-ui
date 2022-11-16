@@ -1,7 +1,8 @@
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { TwitterPicker } from "react-color";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import { ApiContext } from "../../Contexts/ApiContext";
 import { updateIssue } from "../../Services/IssueServices";
 import constants from "../../Utils/constants";
 import validateStrings from "../../Utils/validation";
@@ -10,11 +11,12 @@ import ModalComponent from "../ModalComponent";
 import UpdateForm from "./UpdateForm";
 
 const UpdateIssue = () => {
-  const location = useLocation();
+  const { state } = useLocation();
   const navigate = useNavigate();
+  const { apiPathIndex } = useContext(ApiContext);
 
-  const currentIssue = useRef(location.state.issue);
-  const currentReminder = useRef(location.state.reminder);
+  const currentIssue = useRef(state.issue);
+  const currentReminder = useRef(state.reminder);
   const [errors, setErrors] = useState({});
   const [errLength, setErrLength] = useState(0);
   const [removeReminderModal, setRemoveReminderModal] = useState(false);
@@ -105,7 +107,8 @@ const UpdateIssue = () => {
         ...colorToUpdate,
         reminder: reminder,
       },
-      navigate
+      navigate,
+      apiPathIndex
     );
   };
 

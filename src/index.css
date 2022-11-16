@@ -41,6 +41,10 @@ div#root {
   padding: 10px;
 }
 
+.spinnerContainer {
+  vertical-align: middle;
+}
+
 textarea {
   resize: vertical;
   margin-left: 5px;
