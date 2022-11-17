@@ -1,19 +1,19 @@
-import { useContext, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { TwitterPicker } from "react-color";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import { ApiContext } from "../../Contexts/ApiContext";
 import { updateIssue } from "../../Services/IssueServices";
 import constants from "../../Utils/constants";
 import validateStrings from "../../Utils/validation";
 import classes from "../Form.module.css";
 import ModalComponent from "../ModalComponent";
 import UpdateForm from "./UpdateForm";
+import { getItem } from "../../Utils/storage";
 
 const UpdateIssue = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
-  const { apiPathIndex } = useContext(ApiContext);
+  const apiPath = getItem("api");
 
   const currentIssue = useRef(state.issue);
   const currentReminder = useRef(state.reminder);
@@ -108,7 +108,7 @@ const UpdateIssue = () => {
         reminder: reminder,
       },
       navigate,
-      apiPathIndex
+      apiPath
     );
   };
 

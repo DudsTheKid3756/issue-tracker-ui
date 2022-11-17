@@ -1,8 +1,8 @@
 import constants from "../../Utils/constants";
 import { deleteIssue, getIssues } from "../../Services/IssueServices";
 import { toaster } from "../../Utils/toaster";
-import { useState, useEffect, useContext, useRef } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import classes from "./Issues.module.css";
 import trashcan from "../../Utils/Icons/delete.svg";
@@ -12,13 +12,12 @@ import Check from "../../Utils/Icons/Check";
 import handleNotification from "../../Utils/notificationHelper";
 import { ApiContext } from "../../Contexts/ApiContext";
 import LoadingSpinner from "../LoadingSpinner";
+import { getItem } from "../../Utils/storage";
 
 const Issues = () => {
   const navigate = useNavigate();
-  const { state } = useLocation();
-  const { apiPathIndex, toggleApiPath, apiError, toggleApiError } =
-    useContext(ApiContext);
-  const currentApiPathIndex = useRef(state);
+  const { toggleApiPath, apiError, toggleApiError } = useContext(ApiContext);
+  const apiPath = getItem("api");
 
   const [today, setToday] = useState(new Date());
   const dateData = new Map([
@@ -36,18 +35,20 @@ const Issues = () => {
   const [isDeleted, setIsDeleted] = useState(false);
   const [showComment, setShowComment] = useState({});
 
+  const urls = constants.BASE_URL;
+
   const resetToday = () => setToday(new Date());
 
   const handleDelete = (id) => {
-    deleteIssue(id, setIsDeleted, apiPathIndex);
+    deleteIssue(id, setIsDeleted, apiPath);
     setIsDeleted(false);
   };
 
   useEffect(() => {
     setIsDisabled(true);
     setIssues([]);
-    getIssues(setIssues, toggleApiError, index, setIsLoading, setIsDisabled);
-  }, [apiPathIndex, isDeleted]);
+    getIssues(setIssues, toggleApiError, apiPath, setIsLoading, setIsDisabled);
+  }, [apiPath, isDeleted]);
 
   useEffect(() => {
     while (issues.length > 0 && !apiError) {
@@ -83,11 +84,12 @@ const Issues = () => {
           className={classes.apiSelect}
           onChange={toggleApiPath}
         >
-          <option key={0} value={0}>
-            .NET (localhost:7082)
+          <option>{urls[apiPath]}</option>
+          <option key={"dotnet"} value={"dotnet"}>
+            {urls.dotnet}
           </option>
-          <option key={1} value={1}>
-            Java (localhost:8080)
+          <option key={"java"} value={"java"}>
+            {urls.java}
           </option>
         </select>
         <button

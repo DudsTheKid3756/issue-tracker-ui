@@ -5,12 +5,12 @@ import { toaster } from "../Utils/toaster";
 const getIssues = async (
   setIssues,
   setApiError,
-  index,
+  apiPath,
   setIsLoading,
   setIsDisabled
 ) => {
   setIsLoading(true);
-  await httpHelper("issue", index, "GET")
+  await httpHelper("issue", apiPath, "GET")
     .then((response) => {
       if (!response.ok) {
         throw new Error(constants.API_ERROR);
@@ -31,8 +31,8 @@ const getIssues = async (
     });
 };
 
-const addIssue = async (newIssue, navigate, apiPathIndex) => {
-  await httpHelper("issue", apiPathIndex, "POST", newIssue)
+const addIssue = async (newIssue, navigate, apiPath) => {
+  await httpHelper("issue", apiPath, "POST", newIssue)
     .then((response) => {
       if (!response.ok) {
         toaster(constants.BAD_REQUEST_ERROR, "error");
@@ -43,15 +43,15 @@ const addIssue = async (newIssue, navigate, apiPathIndex) => {
     .then(() => {
       toaster(constants.NEW_ISSUE_SUCCESS_MESSAGE, "success");
       setTimeout(
-        () => navigate("/", { state: apiPathIndex }),
+        () => navigate("/", { state: apiPath }),
         2000
       );
     })
     .catch((error) => console.error(error));
 };
 
-const updateIssue = async (issueId, updatedIssue, navigate, apiPathIndex) => {
-  await httpHelper(`issue/${issueId}`, apiPathIndex, "PUT", updatedIssue)
+const updateIssue = async (issueId, updatedIssue, navigate, apiPath) => {
+  await httpHelper(`issue/${issueId}`, apiPath, "PUT", updatedIssue)
     .then((response) => {
       if (!response.ok) {
         toaster(constants.BAD_REQUEST_ERROR, "error");
@@ -62,15 +62,15 @@ const updateIssue = async (issueId, updatedIssue, navigate, apiPathIndex) => {
     .then(() => {
       toaster(constants.UPDATE_SUCCESS_MESSAGE, "success");
       setTimeout(
-        () => navigate("/", { state: apiPathIndex }),
+        () => navigate("/", { state: apiPath }),
         2000
       );
     })
     .catch((error) => console.error(error));
 };
 
-const deleteIssue = async (issueId, setIsDeleted, apiPathIndex) => {
-  await httpHelper(`issue/${issueId}`, apiPathIndex, "DELETE")
+const deleteIssue = async (issueId, setIsDeleted, apiPath) => {
+  await httpHelper(`issue/${issueId}`, apiPath, "DELETE")
     .then((response) => {
       if (!response.ok) {
         throw new Error(constants.API_ERROR);

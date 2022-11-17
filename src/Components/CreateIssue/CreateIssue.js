@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { addIssue } from "../../Services/IssueServices";
@@ -7,11 +7,11 @@ import validateStrings from "../../Utils/validation";
 import CreateForm from "./CreateForm";
 import classes from "../Form.module.css";
 import constants from "../../Utils/constants";
-import { ApiContext } from "../../Contexts/ApiContext";
+import { getItem } from "../../Utils/storage";
 
 const CreateIssue = () => {
   const navigate = useNavigate();
-  const { apiPathIndex } = useContext(ApiContext);
+  const apiPath = getItem("api");
 
   const [errors, setErrors] = useState({});
   const [errLength, setErrLength] = useState(0);
@@ -79,7 +79,7 @@ const CreateIssue = () => {
         reminder: reminderToAdd,
       },
       navigate,
-      apiPathIndex
+      apiPath
     );
   };
 
