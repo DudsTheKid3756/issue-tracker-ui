@@ -5,7 +5,7 @@ import { addIssue } from "../../Services/IssueServices";
 import { TwitterPicker } from "react-color";
 import validateStrings from "../../Utils/validation";
 import CreateForm from "./CreateForm";
-import classes from "../Form.module.css";
+import classes from "../Forms/Form.module.css";
 import constants from "../../Utils/constants";
 import { getItem } from "../../Utils/storage";
 

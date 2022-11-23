@@ -5,7 +5,7 @@ import { ToastContainer } from "react-toastify";
 import { updateIssue } from "../../Services/IssueServices";
 import constants from "../../Utils/constants";
 import validateStrings from "../../Utils/validation";
-import classes from "../Form.module.css";
+import classes from "../Forms/Form.module.css";
 import ModalComponent from "../ModalComponent";
 import UpdateForm from "./UpdateForm";
 import { getItem } from "../../Utils/storage";

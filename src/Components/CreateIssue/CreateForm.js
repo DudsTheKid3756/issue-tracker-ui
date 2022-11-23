@@ -1,5 +1,5 @@
-import FormComponent from "../FormComponent";
-import classes from "../Form.module.css";
+import FormComponent from "../Forms/FormComponent";
+import classes from "../Forms/Form.module.css";
 import ModalComponent from "../ModalComponent";
 import Reminder from "../Reminder/Reminder";
 import paintbrush from "../../Utils/Icons/paintbrush.svg";

@@ -1,12 +1,3 @@
-.apiSelectLabel {
-  margin-left: 5px;
-}
-
-.apiSelect {
-  vertical-align: middle;
-  margin-left: 5px;
-}
-
 .button:disabled {
   background-color: gray;
 }

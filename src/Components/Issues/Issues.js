@@ -13,6 +13,7 @@ import handleNotification from "../../Utils/notificationHelper";
 import { ApiContext } from "../../Contexts/ApiContext";
 import LoadingSpinner from "../LoadingSpinner";
 import { getItem } from "../../Utils/storage";
+import ApiSelectComponent from "../Forms/ApiSelectComponent";
 
 const Issues = () => {
   const navigate = useNavigate();
@@ -34,8 +35,6 @@ const Issues = () => {
   const [isDisabled, setIsDisabled] = useState(true);
   const [isDeleted, setIsDeleted] = useState(false);
   const [showComment, setShowComment] = useState({});
-
-  const urls = constants.BASE_URL;
 
   const resetToday = () => setToday(new Date());
 
@@ -75,23 +74,7 @@ const Issues = () => {
     <div className={classes.page}>
       <div className={classes.headContainer}>
         <h1 className={classes.header}>Issue Tracker</h1>
-        <label className={classes.apiSelectLabel} htmlFor="api">
-          API
-        </label>
-        <select
-          id="api"
-          name="api"
-          className={classes.apiSelect}
-          onChange={toggleApiPath}
-        >
-          <option>{urls[apiPath]}</option>
-          <option key={"dotnet"} value={"dotnet"}>
-            {urls.dotnet}
-          </option>
-          <option key={"java"} value={"java"}>
-            {urls.java}
-          </option>
-        </select>
+        <ApiSelectComponent apiPath={apiPath} toggleApiPath={toggleApiPath} />
         <button
           className={`${classes.button} ${classes.head}`}
           onClick={handleRedirect}

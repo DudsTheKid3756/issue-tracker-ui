@@ -1,7 +1,7 @@
 import React from "react";
-import FormComponent from "../FormComponent";
-import classes from "../Form.module.css";
-import SelectComponent from "../SelectComponent";
+import FormComponent from "../Forms/FormComponent";
+import classes from "../Forms/Form.module.css";
+import SelectComponent from "../Forms/SelectComponent";
 import constants from "../../Utils/constants";
 
 const ReminderForm = ({ closeModal, values, onChanges }) => {

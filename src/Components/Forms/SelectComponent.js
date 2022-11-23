@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "../Components/Form.module.css";
+import classes from "./Form.module.css";
 
 const SelectComponent = ({ label, field, onChanges, values, options }) => {
   return (
