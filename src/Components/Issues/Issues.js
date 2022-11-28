@@ -46,7 +46,7 @@ const Issues = () => {
   useEffect(() => {
     setIsDisabled(true);
     setIssues([]);
-    getIssues(setIssues, toggleApiError, apiPath, setIsLoading, setIsDisabled);
+    getIssues(setIssues, toggleApiError, setIsLoading, setIsDisabled);
   }, [apiPath, isDeleted]);
 
   useEffect(() => {
