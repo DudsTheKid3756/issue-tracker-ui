@@ -3,7 +3,7 @@ import classes from "./Form.module.css";
 import constants from "../../Utils/constants";
 
 const ApiSelectComponent = ({ apiPath, toggleApiPath }) => {
-  const urls = constants.BASE_URL;
+  const urls = constants.BASE_URLS;
 
   return (
     <>
