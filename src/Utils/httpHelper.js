@@ -1,7 +1,7 @@
 import constants from "./constants";
 
 const httpHelper = async (uri, api, method, body) => {
-  return await fetch(`${constants.BASE_URLS[api]}/${uri}`, {
+  return await fetch(`${api}/${uri}`, {
     method: method,
     headers: {
       "Content-Type": "application/json",

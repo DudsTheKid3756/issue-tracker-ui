@@ -13,34 +13,35 @@ const getIssues = async (
   const urls = Object.entries(baseUrls);
   const promises = new Map();
 
-  for (let i = 0; i < Object.length(urls); i++) {
-    setIsLoading(true);
-    await httpHelper("issue", urls.at(i)[1], "GET").then((response) => {
-      promises.set(urls.at(i)[0], !response.ok ? null : response.json());
-    });
+  setIsLoading(true);
+
+  for (let i = 0; i < urls.length; i++) {
+    await httpHelper("issue", urls.at(i)[1], "GET")
+      .then((response) => (!response.ok ? new Error(constants.API_ERROR) : response.json()))
+      .then((data) => {
+        promises.set(urls.at(i)[0], data);
+        setTimeout(() => {
+          setIssues(data);
+          setIsLoading(false);
+          setIsDisabled(false);
+        }, 3000);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        toggleApiError(true);
+        console.error(error);
+        throw error;
+      });
   }
 
   const dotnet = promises.get("dotnet");
   const java = promises.get("java");
-  const fullfilledPromise = ["dotnet", dotnet];
+  console.log(dotnet, java);
+  // const fullfilledPromise = ["dotnet", dotnet];
 
-  if (dotnet == null && java != null) fullfilledPromise = ["java", java];
+  // if (dotnet == null && java != null) fullfilledPromise = ["java", java];
 
-  storeItem("api", baseUrls[fullfilledPromise[0]]);
-
-  fullfilledPromise[1]
-    .then((data) => {
-      setTimeout(() => {
-        setIssues(data);
-        setIsLoading(false);
-        setIsDisabled(false);
-      }, 3000);
-    })
-    .catch((error) => {
-      setIsLoading(false);
-      toggleApiError(true);
-      console.error(error);
-    });
+  // storeItem("api", baseUrls[fullfilledPromise[0]]);
 };
 
 const addIssue = async (newIssue, navigate, apiPath) => {
