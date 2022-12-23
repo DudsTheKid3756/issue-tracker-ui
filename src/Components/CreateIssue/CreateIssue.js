@@ -11,7 +11,7 @@ import { getItem } from "../../Utils/storage";
 
 const CreateIssue = () => {
   const navigate = useNavigate();
-  const apiPath = getItem("api");
+  const apiPath = getItem("api", "local");
 
   const [errors, setErrors] = useState({});
   const [errLength, setErrLength] = useState(0);

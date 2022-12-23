@@ -1,8 +1,12 @@
-const storeItem = (key, item) =>
-  window.localStorage.setItem(key, JSON.stringify(item));
+const storeItem = (key, item, storageType) =>
+  window[`${storageType}Storage`].setItem(key, JSON.stringify(item));
 
-const getItem = (key) => JSON.parse(window.localStorage.getItem(key));
+const getItem = (key, storageType) =>
+  JSON.parse(window[`${storageType}Storage`].getItem(key));
 
-const storageClear = () => window.localStorage.clear();
+const removeItem = (key, storageType) =>
+  window[`${storageType}Storage`].removeItem(key);
 
-export { storeItem, getItem, storageClear };
+const clearStorage = (storageType) => window[`${storageType}Storage`].clear();
+
+export { storeItem, getItem, clearStorage, removeItem };

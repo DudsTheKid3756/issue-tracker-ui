@@ -2,7 +2,7 @@ import constants from "../../Utils/constants";
 import { deleteIssue, getIssues } from "../../Services/IssueServices";
 import { toaster } from "../../Utils/toaster";
 import { useState, useEffect, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import classes from "./Issues.module.css";
 import trashcan from "../../Utils/Icons/delete.svg";
@@ -18,7 +18,7 @@ import ApiSelectComponent from "../Forms/ApiSelectComponent";
 const Issues = () => {
   const navigate = useNavigate();
   const { toggleApiPath, apiError, toggleApiError } = useContext(ApiContext);
-  const apiPath = getItem("api");
+  const apiPath = getItem("api", "local");
 
   const [today, setToday] = useState(new Date());
   const dateData = new Map([

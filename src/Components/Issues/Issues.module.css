@@ -1,5 +1,6 @@
 .button:disabled {
   background-color: gray;
+  cursor: default;
 }
 
 .button:disabled:active {

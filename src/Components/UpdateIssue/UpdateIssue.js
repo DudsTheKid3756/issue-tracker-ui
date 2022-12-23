@@ -13,10 +13,10 @@ import { getItem } from "../../Utils/storage";
 const UpdateIssue = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
-  const apiPath = getItem("api");
+  const apiPath = getItem("api", "local");
 
-  const currentIssue = useRef(state.issue);
-  const currentReminder = useRef(state.reminder);
+  const currentIssue = useRef(state?.issue);
+  const currentReminder = useRef(state?.reminder);
   const [errors, setErrors] = useState({});
   const [errLength, setErrLength] = useState(0);
   const [removeReminderModal, setRemoveReminderModal] = useState(false);
@@ -27,8 +27,8 @@ const UpdateIssue = () => {
   };
 
   const [strsToUpdate, setStrsToUpdate] = useState({
-    title: currentIssue.current.title,
-    comment: currentIssue.current.comment,
+    title: currentIssue?.current?.title,
+    comment: currentIssue?.current?.comment,
   });
 
   const onStringChange = (e) => {
@@ -39,15 +39,15 @@ const UpdateIssue = () => {
   const [showColorPicker, setShowColorPicker] = useState(false);
 
   const [colorToUpdate, setColorToUpdate] = useState({
-    color: currentIssue.current.color,
+    color: currentIssue?.current?.color,
   });
 
   const onColorChange = (colorToUpdate) =>
     setColorToUpdate(() => ({ ["color"]: colorToUpdate.hex }));
 
   const [boolsToUpdate, setBoolsToUpdate] = useState({
-    hasReminder: currentIssue.current.hasReminder,
-    isCompleted: currentIssue.current.isCompleted,
+    hasReminder: currentIssue?.current?.hasReminder,
+    isCompleted: currentIssue?.current?.isCompleted,
   });
 
   const onBoolChange = (e) => {
