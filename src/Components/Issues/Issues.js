@@ -33,13 +33,13 @@ const Issues = () => {
   const [issues, setIssues] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
-  // const [isDeleted, setIsDeleted] = useState(false);
+  const [isDeleted, setIsDeleted] = useState(false);
   const [showComment, setShowComment] = useState({});
 
   const resetToday = () => setToday(new Date());
 
   const handleDelete = (id) => {
-    deleteIssue(id, apiPath);
+    deleteIssue(id, apiPath, setIsDeleted);
     setIsDeleted(false);
   };
 
@@ -47,7 +47,7 @@ const Issues = () => {
     setIsDisabled(true);
     setIssues([]);
     getIssues(setIssues, toggleApiError, apiPath, setIsLoading, setIsDisabled);
-  }, [apiPath]);
+  }, [apiPath, isDeleted]);
 
   useEffect(() => {
     while (issues.length > 0 && !apiError) {

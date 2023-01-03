@@ -69,13 +69,13 @@ const updateIssue = async (issueId, updatedIssue, navigate, apiPath) => {
     .catch((error) => console.error(error));
 };
 
-const deleteIssue = async (issueId, apiPath) => {
+const deleteIssue = async (issueId, apiPath, setIsDeleted) => {
   await httpHelper(`issue/${issueId}`, apiPath, "DELETE")
     .then((response) => {
       if (!response.ok) {
         throw new Error(constants.API_ERROR);
       }
-      window.location.reload();
+      setIsDeleted(true);
       return response;
     })
     .catch((error) => console.error(error));
