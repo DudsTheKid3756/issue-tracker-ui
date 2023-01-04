@@ -4,7 +4,7 @@ import Notification from "../Components/Reminder/Notification";
 
 const toaster = (text, type) => {
   toast(text, {
-    position: "top-right",
+    position: "bottom-right",
     autoClose: 2000,
     hideProgressBar: false,
     closeOnClick: true,

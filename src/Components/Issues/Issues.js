@@ -2,11 +2,12 @@ import constants from "../../Utils/constants";
 import { deleteIssue, getIssues } from "../../Services/IssueServices";
 import { toaster } from "../../Utils/toaster";
 import { useState, useEffect, useContext } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import classes from "./Issues.module.css";
 import trashcan from "../../Utils/Icons/delete.svg";
 import pencil from "../../Utils/Icons/edit.svg";
+import bars from "../../Utils/Icons/bars.svg";
 import Info from "../../Utils/Icons/Info";
 import Check from "../../Utils/Icons/Check";
 import handleNotification from "../../Utils/notificationHelper";
@@ -68,76 +69,89 @@ const Issues = () => {
     setShowComment({ ...showComment, [id]: !showComment[id] });
   };
 
+  const collapseAllComments = () => setShowComment({});
+
   handleNotification(issues, dateData);
 
   return (
-    <div className={classes.page}>
-      <div className={classes.headContainer}>
-        <h1 className={classes.header}>Issue Tracker</h1>
-        <ApiSelectComponent apiPath={apiPath} toggleApiPath={toggleApiPath} />
-        <button
-          className={`${classes.button} ${classes.head}`}
-          onClick={handleRedirect}
-          disabled={isDisabled}
-        >
-          New Issue
-        </button>
-      </div>
-      <div className={classes.issues}>
-        {isLoading ? (
-          <LoadingSpinner />
-        ) : (
-          <span className={classes.issuesContainer}>
-            {issues.length > 0 ? (
-              issues.map((issue) => (
-                <div key={issue.id} className={classes.item}>
-                  <div className={classes.titleContainer}>
-                    <h3 className={classes.title}>{issue.title}</h3>
-                    <Info
-                      title="Issue Comment"
-                      onClick={() => toggleComment(issue.id)}
-                    />
-                    <span className={classes.created}>{issue.created}</span>
-                    <img
-                      className={classes.icon}
-                      src={pencil}
-                      onClick={() => toEdit(issue, issue.reminder)}
-                    />
-                    <img
-                      className={classes.icon}
-                      src={trashcan}
-                      onClick={() => handleDelete(issue.id)}
-                    />
-                    {issue.isCompleted ? <Check /> : null}
+    <>
+      <div className={classes.page}>
+        <div className={classes.headContainer}>
+          <h1 className={classes.header}>Issue Tracker</h1>
+          <ApiSelectComponent apiPath={apiPath} toggleApiPath={toggleApiPath} />
+          <button
+            className={`${classes.button} ${classes.head}`}
+            onClick={handleRedirect}
+            disabled={isDisabled}
+          >
+            New Issue
+          </button>
+        </div>
+        <div className={classes.issues}>
+          {isLoading ? (
+            <LoadingSpinner />
+          ) : (
+            <span className={classes.issuesContainer}>
+              {issues.length > 0 ? (
+                issues.map((issue) => (
+                  <div key={issue.id} className={classes.item}>
+                    <div className={classes.titleContainer}>
+                      <h3 className={classes.title}>{issue.title}</h3>
+                      <Info
+                        title="Issue Comment"
+                        onClick={() => toggleComment(issue.id)}
+                      />
+                      <span className={classes.created}>{issue.created}</span>
+                      <img
+                        className={classes.icon}
+                        src={pencil}
+                        onClick={() => toEdit(issue, issue.reminder)}
+                      />
+                      <img
+                        className={classes.icon}
+                        src={trashcan}
+                        onClick={() => handleDelete(issue.id)}
+                      />
+                      {issue.isCompleted ? <Check /> : null}
+                    </div>
+                    {showComment[issue.id] ? (
+                      <p
+                        className={classes.comment}
+                        style={{ borderColor: issue.color }}
+                      >
+                        {issue.comment}
+                      </p>
+                    ) : (
+                      <p
+                        className={classes.spacer}
+                        style={{ borderColor: issue.color }}
+                      ></p>
+                    )}
                   </div>
-                  {showComment[issue.id] ? (
-                    <p
-                      className={classes.comment}
-                      style={{ borderColor: issue.color }}
-                    >
-                      {issue.comment}
-                    </p>
-                  ) : (
-                    <p
-                      className={classes.spacer}
-                      style={{ borderColor: issue.color }}
-                    ></p>
-                  )}
-                </div>
-              ))
-            ) : apiError ? (
-              <p className={classes.noIssues}>{constants.API_ERROR}</p>
-            ) : (
-              <p className={classes.noIssues}>
-                No issues to show. Add a new one!
-              </p>
-            )}
-            {apiError ? toaster(constants.API_ERROR, "error") : null}
-          </span>
-        )}
+                ))
+              ) : apiError ? (
+                <p className={classes.noIssues}>{constants.API_ERROR}</p>
+              ) : (
+                <p className={classes.noIssues}>
+                  No issues to show. Add a new one!
+                </p>
+              )}
+              {apiError ? toaster(constants.API_ERROR, "error") : null}
+            </span>
+          )}
+        </div>
+        <ToastContainer />
       </div>
-      <ToastContainer />
-    </div>
+      {Object.values(showComment).some((value) => value == true) ? (
+        <div className={classes.barsContainer}>
+          <img
+            className={classes.icon}
+            src={bars}
+            onClick={() => collapseAllComments()}
+          />
+        </div>
+      ) : null}
+    </>
   );
 };
 
