@@ -7,7 +7,6 @@ import { ToastContainer } from "react-toastify";
 import classes from "./Issues.module.css";
 import trashcan from "../../Utils/Icons/delete.svg";
 import pencil from "../../Utils/Icons/edit.svg";
-import bars from "../../Utils/Icons/bars.svg";
 import Info from "../../Utils/Icons/Info";
 import Check from "../../Utils/Icons/Check";
 import handleNotification from "../../Utils/notificationHelper";
@@ -15,6 +14,7 @@ import { ApiContext } from "../../Contexts/ApiContext";
 import LoadingSpinner from "../LoadingSpinner";
 import { getItem } from "../../Utils/storage";
 import ApiSelectComponent from "../Forms/ApiSelectComponent";
+import CommentCollapse from "../CommentCollapse";
 
 const Issues = () => {
   const navigate = useNavigate();
@@ -142,15 +142,10 @@ const Issues = () => {
         </div>
         <ToastContainer />
       </div>
-      {Object.values(showComment).some((value) => value == true) ? (
-        <div className={classes.barsContainer}>
-          <img
-            className={classes.icon}
-            src={bars}
-            onClick={() => collapseAllComments()}
-          />
-        </div>
-      ) : null}
+      <CommentCollapse
+        showComment={showComment}
+        collapseAllComments={collapseAllComments}
+      />
     </>
   );
 };
