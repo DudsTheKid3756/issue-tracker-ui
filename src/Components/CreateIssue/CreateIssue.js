@@ -1,13 +1,13 @@
 import { useState } from "react";
+import { TwitterPicker } from "react-color";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { addIssue } from "../../Services/IssueServices";
-import { TwitterPicker } from "react-color";
-import validateStrings from "../../Utils/validation";
-import CreateForm from "./CreateForm";
-import classes from "../Forms/Form.module.css";
 import constants from "../../Utils/constants";
 import { getItem } from "../../Utils/storage";
+import validateStrings from "../../Utils/validation";
+import classes from "../Forms/Form.module.css";
+import CreateForm from "./CreateForm";
 
 const CreateIssue = () => {
   const navigate = useNavigate();

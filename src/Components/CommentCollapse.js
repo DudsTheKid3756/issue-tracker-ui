@@ -11,7 +11,7 @@ const CommentCollapse = ({ showComment, collapseAllComments }) => {
   }, {});
 
   return (
-    <div className={classes.barsContainer}>
+    <div className={classes.barsContainer} title="Collapse Comments">
       {commentsShown.true > 1 ? (
         <img
           className={classes.icon}

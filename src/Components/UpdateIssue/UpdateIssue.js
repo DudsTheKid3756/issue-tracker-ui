@@ -4,11 +4,11 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { updateIssue } from "../../Services/IssueServices";
 import constants from "../../Utils/constants";
+import { getItem } from "../../Utils/storage";
 import validateStrings from "../../Utils/validation";
 import classes from "../Forms/Form.module.css";
 import ModalComponent from "../ModalComponent";
 import UpdateForm from "./UpdateForm";
-import { getItem } from "../../Utils/storage";
 
 const UpdateIssue = () => {
   const { state } = useLocation();
@@ -108,7 +108,8 @@ const UpdateIssue = () => {
         reminder: reminder,
       },
       navigate,
-      apiPath
+      apiPath,
+      false
     );
   };
 

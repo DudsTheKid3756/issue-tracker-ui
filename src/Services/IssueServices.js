@@ -42,15 +42,18 @@ const addIssue = async (newIssue, navigate, apiPath) => {
     })
     .then(() => {
       toaster(constants.NEW_ISSUE_SUCCESS_MESSAGE, "success");
-      setTimeout(
-        () => navigate("/", { state: apiPath }),
-        2000
-      );
+      setTimeout(() => navigate("/", { state: apiPath }), 2000);
     })
     .catch((error) => console.error(error));
 };
 
-const updateIssue = async (issueId, updatedIssue, navigate, apiPath) => {
+const updateIssue = async (
+  issueId,
+  updatedIssue,
+  navigate,
+  apiPath,
+  reminderPosted
+) => {
   await httpHelper(`issue/${issueId}`, apiPath, "PUT", updatedIssue)
     .then((response) => {
       if (!response.ok) {
@@ -60,11 +63,10 @@ const updateIssue = async (issueId, updatedIssue, navigate, apiPath) => {
       return response.json();
     })
     .then(() => {
-      toaster(constants.UPDATE_SUCCESS_MESSAGE, "success");
-      setTimeout(
-        () => navigate("/", { state: apiPath }),
-        2000
-      );
+      !reminderPosted
+        ? toaster(constants.UPDATE_SUCCESS_MESSAGE, "success")
+        : null;
+      setTimeout(() => navigate("/", { state: apiPath }), 2000);
     })
     .catch((error) => console.error(error));
 };
@@ -76,9 +78,14 @@ const deleteIssue = async (issueId, apiPath, setIsDeleted) => {
         throw new Error(constants.API_ERROR);
       }
       setIsDeleted(true);
+      setTimeout(
+        () => toaster(`Issue with id: ${issueId} deleted`, "success"),
+        3500
+      );
       return response;
     })
     .catch((error) => console.error(error));
 };
 
 export { getIssues, addIssue, updateIssue, deleteIssue };
+

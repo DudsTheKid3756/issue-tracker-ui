@@ -15,14 +15,14 @@ const toaster = (text, type) => {
   });
 };
 
-const notificationToast = (info) => {
+const notificationToast = (info, reminderPosted, removeReminder) => {
   toast(<Notification info={info} />, {
     position: "bottom-right",
     autoClose: false,
     hideProgressBar: true,
     closeOnClick: false,
     closeButton: ({ closeToast }) => (
-      <button onClick={closeToast}>Dismiss</button>
+      <button onClick={() => removeReminder(info, reminderPosted, closeToast)}>Dismiss</button>
     ),
     draggable: false,
     theme: "dark",
@@ -31,3 +31,4 @@ const notificationToast = (info) => {
 };
 
 export { toaster, notificationToast };
+
