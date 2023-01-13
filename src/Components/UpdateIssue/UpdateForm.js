@@ -5,6 +5,7 @@ import ModalComponent from "../ModalComponent";
 import Reminder from "../Reminder/Reminder";
 import pencil from "../../Utils/Icons/edit.svg";
 import paintbrush from "../../Utils/Icons/paintbrush.svg";
+import ReminderComponent from "../Issues/ReminderComponent";
 
 const UpdateForm = ({
   values,
@@ -18,7 +19,7 @@ const UpdateForm = ({
   openModal,
   showModal,
   closeModal,
-  setShowColorPicker
+  setShowColorPicker,
 }) => {
   return (
     <div className={classes.formComponent}>
@@ -56,7 +57,6 @@ const UpdateForm = ({
           isOpen={showModal}
           onRequestClose={closeModal}
           label="Update Reminder"
-          header="Update Reminder"
           component={
             <Reminder
               closeModal={closeModal}
@@ -101,6 +101,7 @@ const UpdateForm = ({
           Update
         </button>
       </div>
+      {values?.hasReminder ? <ReminderComponent reminder={reminder} /> : null}
     </div>
   );
 };

@@ -3,6 +3,7 @@ import classes from "../Forms/Form.module.css";
 import ModalComponent from "../ModalComponent";
 import Reminder from "../Reminder/Reminder";
 import paintbrush from "../../Utils/Icons/paintbrush.svg";
+import ReminderComponent from "../Issues/ReminderComponent";
 
 const CreateForm = ({
   values,
@@ -54,7 +55,6 @@ const CreateForm = ({
         isOpen={showModal}
         onRequestClose={closeModal}
         label="Create Reminder"
-        header="Create Reminder"
         component={
           <Reminder
             closeModal={closeModal}
@@ -86,23 +86,7 @@ const CreateForm = ({
         Submit
       </button>
     </div>
-    {values?.hasReminder ? (
-      <div className={classes.reminderContainer}>
-        <h3 className={classes.formHeader}>Reminder</h3>
-        <span className={classes.formLabel}>
-          Date: {reminder.date}
-          <br />
-        </span>
-        <span className={classes.formLabel}>
-          Time: {reminder.time}
-          <br />
-        </span>
-        <span className={classes.formLabel}>
-          Alert: {reminder.alert}
-          <br />
-        </span>
-      </div>
-    ) : null}
+    {values?.hasReminder ? <ReminderComponent reminder={reminder} /> : null}
   </div>
 );
 

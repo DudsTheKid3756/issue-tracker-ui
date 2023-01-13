@@ -1,9 +1,9 @@
 import React from "react";
 import classes from "../../Components/Issues/Issues.module.css";
 
-const Alert = () => {
+const Alert = ({ title, onClick }) => {
   return (
-    <span className={classes.icon}>
+    <span className={classes.icon} title={title} onClick={onClick}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="16"

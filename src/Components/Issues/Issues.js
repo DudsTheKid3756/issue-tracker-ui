@@ -5,14 +5,10 @@ import { ApiContext } from "../../Contexts/ApiContext";
 import {
   deleteIssue,
   getIssues,
-  updateIssue,
+  updateIssue
 } from "../../Services/IssueServices";
 import constants from "../../Utils/constants";
-import Alert from "../../Utils/Icons/Alert";
-import Check from "../../Utils/Icons/Check";
-import trashcan from "../../Utils/Icons/delete.svg";
-import pencil from "../../Utils/Icons/edit.svg";
-import Info from "../../Utils/Icons/Info";
+import { dateData, handleTimeout } from "../../Utils/counterHelper";
 import handleNotification from "../../Utils/notificationHelper";
 import { getItem } from "../../Utils/storage";
 import { toaster } from "../../Utils/toaster";
@@ -20,21 +16,12 @@ import CommentCollapse from "../CommentCollapse";
 import ApiSelectComponent from "../Forms/ApiSelectComponent";
 import LoadingSpinner from "../LoadingSpinner";
 import classes from "./Issues.module.css";
+import IssuesList from "./IssuesList";
 
 const Issues = () => {
   const navigate = useNavigate();
   const { toggleApiPath, apiError, toggleApiError } = useContext(ApiContext);
   const apiPath = getItem("api", "local");
-
-  const [today, setToday] = useState(new Date());
-  const dateData = new Map([
-    ["month", today.getMonth() + 1],
-    ["day", today.getDate()],
-    ["year", today.getFullYear()],
-    ["hours", today.getHours()],
-    ["minutes", today.getMinutes()],
-    ["seconds", today.getSeconds()],
-  ]);
 
   const [issues, setIssues] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -42,6 +29,7 @@ const Issues = () => {
   const [isDeleted, setIsDeleted] = useState(false);
   const [showComment, setShowComment] = useState({});
   const [reminderDeleted, setReminderDeleted] = useState(false);
+  const [today, setToday] = useState(new Date());
 
   const resetToday = () => setToday(new Date());
 
@@ -57,10 +45,7 @@ const Issues = () => {
   }, [apiPath, isDeleted, reminderDeleted]);
 
   useEffect(() => {
-    while (issues.length > 0 && !apiError) {
-      const timerId = setInterval(resetToday, 1000);
-      return () => clearInterval(timerId);
-    }
+    handleTimeout(issues, apiError, resetToday);
   }, [issues]);
 
   const handleRedirect = () => {
@@ -89,7 +74,7 @@ const Issues = () => {
     setTimeout(() => setReminderDeleted(true), 1000);
   };
 
-  handleNotification(issues, dateData, removeReminder);
+  handleNotification(issues, dateData(today), removeReminder);
 
   return (
     <>
@@ -111,43 +96,13 @@ const Issues = () => {
           ) : (
             <span className={classes.issuesContainer}>
               {issues.length > 0 ? (
-                issues.map((issue) => (
-                  <div key={issue.id} className={classes.item}>
-                    <div className={classes.titleContainer}>
-                      <h3 className={classes.title}>{issue.title}</h3>
-                      <Info
-                        title="Issue Comment"
-                        onClick={() => toggleComment(issue.id)}
-                      />
-                      <span className={classes.created}>{issue.created}</span>
-                      <img
-                        className={classes.icon}
-                        src={pencil}
-                        onClick={() => toEdit(issue, issue.reminder)}
-                      />
-                      <img
-                        className={classes.icon}
-                        src={trashcan}
-                        onClick={() => handleDelete(issue.id)}
-                      />
-                      {issue.isCompleted ? <Check /> : null}
-                      {issue.reminder ? <Alert /> : null}
-                    </div>
-                    {showComment[issue.id] ? (
-                      <p
-                        className={classes.comment}
-                        style={{ borderColor: issue.color }}
-                      >
-                        {issue.comment}
-                      </p>
-                    ) : (
-                      <p
-                        className={classes.spacer}
-                        style={{ borderColor: issue.color }}
-                      ></p>
-                    )}
-                  </div>
-                ))
+                <IssuesList
+                  issues={issues}
+                  showComment={showComment}
+                  toggleComment={toggleComment}
+                  toEdit={toEdit}
+                  handleDelete={handleDelete}
+                />
               ) : apiError ? (
                 <p className={classes.noIssues}>{constants.API_ERROR}</p>
               ) : (

@@ -1,13 +1,7 @@
 import Modal from "react-modal";
 import classes from "./Forms/Form.module.css";
 
-const ModalComponent = ({
-  isOpen,
-  onRequestClose,
-  label,
-  header,
-  component,
-}) => {
+const ModalComponent = ({ isOpen, onRequestClose, label, component }) => {
   const styles = {
     content: {
       top: "50%",
@@ -31,7 +25,7 @@ const ModalComponent = ({
         onRequestClose={onRequestClose}
         contentLabel={label}
       >
-        <h1 className={classes.header}>{header}</h1>
+        <h1 className={classes.header}>{label}</h1>
         {component}
       </Modal>
     </div>
