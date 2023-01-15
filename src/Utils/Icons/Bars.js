@@ -1,13 +1,13 @@
 import React from "react";
-import info from "../../assets/info.svg";
+import bars from "../../assets/bars.svg";
 import classes from "../../Components/Issues/Issues.module.css";
 
-const Info = ({ title, onClick }) => {
+const Bars = ({ title, onClick }) => {
   return (
     <span className={classes.icon} title={title} onClick={onClick}>
-      <img src={info} />
+      <img src={bars} />
     </span>
   );
 };
 
-export default Info;
+export default Bars;

@@ -1,11 +1,11 @@
 import React from "react";
-import FormComponent from "../Forms/FormComponent";
+import Paintbrush from "../../Utils/Icons/Paintbrush.js";
+import Pencil from "../../Utils/Icons/Pencil";
 import classes from "../Forms/Form.module.css";
+import FormComponent from "../Forms/FormComponent";
+import ReminderComponent from "../Issues/ReminderComponent";
 import ModalComponent from "../ModalComponent";
 import Reminder from "../Reminder/Reminder";
-import pencil from "../../Utils/Icons/edit.svg";
-import paintbrush from "../../Utils/Icons/paintbrush.svg";
-import ReminderComponent from "../Issues/ReminderComponent";
 
 const UpdateForm = ({
   values,
@@ -66,9 +66,7 @@ const UpdateForm = ({
           }
         />
       </div>
-      {values?.hasReminder ? (
-        <img className={classes.icon} src={pencil} onClick={openModal} />
-      ) : null}
+      {values?.hasReminder ? <Pencil onClick={openModal} /> : null}
       {" | "}
       <div className={classes.checkboxInput2}>
         <FormComponent
@@ -81,9 +79,7 @@ const UpdateForm = ({
       </div>
       {" | "}
       <label className={classes.label}>Color</label>
-      <img
-        className={classes.icon}
-        src={paintbrush}
+      <Paintbrush
         onClick={() => setShowColorPicker((prevState) => !prevState)}
       />
       <div className={classes.buttonDiv}>

@@ -2,12 +2,12 @@ import React, { useState } from "react";
 
 import Alert from "../../Utils/Icons/Alert";
 import Check from "../../Utils/Icons/Check";
-import trashcan from "../../Utils/Icons/delete.svg";
-import pencil from "../../Utils/Icons/edit.svg";
+import Pencil from "../../Utils/Icons/Pencil";
 import Info from "../../Utils/Icons/Info";
 import ModalComponent from "../ModalComponent";
 import classes from "./Issues.module.css";
 import ReminderComponent from "./ReminderComponent";
+import TrashCan from "../../Utils/Icons/TrashCan";
 
 const IssuesList = ({
   issues,
@@ -24,16 +24,8 @@ const IssuesList = ({
         <h3 className={classes.title}>{issue.title}</h3>
         <Info title="Issue Comment" onClick={() => toggleComment(issue.id)} />
         <span className={classes.created}>{issue.created}</span>
-        <img
-          className={classes.icon}
-          src={pencil}
-          onClick={() => toEdit(issue, issue.reminder)}
-        />
-        <img
-          className={classes.icon}
-          src={trashcan}
-          onClick={() => handleDelete(issue.id)}
-        />
+        <Pencil onClick={() => toEdit(issue, issue.reminder)} />
+        <TrashCan onClick={() => handleDelete(issue.id)} />
         {issue.isCompleted ? <Check /> : null}
         {issue.reminder ? (
           <>

@@ -1,5 +1,5 @@
 import React from "react";
-import bars from "../Utils/Icons/bars.svg";
+import Bars from "../Utils/Icons/Bars";
 import classes from "./Issues/Issues.module.css";
 
 const CommentCollapse = ({ showComment, collapseAllComments }) => {
@@ -11,13 +11,9 @@ const CommentCollapse = ({ showComment, collapseAllComments }) => {
   }, {});
 
   return (
-    <div className={classes.barsContainer} title="Collapse Comments">
+    <div className={classes.barsContainer}>
       {commentsShown.true > 1 ? (
-        <img
-          className={classes.icon}
-          src={bars}
-          onClick={() => collapseAllComments()}
-        />
+        <Bars title="Collapse Comments" onClick={() => collapseAllComments()} />
       ) : null}
     </div>
   );

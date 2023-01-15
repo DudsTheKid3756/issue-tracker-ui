@@ -2,8 +2,8 @@ import FormComponent from "../Forms/FormComponent";
 import classes from "../Forms/Form.module.css";
 import ModalComponent from "../ModalComponent";
 import Reminder from "../Reminder/Reminder";
-import paintbrush from "../../Utils/Icons/paintbrush.svg";
 import ReminderComponent from "../Issues/ReminderComponent";
+import Paintbrush from "../../Utils/Icons/Paintbrush";
 
 const CreateForm = ({
   values,
@@ -66,11 +66,7 @@ const CreateForm = ({
     </div>
     {" | "}
     <label className={classes.label}>Color</label>
-    <img
-      className={classes.icon}
-      src={paintbrush}
-      onClick={() => setShowColorPicker((prevState) => !prevState)}
-    />
+    <Paintbrush onClick={() => setShowColorPicker((prevState) => !prevState)} />
     <div className={classes.buttonDiv}>
       <button
         className={`${classes.button} ${classes.cancel}`}
