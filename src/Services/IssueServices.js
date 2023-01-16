@@ -2,15 +2,15 @@ import constants from "../Utils/constants";
 import httpHelper from "../Utils/httpHelper";
 import { toaster } from "../Utils/toaster";
 
-const getIssues = async (
+async function getIssues(
   setIssues,
   setApiError,
   apiPath,
   setIsLoading,
   setIsDisabled
-) => {
+) {
   setIsLoading(true);
-  await httpHelper("issue", apiPath, "GET")
+  await httpHelper("/", apiPath, "GET")
     .then((response) => {
       if (!response.ok) {
         throw new Error(constants.API_ERROR);
@@ -29,10 +29,10 @@ const getIssues = async (
       setApiError(true);
       console.error(error);
     });
-};
+}
 
-const addIssue = async (newIssue, navigate, apiPath) => {
-  await httpHelper("issue", apiPath, "POST", newIssue)
+async function addIssue(newIssue, navigate, apiPath) {
+  await httpHelper("/", apiPath, "POST", newIssue)
     .then((response) => {
       if (!response.ok) {
         toaster(constants.BAD_REQUEST_ERROR, "error");
@@ -45,16 +45,16 @@ const addIssue = async (newIssue, navigate, apiPath) => {
       setTimeout(() => navigate("/", { state: apiPath }), 2000);
     })
     .catch((error) => console.error(error));
-};
+}
 
-const updateIssue = async (
+async function updateIssue(
   issueId,
   updatedIssue,
   navigate,
   apiPath,
   reminderPosted
-) => {
-  await httpHelper(`issue/${issueId}`, apiPath, "PUT", updatedIssue)
+) {
+  await httpHelper(`/${issueId}`, apiPath, "PUT", updatedIssue)
     .then((response) => {
       if (!response.ok) {
         toaster(constants.BAD_REQUEST_ERROR, "error");
@@ -69,10 +69,10 @@ const updateIssue = async (
       setTimeout(() => navigate("/", { state: apiPath }), 2000);
     })
     .catch((error) => console.error(error));
-};
+}
 
-const deleteIssue = async (issueId, apiPath, setIsDeleted) => {
-  await httpHelper(`issue/${issueId}`, apiPath, "DELETE")
+async function deleteIssue(issueId, apiPath, setIsDeleted) {
+  await httpHelper(`/${issueId}`, apiPath, "DELETE")
     .then((response) => {
       if (!response.ok) {
         throw new Error(constants.API_ERROR);
@@ -85,7 +85,6 @@ const deleteIssue = async (issueId, apiPath, setIsDeleted) => {
       return response;
     })
     .catch((error) => console.error(error));
-};
+}
 
 export { getIssues, addIssue, updateIssue, deleteIssue };
-

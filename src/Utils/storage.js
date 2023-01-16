@@ -1,12 +1,25 @@
-const storeItem = (key, item, storageType) =>
-  window[`${storageType}Storage`].setItem(key, JSON.stringify(item));
+import constants from "./constants";
 
-const getItem = (key, storageType) =>
-  JSON.parse(window[`${storageType}Storage`].getItem(key));
+export default function handleStorage(action, storageType, key, item) {
+  const _storage = window[`${storageType}Storage`];
 
-const removeItem = (key, storageType) =>
-  window[`${storageType}Storage`].removeItem(key);
+  switch (action) {
+    case "set":
+      _storage.setItem(key, JSON.stringify(item));
+      break;
 
-const clearStorage = (storageType) => window[`${storageType}Storage`].clear();
+    case "get":
+      return JSON.parse(_storage.getItem(key));
 
-export { storeItem, getItem, clearStorage, removeItem };
+    case "remove":
+      _storage.removeItem(key);
+      break;
+
+    case "clear":
+      _storage.clear();
+      break;
+
+    default:
+      console.error(`${action}${constants.STORAGE_ERROR}`);
+  }
+}

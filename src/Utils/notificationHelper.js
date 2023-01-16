@@ -1,7 +1,7 @@
 import constants from "./constants";
 import { notificationToast } from "./toaster";
 
-const handleNotification = (issues, dateData, removeReminder) => {
+function handleNotification(issues, dateData, removeReminder) {
   const _day = dateData.get("day");
   const _month = dateData.get("month");
   const _year = dateData.get("year");
@@ -27,15 +27,15 @@ const handleNotification = (issues, dateData, removeReminder) => {
           Number.parseInt(
             `${_minutes.toString().length == 2 ? _minutes : `0${_minutes}`}`
           ) + option.duration
-          }:${_seconds.toString().length == 2 ? _seconds : `0${_seconds}`}`;
+        }:${_seconds.toString().length == 2 ? _seconds : `0${_seconds}`}`;
         const t = time.length == 8 ? time.toString() : `${time.toString()}:00`;
         if (t == _time && date == _date) {
           const reminderPosted = true;
           notificationToast(issue, reminderPosted, removeReminder);
-        };
+        }
       }
     }
   });
-};
+}
 
 export default handleNotification;

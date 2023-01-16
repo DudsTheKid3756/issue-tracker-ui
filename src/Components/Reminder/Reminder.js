@@ -1,15 +1,11 @@
 import React from "react";
 import ReminderForm from "./ReminderForm";
 
-const Reminder = ({
-  closeModal,
-  reminder,
-  setReminder,
-}) => {
-  const onChange = (e) => {
+const Reminder = ({ closeModal, reminder, setReminder }) => {
+  function onChange(e) {
     const { name, value } = e.target;
     setReminder((values) => ({ ...values, [name]: value }));
-  };
+  }
 
   return (
     <div>

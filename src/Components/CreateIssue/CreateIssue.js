@@ -4,65 +4,58 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { addIssue } from "../../Services/IssueServices";
 import constants from "../../Utils/constants";
-import { getItem } from "../../Utils/storage";
+import handleStorage from "../../Utils/storage";
 import validateStrings from "../../Utils/validation";
 import classes from "../Forms/Form.module.css";
 import CreateForm from "./CreateForm";
 
 const CreateIssue = () => {
   const navigate = useNavigate();
-  const apiPath = getItem("api", "local");
+  const apiPath = handleStorage("get", "local", "api");
 
   const [errors, setErrors] = useState({});
   const [errLength, setErrLength] = useState(0);
-
   const [newIssueStrings, setNewIssueStrings] = useState({
     title: "",
     comment: "",
   });
-
-  const onStringChange = (e) => {
-    const { name, value } = e.target;
-    setNewIssueStrings((values) => ({ ...values, [name]: value }));
-  };
-
-  const [showColorPicker, setShowColorPicker] = useState(false);
   const [color, setColor] = useState("#000000");
-
-  const onColorChange = (color) => setColor(color.hex);
-
   const [newIssueBools, setNewIssueBools] = useState({
     hasReminder: false,
     isCompleted: false,
   });
-
   const defaultReminder = {
     ...JSON.parse(JSON.stringify(constants.INITIAL_REMINDER)),
     ["alert"]: "---Select an option---",
   };
-
   const [reminder, setReminder] = useState(defaultReminder);
+  const [showColorPicker, setShowColorPicker] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const strErrors = validateStrings({ ...newIssueStrings });
 
-  const onBoolChange = (e) => {
+  const onColorChange = (color) => setColor(color.hex);
+
+  function onStringChange(e) {
+    const { name, value } = e.target;
+    setNewIssueStrings((values) => ({ ...values, [name]: value }));
+  }
+
+  function onBoolChange(e) {
     const { name, checked } = e.target;
     setNewIssueBools((values) => ({ ...values, [name]: checked }));
     if (name == "hasReminder") {
       if (checked == true) setShowModal(true);
       else setReminder(defaultReminder);
     }
-  };
+  }
 
-  const [showModal, setShowModal] = useState(false);
-
-  const closeModal = (event) => {
-    if (event.currentTarget.innerHTML == "Cancel")
+  function closeModal(e) {
+    if (e.currentTarget.innerHTML == "Cancel")
       setNewIssueBools((values) => ({ ...values, ["hasReminder"]: false }));
     setShowModal(false);
-  };
+  }
 
-  const strErrors = validateStrings({ ...newIssueStrings });
-
-  const handleSubmit = (e) => {
+  function handleSubmit(e) {
     e.preventDefault();
     if (Object.keys(strErrors).length != 0) {
       setErrors(strErrors);
@@ -81,11 +74,11 @@ const CreateIssue = () => {
       navigate,
       apiPath
     );
-  };
+  }
 
-  const handleCancel = () => {
+  function handleCancel() {
     navigate("/");
-  };
+  }
 
   return (
     <div className={classes.formContainer}>

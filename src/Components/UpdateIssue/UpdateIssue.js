@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { updateIssue } from "../../Services/IssueServices";
 import constants from "../../Utils/constants";
-import { getItem } from "../../Utils/storage";
+import handleStorage from "../../Utils/storage";
 import validateStrings from "../../Utils/validation";
 import classes from "../Forms/Form.module.css";
 import ModalComponent from "../ModalComponent";
@@ -13,44 +13,48 @@ import UpdateForm from "./UpdateForm";
 const UpdateIssue = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
-  const apiPath = getItem("api", "local");
+  const apiPath = handleStorage("get", "local", "api");
+
 
   const currentIssue = useRef(state?.issue);
   const currentReminder = useRef(state?.reminder);
   const [errors, setErrors] = useState({});
   const [errLength, setErrLength] = useState(0);
   const [removeReminderModal, setRemoveReminderModal] = useState(false);
-
-  const defaultReminder = {
-    ...JSON.parse(JSON.stringify(constants.INITIAL_REMINDER)),
-    ["alert"]: "---Select an option---",
-  };
-
   const [strsToUpdate, setStrsToUpdate] = useState({
     title: currentIssue?.current?.title,
     comment: currentIssue?.current?.comment,
   });
-
-  const onStringChange = (e) => {
-    const { name, value } = e.target;
-    setStrsToUpdate((values) => ({ ...values, [name]: value }));
-  };
-
-  const [showColorPicker, setShowColorPicker] = useState(false);
-
-  const [colorToUpdate, setColorToUpdate] = useState({
-    color: currentIssue?.current?.color,
-  });
-
-  const onColorChange = (colorToUpdate) =>
-    setColorToUpdate(() => ({ ["color"]: colorToUpdate.hex }));
-
   const [boolsToUpdate, setBoolsToUpdate] = useState({
     hasReminder: currentIssue?.current?.hasReminder,
     isCompleted: currentIssue?.current?.isCompleted,
   });
+  const [colorToUpdate, setColorToUpdate] = useState({
+    color: currentIssue?.current?.color,
+  });
+  const [showColorPicker, setShowColorPicker] = useState(false);
+  const defaultReminder = {
+    ...JSON.parse(JSON.stringify(constants.INITIAL_REMINDER)),
+    ["alert"]: "---Select an option---",
+  };
+  const [reminder, setReminder] = useState({
+    date: currentReminder?.current?.date,
+    time: currentReminder?.current?.time,
+    alert: currentReminder?.current?.alert,
+  });
+  const [showReminderModal, setShowReminderModal] = useState(false);
+  const strErrors = validateStrings({ ...strsToUpdate });
 
-  const onBoolChange = (e) => {
+  function onStringChange(e) {
+    const { name, value } = e.target;
+    setStrsToUpdate((values) => ({ ...values, [name]: value }));
+  }
+
+  function onColorChange(colorToUpdate) {
+    return setColorToUpdate(() => ({ ["color"]: colorToUpdate.hex }));
+  }
+
+  function onBoolChange(e) {
     const { name, checked } = e.target;
     setBoolsToUpdate((values) => ({ ...values, [name]: checked }));
     if (name == "hasReminder") {
@@ -60,28 +64,20 @@ const UpdateIssue = () => {
         setShowReminderModal(checked);
       }
     }
-  };
+  }
 
-  const [reminder, setReminder] = useState({
-    date: currentReminder?.current?.date,
-    time: currentReminder?.current?.time,
-    alert: currentReminder?.current?.alert,
-  });
-
-  const [showReminderModal, setShowReminderModal] = useState(false);
-
-  const removeReminder = () => {
+  function removeReminder() {
     setReminder(null);
     setBoolsToUpdate(() => ({ ...boolsToUpdate, ["hasReminder"]: false }));
     setRemoveReminderModal(false);
-  };
+  }
 
-  const closeRemoveReminderModal = () => {
+  function closeRemoveReminderModal() {
     setBoolsToUpdate(() => ({ ...boolsToUpdate, ["hasReminder"]: true }));
     setRemoveReminderModal(false);
-  };
+  }
 
-  const closeReminderModal = () => {
+  function closeReminderModal() {
     setBoolsToUpdate((values) => ({
       ...values,
       ["hasReminder"]: Object.values(reminder).some((prop) => prop == "")
@@ -89,11 +85,9 @@ const UpdateIssue = () => {
         : true,
     }));
     setShowReminderModal(false);
-  };
+  }
 
-  const strErrors = validateStrings({ ...strsToUpdate });
-
-  const handleUpdate = (e) => {
+  function handleUpdate(e) {
     e.preventDefault();
     if (Object.keys(strErrors).length != 0) {
       setErrors(strErrors);
@@ -111,11 +105,11 @@ const UpdateIssue = () => {
       apiPath,
       false
     );
-  };
+  }
 
-  const handleCancel = () => {
+  function handleCancel() {
     navigate("/");
-  };
+  }
 
   return (
     <div className={classes.formContainer}>

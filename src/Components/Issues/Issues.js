@@ -5,12 +5,12 @@ import { ApiContext } from "../../Contexts/ApiContext";
 import {
   deleteIssue,
   getIssues,
-  updateIssue
+  updateIssue,
 } from "../../Services/IssueServices";
 import constants from "../../Utils/constants";
 import { dateData, handleTimeout } from "../../Utils/counterHelper";
 import handleNotification from "../../Utils/notificationHelper";
-import { getItem } from "../../Utils/storage";
+import handleStorage from "../../Utils/storage";
 import { toaster } from "../../Utils/toaster";
 import CommentCollapse from "../CommentCollapse";
 import ApiSelectComponent from "../Forms/ApiSelectComponent";
@@ -19,9 +19,9 @@ import classes from "./Issues.module.css";
 import IssuesList from "./IssuesList";
 
 const Issues = () => {
-  const navigate = useNavigate();
   const { toggleApiPath, apiError, toggleApiError } = useContext(ApiContext);
-  const apiPath = getItem("api", "local");
+  const navigate = useNavigate();
+  const apiPath = handleStorage("get", "local", "api");
 
   const [issues, setIssues] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -32,11 +32,7 @@ const Issues = () => {
   const [today, setToday] = useState(new Date());
 
   const resetToday = () => setToday(new Date());
-
-  const handleDelete = (id) => {
-    deleteIssue(id, apiPath, setIsDeleted);
-    setIsDeleted(false);
-  };
+  const collapseAllComments = () => setShowComment({});
 
   useEffect(() => {
     setIsDisabled(true);
@@ -48,21 +44,24 @@ const Issues = () => {
     handleTimeout(issues, apiError, resetToday);
   }, [issues]);
 
-  const handleRedirect = () => {
+  function handleDelete(id) {
+    deleteIssue(id, apiPath, setIsDeleted);
+    setIsDeleted(false);
+  }
+
+  function handleRedirect() {
     navigate("/create");
-  };
+  }
 
-  const toEdit = (issue, reminder) => {
+  function toEdit(issue, reminder) {
     navigate(`/${issue.id}`, { state: { issue: issue, reminder: reminder } });
-  };
+  }
 
-  const toggleComment = (id) => {
+  function toggleComment(id) {
     setShowComment({ ...showComment, [id]: !showComment[id] });
-  };
+  }
 
-  const collapseAllComments = () => setShowComment({});
-
-  const removeReminder = (issue, reminderPosted, closeToast) => {
+  function removeReminder(issue, reminderPosted, closeToast) {
     updateIssue(
       issue.id,
       { ...issue, ["reminder"]: null, ["hasReminder"]: false },
@@ -72,7 +71,7 @@ const Issues = () => {
     );
     closeToast();
     setTimeout(() => setReminderDeleted(true), 1000);
-  };
+  }
 
   handleNotification(issues, dateData(today), removeReminder);
 

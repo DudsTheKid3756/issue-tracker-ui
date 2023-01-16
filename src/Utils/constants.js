@@ -1,5 +1,8 @@
 export default Object.freeze({
-  BASE_URLS: { dotnet: "https://localhost:7082", java: "http://localhost:8080" },
+  BASE_URLS: {
+    dotnet: "https://localhost:7082",
+    java: "http://localhost:8080",
+  },
   API_ERROR: "Could not connect to API. Try again later.",
   BLANK_ERROR: " field cannot be blank",
   INVALID_ERROR: " field is invalid",
@@ -21,4 +24,6 @@ export default Object.freeze({
     time: "",
     alert: "",
   },
+  STORAGE_ERROR:
+    ' not a valid storage action. Try "set, get, remove, or clear"',
 });

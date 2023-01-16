@@ -1,16 +1,16 @@
 import { createContext, useState } from "react";
-import { storeItem } from "../Utils/storage";
+import handleStorage from "../Utils/storage";
 
 export const LoginContext = createContext(null);
 
 const LoginContextProvider = (props) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  storeItem("authState", false, "session");
+  handleStorage("set", "session", "authState", false);
 
   const changeIsLoggedIn = (bool) => {
     setIsLoggedIn(bool);
-    storeItem("authState", bool, "session");
-  }
+    handleStorage("set", "session", "authState", bool);
+  };
 
   return (
     <LoginContext.Provider value={{ isLoggedIn, changeIsLoggedIn }}>
