@@ -12,13 +12,13 @@ const LoginPage = () => {
   };
 
   const [loginInfo, setLoginInfo] = useState({
-    username: "",
+    email: "",
     password: "",
   });
 
   const [signUpInfo, setSignUpInfo] = useState({
     fullName: "",
-    username: "",
+    email: "",
     password: "",
   });
 

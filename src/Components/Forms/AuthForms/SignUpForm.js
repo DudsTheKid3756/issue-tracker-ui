@@ -1,4 +1,5 @@
 import React from "react";
+import handleStorage from "../../../Utils/storage";
 
 const SignUpForm = ({
   changeAuthMode,
@@ -9,7 +10,7 @@ const SignUpForm = ({
 }) => {
   const onSignUp = (e) => {
     e.preventDefault();
-    storeItem(signUpInfo.email, signUpInfo, "session");
+    handleStorage("set", "session", signUpInfo.email, signUpInfo);
     changeIsLoggedIn(true);
     setSignUpInfo((values) => Object.values(values).fill(""));
   };
@@ -65,7 +66,7 @@ const SignUpForm = ({
             />
           </div>
           <div className="d-grid gap-2 mt-3">
-            <button type="submit" className="btn-primary" onClick={() => onSignUp}>
+            <button type="submit" className="btn-primary" onClick={onSignUp}>
               Submit
             </button>
           </div>

@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import handleStorage from "../../../Utils/storage";
 
 const LoginForm = ({
   changeAuthMode,
@@ -7,17 +9,24 @@ const LoginForm = ({
   onChange,
   changeIsLoggedIn,
 }) => {
+  const navigate = useNavigate();
+  const tokenKey = useRef(null);
+  let token;
+
   const onLogin = (e) => {
     e.preventDefault();
-    if (
-      tokenKey === null ||
-      tokenKey.email !== loginInfo.email ||
-      tokenKey.password !== loginInfo.password
-    )
+    tokenKey.current = loginInfo.email;
+    token = handleStorage("get", "session", tokenKey.current);
+    if (token === null || token.password !== loginInfo.password) {
       console.error("stuff was wrong or something");
-    else changeIsLoggedIn(true);
+      throw new Error("error");
+    }
 
+    changeIsLoggedIn(true);
     setLoginInfo((values) => Object.values(values).fill(""));
+    navigate("/welcome", {
+      state: { email: token.email },
+    });
   };
 
   return (
@@ -59,7 +68,7 @@ const LoginForm = ({
             />
           </div>
           <div className="d-grid gap-2 mt-3">
-            <button type="submit" className="btn-primary" onClick={() => onLogin}>
+            <button type="submit" className="btn-primary" onClick={onLogin}>
               Submit
             </button>
           </div>
