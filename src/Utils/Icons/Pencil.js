@@ -1,6 +1,6 @@
 import React from "react";
 import pencil from "../../assets/pencil.svg";
-import classes from "../../Components/Issues/Issues.module.css";
+import classes from "../../components/issues/Issues.module.css";
 
 const Edit = ({ onClick }) => {
   return (

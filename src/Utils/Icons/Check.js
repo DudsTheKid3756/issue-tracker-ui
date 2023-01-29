@@ -1,6 +1,6 @@
 import React from "react";
 import check from "../../assets/check.svg";
-import classes from "../../Components/Issues/Issues.module.css";
+import classes from "../../components/issues/Issues.module.css";
 
 const Check = () => {
   return (

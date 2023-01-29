@@ -1,6 +1,6 @@
 import React from "react";
 import bell from "../../assets/bell.svg";
-import classes from "../../Components/Issues/Issues.module.css";
+import classes from "../../components/issues/Issues.module.css";
 
 const Alert = ({ title, onClick }) => {
   return (

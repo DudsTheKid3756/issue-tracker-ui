@@ -1,6 +1,6 @@
 import React from "react";
 import info from "../../assets/info.svg";
-import classes from "../../Components/Issues/Issues.module.css";
+import classes from "../../components/issues/Issues.module.css";
 
 const Info = ({ title, onClick }) => {
   return (

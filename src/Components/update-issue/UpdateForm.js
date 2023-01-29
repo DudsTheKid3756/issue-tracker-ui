@@ -1,31 +1,33 @@
-import FormComponent from "../Forms/FormComponent";
-import classes from "../Forms/Form.module.css";
+import React from "react";
+import Paintbrush from "../../utils/icons/Paintbrush.js";
+import Pencil from "../../utils/icons/Pencil";
+import classes from "../forms/Form.module.css";
+import FormComponent from "../forms/FormComponent";
+import ReminderComponent from "../issues/ReminderComponent";
 import ModalComponent from "../ModalComponent";
-import Reminder from "../Reminder/Reminder";
-import ReminderComponent from "../Issues/ReminderComponent";
-import Paintbrush from "../../Utils/Icons/Paintbrush";
+import Reminder from "../reminder/Reminder";
 
-const CreateForm = ({
+const UpdateForm = ({
   values,
   onChanges,
-  onSubmit,
+  handleUpdate,
   errors,
-  handleCancel,
   errLength,
+  handleCancel,
   reminder,
   setReminder,
+  openModal,
   showModal,
   closeModal,
   setShowColorPicker,
 }) => (
-  <div className={classes.formContainer}>
-    <h1 className={classes.formHeader}>New Issue</h1>
+  <div className={classes.formComponent}>
+    <h1 className={classes.formHeader}>Edit Issue</h1>
     <div className={classes.textInputs}>
       <FormComponent
         label="Title"
         field="title"
         type="text"
-        placeholder="New Issue"
         values={values}
         onChanges={onChanges}
         errors={errors}
@@ -35,7 +37,6 @@ const CreateForm = ({
         label="Comment"
         field="comment"
         type="text"
-        placeholder=""
         values={values}
         onChanges={onChanges}
         errors={errors}
@@ -54,7 +55,7 @@ const CreateForm = ({
       <ModalComponent
         isOpen={showModal}
         onRequestClose={closeModal}
-        label="Create Reminder"
+        label="Update Reminder"
         component={
           <Reminder
             closeModal={closeModal}
@@ -62,6 +63,17 @@ const CreateForm = ({
             setReminder={setReminder}
           />
         }
+      />
+    </div>
+    {values?.hasReminder ? <Pencil onClick={openModal} /> : null}
+    {" | "}
+    <div className={classes.checkboxInput2}>
+      <FormComponent
+        label="Completed"
+        field="isCompleted"
+        type="checkbox"
+        values={values}
+        onChanges={onChanges}
       />
     </div>
     {" | "}
@@ -77,13 +89,13 @@ const CreateForm = ({
       <button
         className={`${classes.button} ${classes.submit}`}
         type="submit"
-        onClick={onSubmit}
+        onClick={handleUpdate}
       >
-        Submit
+        Update
       </button>
     </div>
     {values?.hasReminder ? <ReminderComponent reminder={reminder} /> : null}
   </div>
 );
 
-export default CreateForm;
+export default UpdateForm;

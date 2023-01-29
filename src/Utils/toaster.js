@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Notification from "../Components/Reminder/Notification";
+import Notification from "../components/reminder/Notification";
 
 function toaster(text, type) {
   toast(text, {

@@ -1,53 +1,20 @@
-import React, { useContext } from "react";
+import React from "react";
 import Modal from "react-modal";
-import { Navigate, Route, Routes } from "react-router-dom";
-import LoginPage from "./Components/Login/LoginPage";
-import WelcomePage from "./Components/Home/WelcomePage";
-import CreateIssue from "./Components/CreateIssue/CreateIssue";
-import Issues from "./Components/Issues/Issues";
-import UpdateIssue from "./Components/UpdateIssue/UpdateIssue";
-import { LoginContext } from "./Contexts/LoginContext";
-import Protected from "./Protected";
+import { Route, Routes } from "react-router-dom";
+import CreateIssue from "./components/create-issue/CreateIssue";
+import Issues from "./components/issues/Issues";
+import LoginPage from "./components/login/LoginPage";
+import UpdateIssue from "./components/update-issue/UpdateIssue";
 
 Modal.setAppElement("#root");
 
 const App = () => {
-  const { isLoggedIn } = useContext(LoginContext);
 
   return (
     <Routes>
-      <Route
-        path="/"
-        element={
-          <Protected isLoggedIn={isLoggedIn}>
-            <Issues />
-          </Protected>
-        }
-      />
-      <Route
-        path="/welcome"
-        element={
-          <Protected isLoggedIn={isLoggedIn}>
-            <WelcomePage />
-          </Protected>
-        }
-      />
-      <Route
-        path="/create"
-        element={
-          <Protected isLoggedIn={isLoggedIn}>
-            <CreateIssue />
-          </Protected>
-        }
-      />
-      <Route
-        path="/:id"
-        element={
-          <Protected isLoggedIn={isLoggedIn}>
-            <UpdateIssue />
-          </Protected>
-        }
-      />
+      <Route path="/" element={<Issues />} />
+      <Route path="/create" element={<CreateIssue />} />
+      <Route path="/:id" element={<UpdateIssue />} />
       <Route path="/login" element={<LoginPage />} />
     </Routes>
   );

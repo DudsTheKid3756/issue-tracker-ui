@@ -1,19 +1,19 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import { ApiContext } from "../../Contexts/ApiContext";
+import { ApiContext } from "../../contexts/ApiContext";
 import {
   deleteIssue,
   getIssues,
   updateIssue,
-} from "../../Services/IssueServices";
-import constants from "../../Utils/constants";
-import { dateData, handleTimeout } from "../../Utils/counterHelper";
-import handleNotification from "../../Utils/notificationHelper";
-import handleStorage from "../../Utils/storage";
-import { toaster } from "../../Utils/toaster";
+} from "../../services/IssueServices";
+import constants from "../../utils/constants";
+import { dateData, handleTimeout } from "../../utils/counterHelper";
+import handleNotification from "../../utils/notificationHelper";
+import handleStorage from "../../utils/storage";
+import { toaster } from "../../utils/toaster";
 import CommentCollapse from "../CommentCollapse";
-import ApiSelectComponent from "../Forms/ApiSelectComponent";
+import ApiSelectComponent from "../forms/ApiSelectComponent";
 import LoadingSpinner from "../LoadingSpinner";
 import classes from "./Issues.module.css";
 import IssuesList from "./IssuesList";

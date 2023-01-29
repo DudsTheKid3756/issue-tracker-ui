@@ -1,6 +1,6 @@
 import React from "react";
-import Bars from "../Utils/Icons/Bars";
-import classes from "./Issues/Issues.module.css";
+import Bars from "../utils/icons/Bars";
+import classes from "./issues/Issues.module.css";
 
 const CommentCollapse = ({ showComment, collapseAllComments }) => {
   const commentsAsArray = Object.entries(showComment);

@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "./Form.module.css";
-import constants from "../../Utils/constants";
+import constants from "../../utils/constants";
 
 const ApiSelectComponent = ({ apiPath, toggleApiPath }) => {
   const urls = constants.BASE_URLS;

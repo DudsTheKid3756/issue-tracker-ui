@@ -2,11 +2,11 @@ import { useState } from "react";
 import { TwitterPicker } from "react-color";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import { addIssue } from "../../Services/IssueServices";
-import constants from "../../Utils/constants";
-import handleStorage from "../../Utils/storage";
-import validateStrings from "../../Utils/validation";
-import classes from "../Forms/Form.module.css";
+import { addIssue } from "../../services/IssueServices";
+import constants from "../../utils/constants";
+import handleStorage from "../../utils/storage";
+import validateStrings from "../../utils/validation";
+import classes from "../forms/Form.module.css";
 import CreateForm from "./CreateForm";
 
 const CreateIssue = () => {

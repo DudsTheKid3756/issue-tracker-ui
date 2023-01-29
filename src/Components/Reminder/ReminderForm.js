@@ -1,8 +1,8 @@
 import React from "react";
-import FormComponent from "../Forms/FormComponent";
-import classes from "../Forms/Form.module.css";
-import SelectComponent from "../Forms/SelectComponent";
-import constants from "../../Utils/constants";
+import FormComponent from "../forms/FormComponent";
+import classes from "../forms/Form.module.css";
+import SelectComponent from "../forms/SelectComponent";
+import constants from "../../utils/constants";
 
 const ReminderForm = ({ closeModal, values, onChanges }) => {
   const options = constants.ALERT_OPTIONS.map((option) => option.text);

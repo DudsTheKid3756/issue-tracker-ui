@@ -1,5 +1,5 @@
 import React, { createContext, useState } from "react";
-import handleStorage, { storeItem } from "../Utils/storage";
+import handleStorage from "../utils/storage";
 
 export const ApiContext = createContext();
 

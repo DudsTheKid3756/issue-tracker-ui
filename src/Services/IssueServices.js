@@ -1,6 +1,6 @@
-import constants from "../Utils/constants";
-import httpHelper from "../Utils/httpHelper";
-import { toaster } from "../Utils/toaster";
+import constants from "../utils/constants";
+import httpHelper from "../utils/httpHelper";
+import { toaster } from "../utils/toaster";
 
 async function getIssues(
   setIssues,

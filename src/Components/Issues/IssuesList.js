@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 
-import Alert from "../../Utils/Icons/Alert";
-import Check from "../../Utils/Icons/Check";
-import Pencil from "../../Utils/Icons/Pencil";
-import Info from "../../Utils/Icons/Info";
+import Alert from "../../utils/icons/Alert";
+import Check from "../../utils/icons/Check";
+import Pencil from "../../utils/icons/Pencil";
+import Info from "../../utils/icons/Info";
 import ModalComponent from "../ModalComponent";
 import classes from "./Issues.module.css";
 import ReminderComponent from "./ReminderComponent";
-import TrashCan from "../../Utils/Icons/TrashCan";
+import TrashCan from "../../utils/icons/TrashCan";
 
 const IssuesList = ({
   issues,

@@ -2,10 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router } from "react-router-dom";
 import App from "./App";
-import ApiContextProvider from "./Contexts/ApiContext";
-import LoginContextProvider from "./Contexts/LoginContext";
+import ApiContextProvider from "./contexts/ApiContext";
+import LoginContextProvider from "./contexts/LoginContext";
 import "./index.css";
-import handleStorage from "./Utils/storage";
+import handleStorage from "./utils/storage";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

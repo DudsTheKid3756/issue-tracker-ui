@@ -1,6 +1,6 @@
 import React from "react";
 import bars from "../../assets/bars.svg";
-import classes from "../../Components/Issues/Issues.module.css";
+import classes from "../../components/issues/Issues.module.css";
 
 const Bars = ({ title, onClick }) => {
   return (

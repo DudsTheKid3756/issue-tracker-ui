@@ -2,11 +2,11 @@ import { useRef, useState } from "react";
 import { TwitterPicker } from "react-color";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import { updateIssue } from "../../Services/IssueServices";
-import constants from "../../Utils/constants";
-import handleStorage from "../../Utils/storage";
-import validateStrings from "../../Utils/validation";
-import classes from "../Forms/Form.module.css";
+import { updateIssue } from "../../services/IssueServices";
+import constants from "../../utils/constants";
+import handleStorage from "../../utils/storage";
+import validateStrings from "../../utils/validation";
+import classes from "../forms/Form.module.css";
 import ModalComponent from "../ModalComponent";
 import UpdateForm from "./UpdateForm";
 

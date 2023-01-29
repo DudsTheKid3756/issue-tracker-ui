@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "../Forms/Form.module.css";
+import classes from "../forms/Form.module.css";
 
 const ReminderComponent = ({ reminder }) => (
   <div className={classes.reminderContainer}>

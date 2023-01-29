@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import handleStorage from "../Utils/storage";
+import handleStorage from "../utils/storage";
 
 export const LoginContext = createContext(null);
 

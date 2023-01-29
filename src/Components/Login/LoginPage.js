@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
-import { LoginContext } from "../../Contexts/LoginContext";
-import LoginForm from "../Forms/AuthForms/LoginForm";
-import SignUpForm from "../Forms/AuthForms/SignUpForm";
+import { LoginContext } from "../../contexts/LoginContext";
+import LoginForm from "../forms/auth-forms/LoginForm";
+import SignUpForm from "../forms/auth-forms/SignUpForm";
 
 const LoginPage = () => {
   const { changeIsLoggedIn } = useContext(LoginContext);

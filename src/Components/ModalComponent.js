@@ -1,5 +1,5 @@
 import Modal from "react-modal";
-import classes from "./Forms/Form.module.css";
+import classes from "./forms/Form.module.css";
 
 const ModalComponent = ({ isOpen, onRequestClose, label, component }) => {
   const styles = {
