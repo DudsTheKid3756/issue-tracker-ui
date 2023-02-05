@@ -1,6 +1,6 @@
-import React, { useRef } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
-import handleStorage from "../../../utils/storage";
+import { signin } from "../../../services/AuthService";
 
 const LoginForm = ({
   changeAuthMode,
@@ -10,23 +10,12 @@ const LoginForm = ({
   changeIsLoggedIn,
 }) => {
   const navigate = useNavigate();
-  const tokenKey = useRef(null);
-  let token;
 
   const onLogin = (e) => {
     e.preventDefault();
-    tokenKey.current = loginInfo.email;
-    token = handleStorage("get", "session", tokenKey.current);
-    if (token === null || token.password !== loginInfo.password) {
-      console.error("stuff was wrong or something");
-      throw new Error("error");
-    }
-
-    changeIsLoggedIn(true);
+    signin("dotnet", loginInfo, changeIsLoggedIn);
     setLoginInfo((values) => Object.values(values).fill(""));
-    navigate("/welcome", {
-      state: { email: token.email },
-    });
+    navigate("/");
   };
 
   return (
@@ -44,15 +33,15 @@ const LoginForm = ({
             </span>
           </div>
           <div className="form-group mt-3">
-            <label>Email address</label>
+            <label>Username</label>
             <input
-              id="email"
-              name="email"
-              type="email"
-              defaultValue={loginInfo.email}
+              id="username"
+              name="username"
+              type="text"
+              defaultValue={loginInfo.username}
               onChange={onChange}
               className="form-control mt-1"
-              placeholder="Enter email"
+              placeholder="Enter username"
             />
           </div>
           <div className="form-group mt-3">
