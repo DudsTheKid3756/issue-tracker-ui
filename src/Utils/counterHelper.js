@@ -12,9 +12,7 @@ function dateData(today) {
 function handleTimeout(issues, apiError, resetToday) {
   while (issues.length > 0 && !apiError) {
     const timerId = setInterval(resetToday, 1000);
-    return () => {
-      clearInterval(timerId);
-    };
+    return () => clearInterval(timerId);
   }
 }
 

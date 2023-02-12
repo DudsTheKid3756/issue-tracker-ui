@@ -3,24 +3,25 @@ import { LoginContext } from "../../contexts/LoginContext";
 import LoginForm from "../forms/auth-forms/LoginForm";
 import SignUpForm from "../forms/auth-forms/SignUpForm";
 
-const LoginPage = () => {
+const LoginPage = ({ setIsLoading }) => {
   const { changeIsLoggedIn } = useContext(LoginContext);
+
   const [authMode, setAuthMode] = useState("signin");
-
-  const changeAuthMode = () => {
-    setAuthMode(authMode == "signin" ? "signup" : "signin");
-  };
-
   const [loginInfo, setLoginInfo] = useState({
-    email: "",
+    username: "",
     password: "",
   });
 
   const [signUpInfo, setSignUpInfo] = useState({
-    fullName: "",
+    username: "",
     email: "",
     password: "",
+    role: "user",
   });
+
+  const changeAuthMode = () => {
+    setAuthMode(authMode == "signin" ? "signup" : "signin");
+  };
 
   const onChange = (e, setInfo) => {
     const { name, value } = e.target;
@@ -31,15 +32,14 @@ const LoginPage = () => {
     <LoginForm
       changeAuthMode={changeAuthMode}
       loginInfo={loginInfo}
-      setLoginInfo={setLoginInfo}
       onChange={(e) => onChange(e, setLoginInfo)}
       changeIsLoggedIn={changeIsLoggedIn}
+      setIsLoading={setIsLoading}
     />
   ) : (
     <SignUpForm
       changeAuthMode={changeAuthMode}
       signUpInfo={signUpInfo}
-      setSignUpInfo={setSignUpInfo}
       onChange={(e) => onChange(e, setSignUpInfo)}
       changeIsLoggedIn={changeIsLoggedIn}
     />

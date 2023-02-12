@@ -108,7 +108,7 @@ const UpdateIssue = () => {
   }
 
   function handleCancel() {
-    navigate("/");
+    navigate("/issues");
   }
 
   return (

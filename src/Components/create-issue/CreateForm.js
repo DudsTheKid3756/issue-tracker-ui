@@ -66,7 +66,10 @@ const CreateForm = ({
     </div>
     {" | "}
     <label className={classes.label}>Color</label>
-    <Paintbrush onClick={() => setShowColorPicker((prevState) => !prevState)} />
+    <Paintbrush
+      title="Change Color"
+      onClick={() => setShowColorPicker((prevState) => !prevState)}
+    />
     <div className={classes.buttonDiv}>
       <button
         className={`${classes.button} ${classes.cancel}`}

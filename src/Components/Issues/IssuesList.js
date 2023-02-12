@@ -24,9 +24,9 @@ const IssuesList = ({
         <h3 className={classes.title}>{issue.title}</h3>
         <Info title="Issue Comment" onClick={() => toggleComment(issue.id)} />
         <span className={classes.created}>{issue.created}</span>
-        <Pencil onClick={() => toEdit(issue, issue.reminder)} />
-        <TrashCan onClick={() => handleDelete(issue.id)} />
-        {issue.isCompleted ? <Check /> : null}
+        <Pencil title="Edit Issue" onClick={() => toEdit(issue, issue.reminder)} />
+        <TrashCan title="Delete Issue" onClick={() => handleDelete(issue.id)} />
+        {issue.isCompleted ? <Check title="Completed" /> : null}
         {issue.reminder ? (
           <>
             <Alert

@@ -65,7 +65,9 @@ const UpdateForm = ({
         }
       />
     </div>
-    {values?.hasReminder ? <Pencil onClick={openModal} /> : null}
+    {values?.hasReminder ? (
+      <Pencil title="Edit Reminder" onClick={openModal} />
+    ) : null}
     {" | "}
     <div className={classes.checkboxInput2}>
       <FormComponent
@@ -78,7 +80,10 @@ const UpdateForm = ({
     </div>
     {" | "}
     <label className={classes.label}>Color</label>
-    <Paintbrush onClick={() => setShowColorPicker((prevState) => !prevState)} />
+    <Paintbrush
+      title="Change Color"
+      onClick={() => setShowColorPicker((prevState) => !prevState)}
+    />
     <div className={classes.buttonDiv}>
       <button
         className={`${classes.button} ${classes.cancel}`}

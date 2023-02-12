@@ -1,18 +1,31 @@
 import React from "react";
-import handleStorage from "../../../utils/storage";
+import { useNavigate } from "react-router-dom";
+import { signin, signup } from "../../../services/AuthService";
+import { clearValues } from "../../../utils/clearValues";
 
 const SignUpForm = ({
   changeAuthMode,
   signUpInfo,
-  setSignUpInfo,
   onChange,
   changeIsLoggedIn,
 }) => {
-  const onSignUp = (e) => {
+  const navigate = useNavigate();
+
+  const handleSignUp = (e) => {
     e.preventDefault();
-    handleStorage("set", "session", signUpInfo.email, signUpInfo);
+    signup("dotnet", signUpInfo);
     changeIsLoggedIn(true);
-    setSignUpInfo((values) => Object.values(values).fill(""));
+
+    signin(
+      "dotnet",
+      {
+        username: signUpInfo.username,
+        password: signUpInfo.password,
+      },
+      changeIsLoggedIn
+    );
+
+    navigate("/issues");
   };
 
   return (
@@ -30,15 +43,15 @@ const SignUpForm = ({
             </span>
           </div>
           <div className="form-group mt-3">
-            <label>Full Name</label>
+            <label>Username</label>
             <input
-              id="fullName"
-              name="fullName"
+              id="username"
+              name="username"
               type="text"
-              value={signUpInfo.fullName}
+              value={signUpInfo.username}
               onChange={onChange}
               className="form-control mt-1"
-              placeholder="e.g Jane Doe"
+              placeholder="e.g johnsmith123"
             />
           </div>
           <div className="form-group mt-3">
@@ -66,7 +79,11 @@ const SignUpForm = ({
             />
           </div>
           <div className="d-grid gap-2 mt-3">
-            <button type="submit" className="btn-primary" onClick={onSignUp}>
+            <button
+              type="submit"
+              className="btn-primary"
+              onClick={handleSignUp}
+            >
               Submit
             </button>
           </div>

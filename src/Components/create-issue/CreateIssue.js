@@ -77,7 +77,7 @@ const CreateIssue = () => {
   }
 
   function handleCancel() {
-    navigate("/");
+    navigate("/issues");
   }
 
   return (

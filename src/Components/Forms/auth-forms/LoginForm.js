@@ -1,32 +1,24 @@
-import React, { useRef } from "react";
+import React from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { signin } from "../../../services/AuthService";
+import { clearValues } from "../../../utils/clearValues";
 import handleStorage from "../../../utils/storage";
 
 const LoginForm = ({
   changeAuthMode,
   loginInfo,
-  setLoginInfo,
   onChange,
   changeIsLoggedIn,
+  setIsLoading,
 }) => {
   const navigate = useNavigate();
-  const tokenKey = useRef(null);
-  let token;
+  setIsLoading(true);
 
-  const onLogin = (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
-    tokenKey.current = loginInfo.email;
-    token = handleStorage("get", "session", tokenKey.current);
-    if (token === null || token.password !== loginInfo.password) {
-      console.error("stuff was wrong or something");
-      throw new Error("error");
-    }
-
-    changeIsLoggedIn(true);
-    setLoginInfo((values) => Object.values(values).fill(""));
-    navigate("/welcome", {
-      state: { email: token.email },
-    });
+    signin("dotnet", loginInfo, changeIsLoggedIn);
+    navigate("/issues");
   };
 
   return (
@@ -44,15 +36,15 @@ const LoginForm = ({
             </span>
           </div>
           <div className="form-group mt-3">
-            <label>Email address</label>
+            <label>Username</label>
             <input
-              id="email"
-              name="email"
-              type="email"
-              defaultValue={loginInfo.email}
+              id="username"
+              name="username"
+              type="text"
+              defaultValue={loginInfo.username}
               onChange={onChange}
               className="form-control mt-1"
-              placeholder="Enter email"
+              placeholder="Enter username"
             />
           </div>
           <div className="form-group mt-3">
@@ -68,7 +60,7 @@ const LoginForm = ({
             />
           </div>
           <div className="d-grid gap-2 mt-3">
-            <button type="submit" className="btn-primary" onClick={onLogin}>
+            <button type="submit" className="btn-primary" onClick={handleLogin}>
               Submit
             </button>
           </div>
