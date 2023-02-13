@@ -10,8 +10,7 @@ Modal.setAppElement("#root");
 const App = () => {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/issues" />} />
-      <Route path="/issues" element={<Issues />} />
+      <Route path="/" element={<Issues />} />
       <Route path="/issues/create" element={<CreateIssue />} />
       <Route path="/issues/edit/:id" element={<UpdateIssue />} />
     </Routes>

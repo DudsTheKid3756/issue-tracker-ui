@@ -57,7 +57,7 @@ const LoginForm = ({
             />
           </div>
           <div className="d-grid gap-2 mt-3">
-            <button type="submit" className="btn-primary" onClick={handleLogin}>
+            <button type="submit" className="btn btn-primary" onClick={handleLogin}>
               Submit
             </button>
           </div>

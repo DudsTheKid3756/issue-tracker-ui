@@ -81,7 +81,7 @@ const SignUpForm = ({
           <div className="d-grid gap-2 mt-3">
             <button
               type="submit"
-              className="btn-primary"
+              className="btn btn-primary"
               onClick={handleSignUp}
             >
               Submit

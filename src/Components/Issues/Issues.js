@@ -122,9 +122,9 @@ const Issues = () => {
                   toggleApiPath={toggleApiPath}
                 />
               )}
-              <button onClick={() => logout()}>Logout</button>
+              <button className="btn btn-primary" onClick={() => logout()}>Logout</button>
               <button
-                className={`${classes.button} ${classes.head}`}
+                className={`btn btn-success ${classes.button} ${classes.head}`}
                 onClick={() => navigate("/issues/create")}
                 disabled={isDisabled}
               >
