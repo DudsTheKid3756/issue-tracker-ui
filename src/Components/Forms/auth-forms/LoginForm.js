@@ -1,9 +1,6 @@
 import React from "react";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { signin } from "../../../services/AuthService";
-import { clearValues } from "../../../utils/clearValues";
-import handleStorage from "../../../utils/storage";
 
 const LoginForm = ({
   changeAuthMode,
@@ -13,11 +10,11 @@ const LoginForm = ({
   setIsLoading,
 }) => {
   const navigate = useNavigate();
-  setIsLoading(true);
 
   const handleLogin = (e) => {
     e.preventDefault();
     signin("dotnet", loginInfo, changeIsLoggedIn);
+    setIsLoading(true);
     navigate("/issues");
   };
 

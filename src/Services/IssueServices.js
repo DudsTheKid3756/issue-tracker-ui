@@ -17,11 +17,12 @@ const getIssues = async (
       return response.json();
     })
     .then((data) => {
+      setApiError(false);
       setTimeout(() => {
         setIssues(data);
         setIsLoading(false);
         setIsDisabled(false);
-      }, 2000);
+      }, 3000);
     })
     .catch((error) => {
       setIsLoading(false);
@@ -92,3 +93,4 @@ const deleteIssue = async (issueId, apiPath, setIsDeleted) => {
 };
 
 export { getIssues, addIssue, updateIssue, deleteIssue };
+
