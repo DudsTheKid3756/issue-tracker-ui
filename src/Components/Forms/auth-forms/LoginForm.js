@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { signin } from "../../../services/AuthService";
 
 const LoginForm = ({
@@ -62,7 +62,8 @@ const LoginForm = ({
             </button>
           </div>
           <p className="text-center mt-2">
-            Forgot <a href="#">password?</a>
+            {/* remember to make password update method in api first */}
+            Forgot <NavLink onClick={() => alert("Ha idiot forgot his password")}>password?</NavLink>
           </p>
         </div>
       </form>

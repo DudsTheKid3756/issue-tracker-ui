@@ -42,7 +42,7 @@ const addIssue = async (newIssue, navigate, apiPath) => {
     })
     .then(() => {
       toaster(constants.NEW_ISSUE_SUCCESS_MESSAGE, "success");
-      setTimeout(() => navigate("/", { state: apiPath }), 2000);
+      setTimeout(() => navigate("/issues", { state: apiPath }), 2000);
     })
     .catch((error) => console.error(error));
 };
@@ -71,7 +71,7 @@ const updateIssue = async (
       !reminderPosted
         ? toaster(constants.UPDATE_SUCCESS_MESSAGE, "success")
         : null;
-      setTimeout(() => navigate("/", { state: apiPath }), 2000);
+      setTimeout(() => navigate("/issues", { state: apiPath }), 2000);
     })
     .catch((error) => console.error(error));
 };
