@@ -42,5 +42,22 @@ const signin = async (apiPath, loginInfo, changeIsLoggedIn) => {
     });
 };
 
-export { signup, signin };
+const resetPassword = async (apiPath, passResetInfo) => {
+  await httpHelper(
+    `${constants.AUTH_PATH}/reset-pass`,
+    apiPath,
+    "PUT",
+    passResetInfo
+  )
+    .then((response) => {
+      if (!response.ok) {
+        toaster(constants.API_ERROR, "error");
+        throw new Error(constants.API_ERROR);
+      }
+      return response.json();
+    })
+    .then((data) => toaster(data.message, data.status.toLower()))
+    .catch((error) => toaster(error, "error"));
+};
 
+export { signup, signin, resetPassword };

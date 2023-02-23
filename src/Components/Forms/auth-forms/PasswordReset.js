@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { resetPassword } from "../../../services/AuthService";
 
 const PasswordReset = ({ closeModal }) => {
   const [passResetInfo, setPassResetInfo] = useState({
@@ -16,7 +17,8 @@ const PasswordReset = ({ closeModal }) => {
 
   const onReset = (e) => {
     e.preventDefault();
-    console.log("Reset attempted", passResetInfo);
+    resetPassword("dotnet", passResetInfo);
+    closeModal();
   };
 
   return (
@@ -75,7 +77,9 @@ const PasswordReset = ({ closeModal }) => {
             <button className="btn btn-secondary" onClick={closeModal}>
               Cancel
             </button>
-            <button className="btn btn-primary" onClick={onReset}>Reset Password</button>
+            <button className="btn btn-primary" onClick={onReset}>
+              Reset Password
+            </button>
           </div>
         </div>
       </form>
