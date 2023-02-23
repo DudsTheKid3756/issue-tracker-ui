@@ -42,7 +42,7 @@ const signin = async (apiPath, loginInfo, changeIsLoggedIn) => {
     });
 };
 
-const resetPassword = async (apiPath, passResetInfo) => {
+const resetPassword = async (apiPath, passResetInfo, resetResponse) => {
   await httpHelper(
     `${constants.AUTH_PATH}/reset-pass`,
     apiPath,
@@ -56,7 +56,7 @@ const resetPassword = async (apiPath, passResetInfo) => {
       }
       return response.json();
     })
-    .then((data) => toaster(data.message, data.status.toLower()))
+    .then((data) => resetResponse.current = data.message)
     .catch((error) => toaster(error, "error"));
 };
 

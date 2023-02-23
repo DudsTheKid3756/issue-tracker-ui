@@ -1,11 +1,13 @@
 import React from "react";
+import { useRef } from "react";
 import { useState } from "react";
 import { resetPassword } from "../../../services/AuthService";
+import { toaster } from "../../../utils/toaster";
 
 const PasswordReset = ({ closeModal }) => {
+  const resetResponse = useRef("");
   const [passResetInfo, setPassResetInfo] = useState({
     username: "",
-    currPassword: "",
     newPassword: "",
     repeatPassword: "",
   });
@@ -17,8 +19,9 @@ const PasswordReset = ({ closeModal }) => {
 
   const onReset = (e) => {
     e.preventDefault();
-    resetPassword("dotnet", passResetInfo);
+    resetPassword("dotnet", passResetInfo, resetResponse);
     closeModal();
+    setTimeout(() => toaster(resetResponse.current, "success"), 1500);
   };
 
   return (
@@ -34,18 +37,6 @@ const PasswordReset = ({ closeModal }) => {
               type="text"
               placeholder="Enter username"
               defaultValue={passResetInfo?.username}
-              onChange={onChange}
-            />
-          </div>
-          <div className="form-group mt-3">
-            <label htmlFor="currPassword">Current Password</label>
-            <input
-              id="currPassword"
-              className="form-control mt-1"
-              name="currPassword"
-              type="password"
-              placeholder="Enter current password"
-              defaultValue={passResetInfo?.currPassword}
               onChange={onChange}
             />
           </div>
