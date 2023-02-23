@@ -79,7 +79,7 @@ const Issues = () => {
   }
 
   function toEdit(issue, reminder) {
-    navigate(`issues/edit/${issue.id}`, {
+    navigate(`/issues/edit/${issue.id}`, {
       state: { issue: issue, reminder: reminder },
     });
   }

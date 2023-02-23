@@ -1,6 +1,9 @@
 import React from "react";
+import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { signin } from "../../../services/AuthService";
+import ModalComponent from "../../ModalComponent";
+import PasswordReset from "./PasswordReset";
 
 const LoginForm = ({
   changeAuthMode,
@@ -10,6 +13,11 @@ const LoginForm = ({
   setIsLoading,
 }) => {
   const navigate = useNavigate();
+
+  const [showModal, setShowModal] = useState(false);
+
+  const displayModal = () => setShowModal(true);
+  const closeModal = () => setShowModal(false);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -57,13 +65,26 @@ const LoginForm = ({
             />
           </div>
           <div className="d-grid gap-2 mt-3">
-            <button type="submit" className="btn btn-primary" onClick={handleLogin}>
+            <button
+              type="submit"
+              className="btn btn-primary"
+              onClick={handleLogin}
+            >
               Submit
             </button>
           </div>
           <p className="text-center mt-2">
             {/* remember to make password update method in api first */}
-            Forgot <NavLink onClick={() => alert("Ha idiot forgot his password")}>password?</NavLink>
+            Forgot{" "}
+            <button className="btn btn-link" type="button" onClick={displayModal}>
+              password?
+            </button>
+            <ModalComponent
+              isOpen={showModal}
+              onRequestClose={closeModal}
+              label="Reset Password"
+              component={<PasswordReset closeModal={closeModal} />}
+            />
           </p>
         </div>
       </form>
