@@ -6,7 +6,7 @@ import { updateIssue } from "../../services/IssueServices";
 import constants from "../../utils/constants";
 import handleStorage from "../../utils/storage";
 import validateStrings from "../../utils/validation";
-import classes from "../forms/Form.module.css";
+import "../forms/form.css";
 import ModalComponent from "../ModalComponent";
 import UpdateForm from "./UpdateForm";
 
@@ -14,7 +14,6 @@ const UpdateIssue = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
   const apiPath = handleStorage("get", "local", "api");
-
 
   const currentIssue = useRef(state?.issue);
   const currentReminder = useRef(state?.reminder);
@@ -112,7 +111,7 @@ const UpdateIssue = () => {
   }
 
   return (
-    <div className={classes.formContainer}>
+    <div className="formContainer">
       <UpdateForm
         values={{ ...strsToUpdate, ...boolsToUpdate }}
         onChanges={[onStringChange, onBoolChange]}
@@ -127,10 +126,10 @@ const UpdateIssue = () => {
         closeModal={closeReminderModal}
         setShowColorPicker={setShowColorPicker}
       />
-      <div className={classes.pickerContainer}>
+      <div className="pickerContainer">
         {showColorPicker ? (
           <TwitterPicker
-            className={classes.picker}
+            className="picker"
             triangle="hide"
             color={colorToUpdate.color}
             onChangeComplete={onColorChange}
@@ -144,13 +143,10 @@ const UpdateIssue = () => {
         header="Remove Reminder?"
         component={
           <>
-            <button
-              className={classes.cancel}
-              onClick={closeRemoveReminderModal}
-            >
+            <button className="cancel" onClick={closeRemoveReminderModal}>
               Cancel
             </button>
-            <button className={classes.submit} onClick={removeReminder}>
+            <button className="submit" onClick={removeReminder}>
               Remove
             </button>
           </>

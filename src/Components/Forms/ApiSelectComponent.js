@@ -1,19 +1,19 @@
 import React from "react";
-import classes from "./Form.module.css";
 import constants from "../../utils/constants";
+import "./form.css";
 
 const ApiSelectComponent = ({ apiPath, toggleApiPath }) => {
   const urls = constants.BASE_URLS;
 
   return (
     <>
-      <label className={classes.apiSelectLabel} htmlFor="api">
+      <label className="apiSelectLabel" htmlFor="api">
         API
       </label>
       <select
         id="api"
         name="api"
-        className={classes.apiSelect}
+        className="apiSelect"
         onChange={toggleApiPath}
       >
         <option>{urls[apiPath]}</option>

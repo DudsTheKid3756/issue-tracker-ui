@@ -93,4 +93,3 @@ const deleteIssue = async (issueId, apiPath, setIsDeleted) => {
 };
 
 export { getIssues, addIssue, updateIssue, deleteIssue };
-

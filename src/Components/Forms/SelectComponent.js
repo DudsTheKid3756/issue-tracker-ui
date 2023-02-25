@@ -1,21 +1,23 @@
 import React from "react";
-import classes from "./Form.module.css";
+import "./form.css";
 
 const SelectComponent = ({ label, field, onChanges, values, options }) => {
   return (
     <div>
-      <label className={classes.formLabel} htmlFor={field}>
+      <label className="formLabel" htmlFor={field}>
         {label}
       </label>
       <select
         id={field}
-        className={classes.formInput}
+        className="formInput"
         name={field}
         onChange={onChanges[1]}
       >
         <option>{values[field]}</option>
         {options.map((option, index) => (
-          <option key={index} defaultValue={option}>{option}</option>
+          <option key={index} defaultValue={option}>
+            {option}
+          </option>
         ))}
       </select>
     </div>

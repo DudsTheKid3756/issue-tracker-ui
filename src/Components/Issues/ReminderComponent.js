@@ -1,18 +1,18 @@
 import React from "react";
-import classes from "../forms/Form.module.css";
+import "../forms/form.css";
 
 const ReminderComponent = ({ reminder }) => (
-  <div className={classes.reminderContainer}>
-    <h3 className={classes.formHeader}>Reminder</h3>
-    <span className={classes.formLabel}>
+  <div className="reminderContainer">
+    <h3 className="formHeader">Reminder</h3>
+    <span className="formLabel">
       Date: {reminder.date}
       <br />
     </span>
-    <span className={classes.formLabel}>
+    <span className="formLabel">
       Time: {reminder.time}
       <br />
     </span>
-    <span className={classes.formLabel}>
+    <span className="formLabel">
       Alert: {reminder.alert}
       <br />
     </span>

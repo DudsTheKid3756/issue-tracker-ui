@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "./Form.module.css";
+import "./form.css";
 
 const FormComponent = ({
   label,
@@ -15,16 +15,16 @@ const FormComponent = ({
 }) => {
   return (
     <>
-      <form className={classes.formComponent}>
-        <label className={classes.formLabel} htmlFor={field}>
+      <form className="formComponent">
+        <label className="formLabel" htmlFor={field}>
           {label}
         </label>
         {type == "text" ? <br /> : null}
         {!isMultiline ? (
           <>
             <input
-              className={`${classes.formInput} ${
-                errLength != 0 ? classes.errBorder : ""
+              className={`formInput ${
+                errLength != 0 ? "errBorder" : ""
               }`}
               id={field}
               name={field}
@@ -35,9 +35,9 @@ const FormComponent = ({
               min={min}
               onChange={type == "text" ? onChanges[0] : onChanges[1]}
             />
-            <div className={classes.errorContainer}>
+            <div className="errorContainer">
               {type == "text" && errLength != 0 ? (
-                <p className={`${classes.errorBase} ${classes.normErr}`}>
+                <p className="errorBase normErr">
                   {errors[field]}
                 </p>
               ) : null}
@@ -47,16 +47,16 @@ const FormComponent = ({
         ) : (
           <>
             <textarea
-              className={`${errLength != 0 ? classes.textAreaErrBorder : ""}`}
+              className={`${errLength != 0 ? textAreaErrBorder : ""}`}
               id={field}
               name={field}
               placeholder={placeholder}
               defaultValue={values[field]}
               onChange={onChanges[0]}
             ></textarea>
-            <div className={classes.errorContainer}>
+            <div className="errorContainer">
               {type == "text" && errLength != 0 ? (
-                <p className={`${classes.errorBase} ${classes.textAreaErr}`}>
+                <p className="errorBase textAreaErr">
                   {errors[field]}
                 </p>
               ) : null}

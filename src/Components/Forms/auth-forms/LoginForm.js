@@ -1,6 +1,5 @@
-import React from "react";
-import { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { signin } from "../../../services/AuthService";
 import ModalComponent from "../../ModalComponent";
@@ -11,7 +10,6 @@ const LoginForm = ({
   loginInfo,
   onChange,
   changeIsLoggedIn,
-  setIsLoading,
 }) => {
   const navigate = useNavigate();
 
@@ -23,7 +21,6 @@ const LoginForm = ({
   const handleLogin = (e) => {
     e.preventDefault();
     signin("dotnet", loginInfo, changeIsLoggedIn);
-    setIsLoading(true);
     navigate("/issues");
   };
 
@@ -76,7 +73,6 @@ const LoginForm = ({
               </button>
             </div>
             <p className="text-center mt-2">
-              {/* remember to make password update method in api first */}
               Forgot{" "}
               <button
                 className="btn btn-link"

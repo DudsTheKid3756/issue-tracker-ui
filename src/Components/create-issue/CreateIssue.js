@@ -6,7 +6,7 @@ import { addIssue } from "../../services/IssueServices";
 import constants from "../../utils/constants";
 import handleStorage from "../../utils/storage";
 import validateStrings from "../../utils/validation";
-import classes from "../forms/Form.module.css";
+import classes from "../forms/form.css";
 import CreateForm from "./CreateForm";
 
 const CreateIssue = () => {
@@ -81,7 +81,7 @@ const CreateIssue = () => {
   }
 
   return (
-    <div className={classes.formContainer}>
+    <div className="formContainer">
       <CreateForm
         values={{ ...newIssueStrings, ...newIssueBools }}
         onChanges={[onStringChange, onBoolChange, onColorChange]}
@@ -95,10 +95,10 @@ const CreateIssue = () => {
         closeModal={closeModal}
         setShowColorPicker={setShowColorPicker}
       />
-      <div className={classes.pickerContainer}>
+      <div className="pickerContainer">
         {showColorPicker ? (
           <TwitterPicker
-            className={classes.picker}
+            className="picker"
             triangle="hide"
             color={color}
             onChangeComplete={onColorChange}

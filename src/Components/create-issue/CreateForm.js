@@ -1,9 +1,9 @@
+import Paintbrush from "../../utils/icons/Paintbrush";
+import "../forms/form.css";
 import FormComponent from "../forms/FormComponent";
-import classes from "../forms/Form.module.css";
+import ReminderComponent from "../issues/ReminderComponent";
 import ModalComponent from "../ModalComponent";
 import Reminder from "../reminder/Reminder";
-import ReminderComponent from "../issues/ReminderComponent";
-import Paintbrush from "../../utils/icons/Paintbrush";
 
 const CreateForm = ({
   values,
@@ -18,9 +18,9 @@ const CreateForm = ({
   closeModal,
   setShowColorPicker,
 }) => (
-  <div className={classes.formContainer}>
-    <h1 className={classes.formHeader}>New Issue</h1>
-    <div className={classes.textInputs}>
+  <div className="formContainer">
+    <h1 className="formHeader">New Issue</h1>
+    <div className="textInputs">
       <FormComponent
         label="Title"
         field="title"
@@ -43,7 +43,7 @@ const CreateForm = ({
         isMultiline={true}
       />
     </div>
-    <div className={classes.checkboxInput1}>
+    <div className="checkboxInput1">
       <FormComponent
         label="Reminder"
         field="hasReminder"
@@ -65,23 +65,16 @@ const CreateForm = ({
       />
     </div>
     {" | "}
-    <label className={classes.label}>Color</label>
+    <label className="label">Color</label>
     <Paintbrush
       title="Change Color"
       onClick={() => setShowColorPicker((prevState) => !prevState)}
     />
-    <div className={classes.buttonDiv}>
-      <button
-        className={`${classes.button} ${classes.cancel}`}
-        onClick={handleCancel}
-      >
+    <div className="buttonDiv">
+      <button className="button cancel" onClick={handleCancel}>
         Cancel
       </button>
-      <button
-        className={`${classes.button} ${classes.submit}`}
-        type="submit"
-        onClick={onSubmit}
-      >
+      <button className="button submit" type="submit" onClick={onSubmit}>
         Submit
       </button>
     </div>

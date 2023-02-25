@@ -1,7 +1,7 @@
 import React from "react";
 import Paintbrush from "../../utils/icons/Paintbrush.js";
 import Pencil from "../../utils/icons/Pencil";
-import classes from "../forms/Form.module.css";
+import "../forms/form.css";
 import FormComponent from "../forms/FormComponent";
 import ReminderComponent from "../issues/ReminderComponent";
 import ModalComponent from "../ModalComponent";
@@ -21,9 +21,9 @@ const UpdateForm = ({
   closeModal,
   setShowColorPicker,
 }) => (
-  <div className={classes.formComponent}>
-    <h1 className={classes.formHeader}>Edit Issue</h1>
-    <div className={classes.textInputs}>
+  <div className="formComponent">
+    <h1 className="formHeader">Edit Issue</h1>
+    <div className="textInputs">
       <FormComponent
         label="Title"
         field="title"
@@ -44,7 +44,7 @@ const UpdateForm = ({
         isMultiline={true}
       />
     </div>
-    <div className={classes.checkboxInput1}>
+    <div className="checkboxInput1">
       <FormComponent
         label="Reminder"
         field="hasReminder"
@@ -69,7 +69,7 @@ const UpdateForm = ({
       <Pencil title="Edit Reminder" onClick={openModal} />
     ) : null}
     {" | "}
-    <div className={classes.checkboxInput2}>
+    <div className="checkboxInput2">
       <FormComponent
         label="Completed"
         field="isCompleted"
@@ -79,23 +79,16 @@ const UpdateForm = ({
       />
     </div>
     {" | "}
-    <label className={classes.label}>Color</label>
+    <label className="label">Color</label>
     <Paintbrush
       title="Change Color"
       onClick={() => setShowColorPicker((prevState) => !prevState)}
     />
-    <div className={classes.buttonDiv}>
-      <button
-        className={`${classes.button} ${classes.cancel}`}
-        onClick={handleCancel}
-      >
+    <div className="buttonDiv">
+      <button className="button cancel" onClick={handleCancel}>
         Cancel
       </button>
-      <button
-        className={`${classes.button} ${classes.submit}`}
-        type="submit"
-        onClick={handleUpdate}
-      >
+      <button className="button submit" type="submit" onClick={handleUpdate}>
         Update
       </button>
     </div>

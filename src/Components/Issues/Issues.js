@@ -7,7 +7,7 @@ import { LoginContext } from "../../contexts/LoginContext";
 import {
   deleteIssue,
   getIssues,
-  updateIssue
+  updateIssue,
 } from "../../services/IssueServices";
 import constants from "../../utils/constants";
 import { dateData, handleTimeout } from "../../utils/counterHelper";
@@ -54,9 +54,10 @@ const Issues = () => {
   useEffect(() => {
     setIsDisabled(true);
     setIssues([]);
+    setIsLoading(true);
     getIssues(setIssues, toggleApiError, apiPath, setIsLoading, setIsDisabled);
     checkToken();
-  }, [apiPath, isDeleted, reminderDeleted, isLoggedIn]);
+  }, [apiPath, isDeleted, reminderDeleted, isLoggedIn, setIsLoading]);
 
   useEffect(() => {
     handleTimeout(issues, apiError, resetToday);
@@ -111,7 +112,7 @@ const Issues = () => {
     <>
       <div className={classes.page}>
         {!isLoggedIn ? (
-          <LoginPage setIsLoading={setIsLoading} />
+          <LoginPage />
         ) : (
           <>
             <div className={classes.headContainer}>
@@ -122,7 +123,9 @@ const Issues = () => {
                   toggleApiPath={toggleApiPath}
                 />
               )}
-              <button className="btn btn-primary" onClick={() => logout()}>Logout</button>
+              <button className="btn btn-primary" onClick={() => logout()}>
+                Logout
+              </button>
               <button
                 className={`btn btn-success ${classes.button} ${classes.head}`}
                 onClick={() => navigate("/issues/create")}
@@ -152,16 +155,16 @@ const Issues = () => {
                     </p>
                   )}
                   {apiError ? toaster(constants.API_ERROR, "error") : null}
+                  <CommentCollapse
+                    showComment={showComment}
+                    collapseAllComments={collapseAllComments}
+                  />
                 </span>
               )}
             </div>
             <ToastContainer />
           </>
         )}
-        <CommentCollapse
-          showComment={showComment}
-          collapseAllComments={collapseAllComments}
-        />
       </div>
     </>
   );

@@ -1,14 +1,14 @@
 import React from "react";
-import FormComponent from "../forms/FormComponent";
-import classes from "../forms/Form.module.css";
-import SelectComponent from "../forms/SelectComponent";
 import constants from "../../utils/constants";
+import "../forms/form.css";
+import FormComponent from "../forms/FormComponent";
+import SelectComponent from "../forms/SelectComponent";
 
 const ReminderForm = ({ closeModal, values, onChanges }) => {
   const options = constants.ALERT_OPTIONS.map((option) => option.text);
   return (
-    <div className={classes.formContainer}>
-      <div className={classes.reminderInput}>
+    <div className="formContainer">
+      <div className="reminderInput">
         <FormComponent
           label="Date"
           field="date"
@@ -17,7 +17,7 @@ const ReminderForm = ({ closeModal, values, onChanges }) => {
           onChanges={onChanges}
         />
       </div>
-      <div className={classes.reminderInput}>
+      <div className="reminderInput">
         <FormComponent
           label="Time"
           field="time"
@@ -26,7 +26,7 @@ const ReminderForm = ({ closeModal, values, onChanges }) => {
           onChanges={onChanges}
         />
       </div>
-      <div className={classes.reminderInput}>
+      <div className="reminderInput">
         <SelectComponent
           label="Alert"
           field="alert"
@@ -35,10 +35,10 @@ const ReminderForm = ({ closeModal, values, onChanges }) => {
           options={options}
         />
       </div>
-      <button className={classes.cancel} onClick={closeModal}>
+      <button className="cancel" onClick={closeModal}>
         Cancel
       </button>
-      <button className={classes.submit} type="submit" onClick={closeModal}>
+      <button className="submit" type="submit" onClick={closeModal}>
         Set Reminder
       </button>
     </div>

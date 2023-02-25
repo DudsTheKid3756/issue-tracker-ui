@@ -3,7 +3,7 @@ import { LoginContext } from "../../contexts/LoginContext";
 import LoginForm from "../forms/auth-forms/LoginForm";
 import SignUpForm from "../forms/auth-forms/SignUpForm";
 
-const LoginPage = ({ setIsLoading }) => {
+const LoginPage = () => {
   const { changeIsLoggedIn } = useContext(LoginContext);
 
   const [authMode, setAuthMode] = useState("signin");
@@ -34,7 +34,6 @@ const LoginPage = ({ setIsLoading }) => {
       loginInfo={loginInfo}
       onChange={(e) => onChange(e, setLoginInfo)}
       changeIsLoggedIn={changeIsLoggedIn}
-      setIsLoading={setIsLoading}
     />
   ) : (
     <SignUpForm
