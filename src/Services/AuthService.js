@@ -33,7 +33,7 @@ const signin = async (apiPath, loginInfo, changeIsLoggedIn) => {
       const token = data.token;
       toaster("Successfully signed in!", "success");
       setSession(token);
-      changeIsLoggedIn(true);
+      setTimeout(() => changeIsLoggedIn(true), 2000);
     })
     .catch((error) => {
       toaster(error, "error");

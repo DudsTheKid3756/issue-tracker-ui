@@ -11,8 +11,6 @@ const LoginForm = ({
   onChange,
   changeIsLoggedIn,
 }) => {
-  const navigate = useNavigate();
-
   const [showModal, setShowModal] = useState(false);
 
   const openModal = () => setShowModal(true);
@@ -21,7 +19,6 @@ const LoginForm = ({
   const handleLogin = (e) => {
     e.preventDefault();
     signin("dotnet", loginInfo, changeIsLoggedIn);
-    navigate("/issues");
   };
 
   return (
