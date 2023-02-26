@@ -9,7 +9,7 @@
   box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
   padding-top: 30px;
   padding-bottom: 20px;
-  border-radius: 8px;
+  border-radius: 6px;
   background-color: white;
 }
 
@@ -30,6 +30,13 @@
   cursor: pointer;
 }
 
+.icon {
+  cursor: pointer;
+  display: inline;
+  vertical-align: middle;
+  margin-left: 5px;
+}
+
 body {
   background-color: rgb(19, 19, 19);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -42,7 +49,6 @@ body {
 button {
   cursor: pointer;
 }
-
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",

@@ -1,10 +1,9 @@
 import React from "react";
 import check from "../../assets/check.svg";
-import classes from "../../components/issues/Issues.module.css";
 
-const Check = ({ title }) => {
+const Check = ({ style, title }) => {
   return (
-    <span className={classes.check} title={title}>
+    <span className={style} title={title}>
       <img src={check} />
     </span>
   );

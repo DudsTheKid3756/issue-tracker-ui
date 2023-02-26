@@ -1,10 +1,9 @@
 import React from "react";
 import trashcan from "../../assets/trashcan.svg";
-import classes from "../../components/issues/Issues.module.css";
 
-const TrashCan = ({ title, onClick }) => {
+const TrashCan = ({ style, title, onClick }) => {
   return (
-    <span className={classes.icon} title={title} onClick={onClick}>
+    <span className={style} title={title} onClick={onClick}>
       <img src={trashcan} />
     </span>
   );

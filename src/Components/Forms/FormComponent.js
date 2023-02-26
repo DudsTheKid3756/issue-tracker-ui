@@ -11,7 +11,7 @@ const FormComponent = ({
   errors,
   errLength,
   isMultiline,
-  min
+  min,
 }) => {
   return (
     <>
@@ -23,9 +23,7 @@ const FormComponent = ({
         {!isMultiline ? (
           <>
             <input
-              className={`formInput ${
-                errLength != 0 ? "errBorder" : ""
-              }`}
+              className={`formInput ${errLength != 0 ? "errBorder" : ""}`}
               id={field}
               name={field}
               type={type}
@@ -37,9 +35,7 @@ const FormComponent = ({
             />
             <div className="errorContainer">
               {type == "text" && errLength != 0 ? (
-                <p className="errorBase normErr">
-                  {errors[field]}
-                </p>
+                <p className="errorBase normErr">{errors[field]}</p>
               ) : null}
             </div>
             <br />
@@ -56,9 +52,7 @@ const FormComponent = ({
             ></textarea>
             <div className="errorContainer">
               {type == "text" && errLength != 0 ? (
-                <p className="errorBase textAreaErr">
-                  {errors[field]}
-                </p>
+                <p className="errorBase textAreaErr">{errors[field]}</p>
               ) : null}
             </div>
             <br />

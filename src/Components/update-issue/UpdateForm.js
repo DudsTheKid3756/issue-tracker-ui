@@ -66,7 +66,7 @@ const UpdateForm = ({
       />
     </div>
     {values?.hasReminder ? (
-      <Pencil title="Edit Reminder" onClick={openModal} />
+      <Pencil style="icon" title="Edit Reminder" onClick={openModal} />
     ) : null}
     {" | "}
     <div className="checkboxInput2">
@@ -81,14 +81,15 @@ const UpdateForm = ({
     {" | "}
     <label className="label">Color</label>
     <Paintbrush
+      style="icon"
       title="Change Color"
       onClick={() => setShowColorPicker((prevState) => !prevState)}
     />
     <div className="buttonDiv">
-      <button className="button cancel" onClick={handleCancel}>
+      <button className="btn btn-secondary" onClick={handleCancel}>
         Cancel
       </button>
-      <button className="button submit" type="submit" onClick={handleUpdate}>
+      <button className="btn btn-primary" type="submit" onClick={handleUpdate}>
         Update
       </button>
     </div>

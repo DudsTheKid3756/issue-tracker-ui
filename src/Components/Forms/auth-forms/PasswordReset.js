@@ -25,8 +25,8 @@ const PasswordReset = ({ closeModal }) => {
   };
 
   return (
-    <div>
-      <form>
+    <>
+      <form className="overflow-hidden m-3">
         <div>
           <div className="form-group mt-3">
             <label htmlFor="username">Username</label>
@@ -64,17 +64,17 @@ const PasswordReset = ({ closeModal }) => {
               onChange={onChange}
             />
           </div>
-          <div className="d-grid gap-2 mt-3">
-            <button className="btn btn-secondary" onClick={closeModal}>
+          <div className="row gap-3 mt-4">
+            <button className="btn btn-secondary col ms-3" onClick={closeModal}>
               Cancel
             </button>
-            <button className="btn btn-primary" onClick={onReset}>
+            <button className="btn btn-primary col me-3" onClick={onReset}>
               Reset Password
             </button>
           </div>
         </div>
       </form>
-    </div>
+    </>
   );
 };
 

@@ -15,7 +15,7 @@ const LoginForm = ({
 
   const [showModal, setShowModal] = useState(false);
 
-  const displayModal = () => setShowModal(true);
+  const openModal = () => setShowModal(true);
   const closeModal = () => setShowModal(false);
 
   const handleLogin = (e) => {
@@ -72,22 +72,21 @@ const LoginForm = ({
                 Submit
               </button>
             </div>
-            <p className="text-center mt-2">
+            <div className="text-center mt-2">
               Forgot{" "}
-              <button
-                className="btn btn-link"
-                type="button"
-                onClick={displayModal}
+              <span
+                className="link-primary link-auth-mode"
+                onClick={openModal}
               >
                 password?
-              </button>
+              </span>
               <ModalComponent
                 isOpen={showModal}
                 onRequestClose={closeModal}
                 label="Reset Password"
                 component={<PasswordReset closeModal={closeModal} />}
               />
-            </p>
+            </div>
           </div>
         </form>
       </div>

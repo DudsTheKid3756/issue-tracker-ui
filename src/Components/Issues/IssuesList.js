@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-
 import Alert from "../../utils/icons/Alert";
 import Check from "../../utils/icons/Check";
-import Pencil from "../../utils/icons/Pencil";
 import Info from "../../utils/icons/Info";
-import ModalComponent from "../ModalComponent";
-import classes from "./Issues.module.css";
-import ReminderComponent from "./ReminderComponent";
+import Pencil from "../../utils/icons/Pencil";
 import TrashCan from "../../utils/icons/TrashCan";
+import ModalComponent from "../ModalComponent";
+import "./issues.css";
+import ReminderComponent from "./ReminderComponent";
 
 const IssuesList = ({
   issues,
@@ -19,35 +18,54 @@ const IssuesList = ({
   const [alertInfoShown, setAlertInfoShown] = useState(false);
 
   return issues.map((issue) => (
-    <div key={issue.id} className={classes.item}>
-      <div className={classes.titleContainer}>
-        <h3 className={classes.title}>{issue.title}</h3>
-        <Info title="Issue Comment" onClick={() => toggleComment(issue.id)} />
-        <span className={classes.created}>{issue.created}</span>
-        <Pencil title="Edit Issue" onClick={() => toEdit(issue, issue.reminder)} />
-        <TrashCan title="Delete Issue" onClick={() => handleDelete(issue.id)} />
-        {issue.isCompleted ? <Check title="Completed" /> : null}
-        {issue.reminder ? (
-          <>
-            <Alert
-              title="Reminder Info"
-              onClick={() => setAlertInfoShown(true)}
+    <div key={issue.id} className="item">
+      <div className="titleContainer d-flex justify-content-between">
+        <div className="d-flex justify-content-start">
+          <h3 className="d-inline">{issue.title}</h3>
+          {issue.isCompleted ? <Check style="check ms-1 mt-1" title="Completed" /> : null}
+        </div>
+        <div className="d-flex justify-content-end me-3">
+          <div className="d-inline">
+            <Info
+              style="icon"
+              title="Issue Comment"
+              onClick={() => toggleComment(issue.id)}
             />
-            <ModalComponent
-              component={<ReminderComponent reminder={issue?.reminder} />}
-              label="Reminder Info"
-              isOpen={alertInfoShown}
-              onRequestClose={() => setAlertInfoShown(false)}
+            <span className="created">{issue.created}</span>
+            <Pencil
+              style="icon"
+              title="Edit Issue"
+              onClick={() => toEdit(issue, issue.reminder)}
             />
-          </>
-        ) : null}
+            <TrashCan
+              style="icon"
+              title="Delete Issue"
+              onClick={() => handleDelete(issue.id)}
+            />
+          </div>
+          {issue.reminder ? (
+            <>
+              <Alert
+                style="icon"
+                title="Reminder Info"
+                onClick={() => setAlertInfoShown(true)}
+              />
+              <ModalComponent
+                component={<ReminderComponent reminder={issue?.reminder} />}
+                label="Reminder Info"
+                isOpen={alertInfoShown}
+                onRequestClose={() => setAlertInfoShown(false)}
+              />
+            </>
+          ) : null}
+        </div>
       </div>
       {showComment[issue.id] ? (
-        <p className={classes.comment} style={{ borderColor: issue.color }}>
+        <p className="comment" style={{ borderColor: issue.color }}>
           {issue.comment}
         </p>
       ) : (
-        <p className={classes.spacer} style={{ borderColor: issue.color }}></p>
+        <p className="spacer" style={{ borderColor: issue.color }}></p>
       )}
     </div>
   ));

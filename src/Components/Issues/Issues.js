@@ -11,6 +11,7 @@ import {
 } from "../../services/IssueServices";
 import constants from "../../utils/constants";
 import { dateData, handleTimeout } from "../../utils/counterHelper";
+import Signout from "../../utils/icons/Signout";
 import handleNotification from "../../utils/notificationHelper";
 import handleStorage from "../../utils/storage";
 import { toaster } from "../../utils/toaster";
@@ -19,7 +20,7 @@ import CommentCollapse from "../CommentCollapse";
 import ApiSelectComponent from "../forms/ApiSelectComponent";
 import LoadingSpinner from "../LoadingSpinner";
 import LoginPage from "../login/LoginPage";
-import classes from "./Issues.module.css";
+import "./issues.css";
 import IssuesList from "./IssuesList";
 
 const Issues = () => {
@@ -110,35 +111,46 @@ const Issues = () => {
 
   return (
     <>
-      <div className={classes.page}>
+      <div className="page">
         {!isLoggedIn ? (
           <LoginPage />
         ) : (
           <>
-            <div className={classes.headContainer}>
-              <h1 className={classes.header}>Issue Tracker</h1>
-              {userRole() !== "admin" ? null : (
-                <ApiSelectComponent
-                  apiPath={apiPath}
-                  toggleApiPath={toggleApiPath}
-                />
-              )}
-              <button className="btn btn-primary" onClick={() => logout()}>
-                Logout
-              </button>
-              <button
-                className={`btn btn-success ${classes.button} ${classes.head}`}
-                onClick={() => navigate("/issues/create")}
-                disabled={isDisabled}
-              >
-                New Issue
-              </button>
+            <div className="mb-10">
+              <div className="row">
+                <h1 className="ms-2 col">Issue Tracker</h1>
+                <button
+                  className="btn btn-primary me-3 col-3"
+                  onClick={() => logout()}
+                >
+                  Logout <Signout style="ms-1" />
+                </button>
+              </div>
+              <div className="row">
+                <span className="ma-2 me-2 gap-1 col">
+                  {userRole() !== "admin" ? null : (
+                    <ApiSelectComponent
+                      apiPath={apiPath}
+                      toggleApiPath={toggleApiPath}
+                    />
+                  )}
+                </span>
+              </div>
+              <div className="row">
+                <button
+                  className="btn btn-success m-3 col"
+                  onClick={() => navigate("/issues/create")}
+                  disabled={isDisabled}
+                >
+                  New Issue +
+                </button>
+              </div>
             </div>
-            <div className={classes.issues}>
+            <div className="issues">
               {isLoading ? (
                 <LoadingSpinner />
               ) : (
-                <span className={classes.issuesContainer}>
+                <span className="issuesContainer">
                   {issues.length > 0 ? (
                     <IssuesList
                       issues={issues}
@@ -148,9 +160,9 @@ const Issues = () => {
                       handleDelete={handleDelete}
                     />
                   ) : apiError ? (
-                    <p className={classes.noIssues}>{constants.API_ERROR}</p>
+                    <p className="noIssues">{constants.API_ERROR}</p>
                   ) : (
-                    <p className={classes.noIssues}>
+                    <p className="noIssues">
                       No issues to show. Add a new one!
                     </p>
                   )}

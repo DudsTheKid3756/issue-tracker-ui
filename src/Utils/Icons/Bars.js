@@ -1,10 +1,9 @@
 import React from "react";
 import bars from "../../assets/bars.svg";
-import classes from "../../components/issues/Issues.module.css";
 
-const Bars = ({ title, onClick }) => {
+const Bars = ({ style, title, onClick }) => {
   return (
-    <span className={classes.icon} title={title} onClick={onClick}>
+    <span className={style} title={title} onClick={onClick}>
       <img src={bars} />
     </span>
   );

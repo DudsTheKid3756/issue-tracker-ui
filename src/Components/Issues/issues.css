@@ -26,33 +26,17 @@
 }
 
 .comment {
-  border: 3px solid black;
+  border: 3px solid #252525;
   border-right-width: 10px;
   height: 5em;
   padding: 5px;
   margin: 8px;
 }
 
-.icon {
-  cursor: pointer;
-  display: inline;
-  vertical-align: middle;
-  margin-left: 5px;
-}
-
 .head {
   position: sticky;
   left: 100%;
   bottom: 500%;
-}
-
-.headContainer {
-  margin-bottom: 10px;
-}
-
-.header {
-  margin: 5px;
-  display: inline;
 }
 
 .itemContainer {
@@ -75,17 +59,13 @@
 }
 
 .spacer {
-  border-top: 3px solid black;
+  border-top: 3px solid #252525;
   padding: 5px;
   margin: 8px;
 }
 
-.title {
-  display: inline;
-  margin-left: 5px;
-}
-
 .titleContainer {
+  display: block;
   margin-left: 5px;
-  width: 700px;
+  width: auto;
 }

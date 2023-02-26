@@ -1,6 +1,6 @@
 import React from "react";
 import Bars from "../utils/icons/Bars";
-import classes from "./issues/Issues.module.css";
+import "./issues/issues.css";
 
 const CommentCollapse = ({ showComment, collapseAllComments }) => {
   const commentsAsArray = Object.entries(showComment);
@@ -11,9 +11,9 @@ const CommentCollapse = ({ showComment, collapseAllComments }) => {
   }, {});
 
   return (
-    <div className={classes.barsContainer}>
+    <div className="barsContainer">
       {commentsShown.true > 1 ? (
-        <Bars title="Collapse Comments" onClick={() => collapseAllComments()} />
+        <Bars style="icon" title="Collapse Comments" onClick={() => collapseAllComments()} />
       ) : null}
     </div>
   );

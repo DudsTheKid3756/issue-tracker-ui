@@ -14,7 +14,7 @@
 
 .cancel {
   background-color: rgb(186, 14, 14);
-  border-color: black;
+  border-color: #252525;
 }
 
 .cancel:hover {
@@ -110,7 +110,7 @@
 
 .reminderContainer {
   display: inline-block;
-  border: 1px solid black;
+  border: 1px solid #252525;
   padding: 0px 5px 5px 5px;
   margin-top: 5px;
   width: 65%;
@@ -128,7 +128,7 @@ select.formInput {
 
 .submit {
   background-color: rgb(15, 174, 15);
-  border-color: black;
+  border-color: #252525;
 }
 
 .submit:hover {

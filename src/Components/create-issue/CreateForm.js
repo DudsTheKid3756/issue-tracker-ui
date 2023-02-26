@@ -67,14 +67,15 @@ const CreateForm = ({
     {" | "}
     <label className="label">Color</label>
     <Paintbrush
+      style="icon"
       title="Change Color"
       onClick={() => setShowColorPicker((prevState) => !prevState)}
     />
     <div className="buttonDiv">
-      <button className="button cancel" onClick={handleCancel}>
+      <button className="btn btn-secondary" onClick={handleCancel}>
         Cancel
       </button>
-      <button className="button submit" type="submit" onClick={onSubmit}>
+      <button className="btn btn-primary" type="submit" onClick={onSubmit}>
         Submit
       </button>
     </div>
