@@ -4,12 +4,14 @@ import Check from "../../utils/icons/Check";
 import Info from "../../utils/icons/Info";
 import Pencil from "../../utils/icons/Pencil";
 import TrashCan from "../../utils/icons/TrashCan";
+import { orderedMap } from "../../utils/orderedMap";
 import ModalComponent from "../ModalComponent";
 import "./issues.css";
 import ReminderComponent from "./ReminderComponent";
 
 const IssuesList = ({
   issues,
+  sortBy,
   showComment,
   toggleComment,
   toEdit,
@@ -17,7 +19,7 @@ const IssuesList = ({
 }) => {
   const [alertInfoShown, setAlertInfoShown] = useState(false);
 
-  return issues.map((issue) => (
+  return orderedMap(issues, sortBy).map((issue) => (
     <div key={issue.id} className="item">
       <div className="titleContainer d-flex justify-content-between">
         <div className="d-flex justify-content-start">

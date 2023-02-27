@@ -40,8 +40,10 @@ const Issues = () => {
     }
     return role;
   };
+  const sortOptions = constants.SORT_OPTIONS;
 
   const [issues, setIssues] = useState([]);
+  const [sortBy, setSortBy] = useState(sortOptions.at(0));
   const [isLoading, setIsLoading] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
   const [isDeleted, setIsDeleted] = useState(false);
@@ -64,6 +66,11 @@ const Issues = () => {
     handleTimeout(issues, apiError, resetToday);
   }, [issues]);
 
+  function onSortChange(e) {
+    const option = sortOptions.find((option) => option.text == e.target.value);
+    setSortBy(option);
+  }
+
   function checkToken() {
     if (decodedToken) {
       const tokenExpirationMs = decodedToken.exp;
@@ -82,7 +89,7 @@ const Issues = () => {
 
   function toEdit(issue, reminder) {
     navigate(`/issues/edit/${issue.id}`, {
-      state: { issue: issue, reminder: reminder },
+      state: { issue, reminder },
     });
   }
 
@@ -145,6 +152,23 @@ const Issues = () => {
                   New Issue +
                 </button>
               </div>
+              {!isDisabled ? <div className="mb-3 d-flex justify-content-end">
+                <label className="me-2 d-inline" htmlFor="sorting">
+                  Sort By:{" "}
+                </label>
+                <select
+                  className="me-2 d-inline"
+                  id="sorting"
+                  name="sorting"
+                  onChange={onSortChange}
+                >
+                  {sortOptions.map((value, index) => (
+                    <option key={index} defaultValue={value.sortBy}>
+                      {value.text}
+                    </option>
+                  ))}
+                </select>
+              </div> : null}
             </div>
             <div className="issues">
               {isLoading ? (
@@ -154,6 +178,7 @@ const Issues = () => {
                   {issues.length > 0 ? (
                     <IssuesList
                       issues={issues}
+                      sortBy={sortBy.sortBy}
                       showComment={showComment}
                       toggleComment={toggleComment}
                       toEdit={toEdit}
