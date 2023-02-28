@@ -43,6 +43,11 @@
   display: inline;
 }
 
+.eye {
+  position: inherit;
+  padding-left: 81%;
+}
+
 .formComponent {
   display: inline;
 }

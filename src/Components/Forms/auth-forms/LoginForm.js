@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { signin } from "../../../services/AuthService";
 import ModalComponent from "../../ModalComponent";
+import Password from "../Password";
 import PasswordReset from "./PasswordReset";
 
 const LoginForm = ({
@@ -12,13 +13,29 @@ const LoginForm = ({
   changeIsLoggedIn,
 }) => {
   const [showModal, setShowModal] = useState(false);
+  const [showPassword, setShowPassword] = useState("password");
+  const [isDisabled, setIsDisabled] = useState(false);
+  const [color, setColor] = useState("gray");
 
   const openModal = () => setShowModal(true);
   const closeModal = () => setShowModal(false);
 
+  const toggleShowPassword = () => {
+    if (loginInfo.password) {
+      if (showPassword === "password") {
+        setColor("black");
+        setShowPassword("text");
+      } else {
+        setColor("gray");
+        setShowPassword("password");
+      }
+    }
+  };
+
   const handleLogin = (e) => {
     e.preventDefault();
     signin("dotnet", loginInfo, changeIsLoggedIn);
+    setIsDisabled(true);
   };
 
   return (
@@ -46,35 +63,30 @@ const LoginForm = ({
                 onChange={onChange}
                 className="form-control mt-1"
                 placeholder="Enter username"
+                disabled={isDisabled}
               />
             </div>
-            <div className="form-group mt-3">
-              <label>Password</label>
-              <input
-                id="password"
-                name="password"
-                type="password"
-                defaultValue={loginInfo.password}
-                onChange={onChange}
-                className="form-control mt-1"
-                placeholder="Enter password"
-              />
-            </div>
+            <Password
+              type={showPassword}
+              defaultValue={loginInfo}
+              onChange={onChange}
+              disabled={isDisabled}
+              showPassword={toggleShowPassword}
+              color={color}
+            />
             <div className="d-grid gap-2 mt-3">
               <button
                 type="submit"
                 className="btn btn-primary"
                 onClick={handleLogin}
+                disabled={isDisabled}
               >
                 Submit
               </button>
             </div>
             <div className="text-center mt-2">
               Forgot{" "}
-              <span
-                className="link-primary link-auth-mode"
-                onClick={openModal}
-              >
+              <span className="link-primary link-auth-mode" onClick={openModal}>
                 password?
               </span>
               <ModalComponent
