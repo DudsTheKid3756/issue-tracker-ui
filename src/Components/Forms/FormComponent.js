@@ -12,6 +12,7 @@ const FormComponent = ({
   errLength,
   isMultiline,
   min,
+  maxLength,
 }) => {
   return (
     <>
@@ -31,6 +32,7 @@ const FormComponent = ({
               defaultValue={values[field]}
               checked={values[field]}
               min={min}
+              maxLength={maxLength}
               onChange={type == "text" ? onChanges[0] : onChanges[1]}
             />
             <div className="errorContainer">

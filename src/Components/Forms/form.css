@@ -95,6 +95,10 @@
   margin-left: 5px;
 }
 
+.refresh {
+  cursor: pointer;
+}
+
 .label {
   margin-left: 5px;
 }

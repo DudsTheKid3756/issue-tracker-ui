@@ -3,11 +3,11 @@ import React from "react";
 const SortComponent = ({ onChange, options }) => {
   return (
     <div className="mb-3 d-flex justify-content-end">
-      <label className="me-2 d-inline" htmlFor="sorting">
+      <label className="me-2 mt-1 d-inline" htmlFor="sorting">
         Sort By:{" "}
       </label>
       <select
-        className="me-2 d-inline"
+        className="me-2 p-1 pe-1 d-inline"
         id="sorting"
         name="sorting"
         onChange={onChange}

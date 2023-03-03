@@ -32,6 +32,7 @@ const UpdateForm = ({
         onChanges={onChanges}
         errors={errors}
         errLength={errLength}
+        maxLength={30}
       />
       <FormComponent
         label="Comment"

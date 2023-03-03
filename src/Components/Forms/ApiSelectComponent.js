@@ -1,6 +1,7 @@
 import React from "react";
 import constants from "../../utils/constants";
 import "./form.css";
+import Refresh from "../../utils/icons/Refresh";
 
 const ApiSelectComponent = ({ apiPath, toggleApiPath }) => {
   const urls = constants.BASE_URLS;
@@ -24,6 +25,7 @@ const ApiSelectComponent = ({ apiPath, toggleApiPath }) => {
           </option>
         ))}
       </select>
+      <Refresh style="ms-2 refresh" color="#252525" title="Refresh" onClick={() => window.location.reload()} />
     </>
   );
 };

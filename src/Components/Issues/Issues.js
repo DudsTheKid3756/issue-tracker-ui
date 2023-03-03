@@ -44,6 +44,7 @@ const Issues = () => {
   const sortOptions = constants.SORT_OPTIONS;
 
   const [issues, setIssues] = useState([]);
+  const [showAllIssues, setShowAllIssues] = useState(false);
   const [sortBy, setSortBy] = useState(sortOptions.at(0));
   const [isLoading, setIsLoading] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
@@ -65,10 +66,17 @@ const Issues = () => {
       apiPath,
       setIsLoading,
       setIsDisabled,
-      `/user/${decodedToken?.[constants.USERNAME_KEY]}`
+      showAllIssues ? "" : `/user/${decodedToken?.[constants.USERNAME_KEY]}`
     );
     checkToken();
-  }, [apiPath, isDeleted, reminderDeleted, isLoggedIn, setIsLoading]);
+  }, [
+    apiPath,
+    isDeleted,
+    reminderDeleted,
+    isLoggedIn,
+    setIsLoading,
+    showAllIssues,
+  ]);
 
   useEffect(() => {
     handleTimeout(issues, apiError, resetToday);
@@ -77,6 +85,10 @@ const Issues = () => {
   function onSortChange(e) {
     const option = sortOptions.find((option) => option.text == e.target.value);
     setSortBy(option);
+  }
+
+  function toggleIssues() {
+    setShowAllIssues((prevState) => !prevState);
   }
 
   function checkToken() {
@@ -160,9 +172,27 @@ const Issues = () => {
                   New Issue +
                 </button>
               </div>
-              {!isDisabled ? (
-                <SortComponent onChange={onSortChange} options={sortOptions} />
-              ) : null}
+              <div className="d-flex justify-content-between">
+                <div className="d-inline ms-1">
+                  {!isDisabled ? (
+                    <SortComponent
+                      onChange={onSortChange}
+                      options={sortOptions}
+                    />
+                  ) : null}
+                </div>
+                <div className="d-inline me-1 mb-1">
+                  {userRole() !== "admin" ? null : (
+                    <button
+                      className="btn btn-sm btn-outline-dark"
+                      onClick={() => toggleIssues()}
+                      disabled={isDisabled}
+                    >
+                      {!showAllIssues ? "Show all issues" : "Show default"}
+                    </button>
+                  )}
+                </div>
+              </div>
             </div>
             <div className="issues">
               {isLoading ? (
