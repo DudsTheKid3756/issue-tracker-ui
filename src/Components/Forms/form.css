@@ -44,8 +44,9 @@
 }
 
 .eye {
-  position: inherit;
-  padding-left: 81%;
+  position: absolute;
+  left: 65.5%;
+  top: 47.5%;
 }
 
 .formComponent {

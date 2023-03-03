@@ -7,7 +7,7 @@ import { LoginContext } from "../../contexts/LoginContext";
 import {
   deleteIssue,
   getIssues,
-  updateIssue
+  updateIssue,
 } from "../../services/IssueServices";
 import constants from "../../utils/constants";
 import { dateData, handleTimeout } from "../../utils/counterHelper";
@@ -20,6 +20,7 @@ import CommentCollapse from "../CommentCollapse";
 import ApiSelectComponent from "../forms/ApiSelectComponent";
 import LoadingSpinner from "../LoadingSpinner";
 import LoginPage from "../login/LoginPage";
+import SortComponent from "../SortComponent";
 import "./issues.css";
 import IssuesList from "./IssuesList";
 
@@ -64,7 +65,7 @@ const Issues = () => {
       apiPath,
       setIsLoading,
       setIsDisabled,
-      `/user/${decodedToken[constants.USERNAME_KEY]}`
+      `/user/${decodedToken?.[constants.USERNAME_KEY]}`
     );
     checkToken();
   }, [apiPath, isDeleted, reminderDeleted, isLoggedIn, setIsLoading]);
@@ -160,23 +161,7 @@ const Issues = () => {
                 </button>
               </div>
               {!isDisabled ? (
-                <div className="mb-3 d-flex justify-content-end">
-                  <label className="me-2 d-inline" htmlFor="sorting">
-                    Sort By:{" "}
-                  </label>
-                  <select
-                    className="me-2 d-inline"
-                    id="sorting"
-                    name="sorting"
-                    onChange={onSortChange}
-                  >
-                    {sortOptions.map((value, index) => (
-                      <option key={index} defaultValue={value.sortBy}>
-                        {value.text}
-                      </option>
-                    ))}
-                  </select>
-                </div>
+                <SortComponent onChange={onSortChange} options={sortOptions} />
               ) : null}
             </div>
             <div className="issues">

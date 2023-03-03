@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { signin } from "../../../services/AuthService";
 import ModalComponent from "../../ModalComponent";
-import Password from "../Password";
+import PasswordInput from "../PasswordInput";
 import PasswordReset from "./PasswordReset";
 
 const LoginForm = ({
@@ -66,7 +66,7 @@ const LoginForm = ({
                 disabled={isDisabled}
               />
             </div>
-            <Password
+            <PasswordInput
               type={showPassword}
               defaultValue={loginInfo}
               onChange={onChange}

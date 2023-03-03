@@ -2,7 +2,7 @@ import React from "react";
 import Eye from "../../utils/icons/Eye";
 import "./form.css";
 
-const Password = ({
+const PasswordInput = ({
   type,
   defaultValue,
   onChange,
@@ -33,4 +33,4 @@ const Password = ({
   );
 };
 
-export default Password;
+export default PasswordInput;
