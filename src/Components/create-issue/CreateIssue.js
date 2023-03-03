@@ -1,3 +1,4 @@
+import jwtDecode from "jwt-decode";
 import { useState } from "react";
 import { TwitterPicker } from "react-color";
 import { useNavigate } from "react-router-dom";
@@ -5,13 +6,16 @@ import { ToastContainer } from "react-toastify";
 import { addIssue } from "../../services/IssueServices";
 import constants from "../../utils/constants";
 import handleStorage from "../../utils/storage";
+import { getToken } from "../../utils/tokenHelper";
 import validateStrings from "../../utils/validation";
-import classes from "../forms/form.css";
+import "../forms/form.css";
 import CreateForm from "./CreateForm";
 
 const CreateIssue = () => {
   const navigate = useNavigate();
   const apiPath = handleStorage("get", "local", "api");
+  const storedToken = getToken();
+  const decodedToken = storedToken !== null ? jwtDecode(storedToken) : null;
 
   const [errors, setErrors] = useState({});
   const [errLength, setErrLength] = useState(0);
@@ -61,11 +65,20 @@ const CreateIssue = () => {
       setErrors(strErrors);
       setErrLength(strErrors.length);
     }
+
+    let username;
+    try {
+      username = decodedToken[constants.USERNAME_KEY];
+    } catch (e) {
+      console.error(e);
+    }
+
     const reminderToAdd = Object.values(reminder).some((prop) => prop == "")
       ? null
       : reminder;
     addIssue(
       {
+        createdBy: username,
         ...newIssueStrings,
         ...newIssueBools,
         color,

@@ -4,12 +4,13 @@ import { toaster } from "../utils/toaster";
 
 const getIssues = async (
   setIssues,
-  setApiError,
+  toggleApiError,
   apiPath,
   setIsLoading,
-  setIsDisabled
+  setIsDisabled,
+  path = ""
 ) => {
-  await httpHelper(constants.ISSUE_PATH, apiPath, "GET")
+  await httpHelper(`${constants.ISSUE_PATH}${path}`, apiPath, "GET")
     .then((response) => {
       if (!response.ok) {
         throw new Error(constants.API_ERROR);
@@ -17,7 +18,7 @@ const getIssues = async (
       return response.json();
     })
     .then((data) => {
-      setApiError(false);
+      toggleApiError(false);
       setTimeout(() => {
         setIssues(data);
         setIsLoading(false);
@@ -26,7 +27,7 @@ const getIssues = async (
     })
     .catch((error) => {
       setIsLoading(false);
-      setApiError(true);
+      toggleApiError(true);
       console.error(error);
     });
 };

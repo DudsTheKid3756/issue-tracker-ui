@@ -4,6 +4,7 @@ import "./form.css";
 
 const ApiSelectComponent = ({ apiPath, toggleApiPath }) => {
   const urls = constants.BASE_URLS;
+  const options = Object.entries(urls);
 
   return (
     <>
@@ -14,15 +15,14 @@ const ApiSelectComponent = ({ apiPath, toggleApiPath }) => {
         id="api"
         name="api"
         className="apiSelect"
+        defaultValue={urls[apiPath]}
         onChange={toggleApiPath}
       >
-        <option>{urls[apiPath]}</option>
-        <option key={"dotnet"} value={"dotnet"}>
-          {urls.dotnet}
-        </option>
-        <option key={"java"} value={"java"}>
-          {urls.java}
-        </option>
+        {options.map((value, index) => (
+          <option key={index} defaultValue={value[1]}>
+            {value[1]}
+          </option>
+        ))}
       </select>
     </>
   );

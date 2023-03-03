@@ -23,6 +23,7 @@ const UpdateIssue = () => {
   const [strsToUpdate, setStrsToUpdate] = useState({
     title: currentIssue?.current?.title,
     comment: currentIssue?.current?.comment,
+    createdBy: currentIssue?.current?.createdBy,
   });
   const [boolsToUpdate, setBoolsToUpdate] = useState({
     hasReminder: currentIssue?.current?.hasReminder,

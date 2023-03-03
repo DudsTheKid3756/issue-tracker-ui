@@ -1,8 +1,11 @@
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Notification from "../components/reminder/Notification";
+import once from "./once";
 
-function toaster(text, type) {
+var toaster = once(toastHelper);
+
+function toastHelper(text, type) {
   toast(text, {
     position: "bottom-right",
     autoClose: 2000,

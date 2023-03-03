@@ -43,7 +43,7 @@ const FormComponent = ({
         ) : (
           <>
             <textarea
-              className={`${errLength != 0 ? textAreaErrBorder : ""}`}
+              className={`${errLength != 0 ? "textAreaErrBorder" : ""}`}
               id={field}
               name={field}
               placeholder={placeholder}

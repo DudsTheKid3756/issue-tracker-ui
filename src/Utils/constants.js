@@ -6,6 +6,7 @@ export default Object.freeze({
   ISSUE_PATH: "/issue",
   AUTH_PATH: "/auth",
   ROLE_KEY: "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
+  USERNAME_KEY: "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name",
   API_ERROR: "Could not connect to API. Try again later.",
   BLANK_ERROR: " field cannot be blank",
   INVALID_ERROR: " field is invalid",
