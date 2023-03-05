@@ -1,7 +1,7 @@
 export default Object.freeze({
   BASE_URLS: {
     dotnet: "https://localhost:7082/api",
-    java: "http://localhost:8080/api",
+    springboot: "http://localhost:8080/api",
   },
   ISSUE_PATH: "/issue",
   AUTH_PATH: "/auth",

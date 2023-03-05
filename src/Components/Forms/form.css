@@ -45,8 +45,11 @@
 
 .eye {
   position: absolute;
-  left: 65.5%;
+  left: 64.8%;
   top: 47.5%;
+  padding: 0px 0px 4px 10px;
+  background-color: white;
+  z-index: 99999;
 }
 
 .formComponent {

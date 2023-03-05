@@ -9,14 +9,15 @@ const SignUpForm = ({
   signUpInfo,
   onChange,
   changeIsLoggedIn,
+  apiPath
 }) => {
   const handleSignUp = (e) => {
     e.preventDefault();
-    signup("dotnet", signUpInfo);
+    signup(apiPath, signUpInfo);
     changeIsLoggedIn(true);
 
     signin(
-      "dotnet",
+      apiPath,
       {
         username: signUpInfo.username,
         password: signUpInfo.password,

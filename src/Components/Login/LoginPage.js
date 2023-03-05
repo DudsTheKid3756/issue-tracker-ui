@@ -1,10 +1,12 @@
 import React, { useContext, useState } from "react";
+import { ApiContext } from "../../contexts/ApiContext";
 import { LoginContext } from "../../contexts/LoginContext";
 import LoginForm from "../forms/auth-forms/LoginForm";
 import SignUpForm from "../forms/auth-forms/SignUpForm";
 
 const LoginPage = () => {
   const { changeIsLoggedIn } = useContext(LoginContext);
+  const { apiPath } = useContext(ApiContext);
 
   const [authMode, setAuthMode] = useState("signin");
   const [loginInfo, setLoginInfo] = useState({
@@ -34,6 +36,7 @@ const LoginPage = () => {
       loginInfo={loginInfo}
       onChange={(e) => onChange(e, setLoginInfo)}
       changeIsLoggedIn={changeIsLoggedIn}
+      apiPath={apiPath}
     />
   ) : (
     <SignUpForm
@@ -41,6 +44,7 @@ const LoginPage = () => {
       signUpInfo={signUpInfo}
       onChange={(e) => onChange(e, setSignUpInfo)}
       changeIsLoggedIn={changeIsLoggedIn}
+      apiPath={apiPath}
     />
   );
 };

@@ -20,6 +20,8 @@ import CommentCollapse from "../CommentCollapse";
 import ApiSelectComponent from "../forms/ApiSelectComponent";
 import LoadingSpinner from "../LoadingSpinner";
 import LoginPage from "../login/LoginPage";
+import ModalComponent from "../ModalComponent";
+import SessionEndModal from "../SessionEndModal";
 import SortComponent from "../SortComponent";
 import "./issues.css";
 import IssuesList from "./IssuesList";
@@ -52,6 +54,7 @@ const Issues = () => {
   const [showComment, setShowComment] = useState({});
   const [reminderDeleted, setReminderDeleted] = useState(false);
   const [today, setToday] = useState(new Date());
+  const [showSessionEndModal, setShowSessionEndModal] = useState(false);
 
   const resetToday = () => setToday(new Date());
   const collapseAllComments = () => setShowComment({});
@@ -96,6 +99,7 @@ const Issues = () => {
       const tokenExpirationMs = decodedToken.exp;
       const currentTimeMs = (Date.now() / 1000).toFixed(0);
       if (tokenExpirationMs < currentTimeMs) {
+        setShowSessionEndModal(true);
         removeSession();
         changeIsLoggedIn(false);
       } else changeIsLoggedIn(true);
@@ -223,6 +227,14 @@ const Issues = () => {
                 </span>
               )}
             </div>
+            <ModalComponent
+              label="Session Expired"
+              isOpen={showSessionEndModal}
+              onRequestClose={() => setShowSessionEndModal(false)}
+              component={
+                <SessionEndModal closeModal={() => setShowSessionEndModal(false)} />
+              }
+            />
             <ToastContainer />
           </>
         )}
