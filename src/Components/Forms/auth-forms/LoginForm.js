@@ -15,6 +15,7 @@ const LoginForm = ({
   apiPath,
 }) => {
   const resetCode = useRef("");
+  const usernameRef = useRef("");
 
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const [showResetCodeModal, setShowResetCodeModal] = useState(false);
@@ -39,6 +40,7 @@ const LoginForm = ({
       setShowResetCodeModal(true);
     }
 
+    usernameRef.current = username;
     setUsername("");
     setShowConfirmationModal(false);
   };
@@ -128,6 +130,7 @@ const LoginForm = ({
                   <ResetEmail
                     resetCode={resetCode.current}
                     email={email}
+                    username={usernameRef.current}
                     closeResetCodeModal={closeResetCodeModal}
                   />
                 }

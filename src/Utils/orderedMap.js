@@ -12,5 +12,5 @@ export const orderedMap = (map, sortBy) => {
       })
       .reduce((p, n) => (p ? p : n), 0);
 
-  return map.sort(fieldSorter([sortBy]));
+  return map.sort(fieldSorter(sortBy));
 };

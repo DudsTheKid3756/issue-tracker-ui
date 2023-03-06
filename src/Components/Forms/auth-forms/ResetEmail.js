@@ -4,7 +4,7 @@ import ModalComponent from "../../ModalComponent";
 import PasswordReset from "./PasswordReset";
 import "../form.css";
 
-const ResetEmail = ({ resetCode, email, closeResetCodeModal }) => {
+const ResetEmail = ({ resetCode, email, username, closeResetCodeModal }) => {
   const [showPasswordResetModal, setShowPasswordResetModal] = useState(false);
   const [code, setCode] = useState("");
   const [error, setError] = useState("");
@@ -72,6 +72,7 @@ const ResetEmail = ({ resetCode, email, closeResetCodeModal }) => {
         label="Password Reset"
         component={
           <PasswordReset
+            username={username}
             closeModal={closePasswordResetModal}
             closeResetCodeModal={closeResetCodeModal}
           />

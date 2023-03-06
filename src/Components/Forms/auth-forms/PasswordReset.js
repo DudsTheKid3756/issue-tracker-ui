@@ -2,10 +2,10 @@ import React, { useRef, useState } from "react";
 import { resetPassword } from "../../../services/AuthService";
 import { toaster } from "../../../utils/toaster";
 
-const PasswordReset = ({ closeModal, closeResetCodeModal }) => {
+const PasswordReset = ({ username, closeModal, closeResetCodeModal }) => {
   const resetResponse = useRef("");
   const [passResetInfo, setPassResetInfo] = useState({
-    username: "",
+    username,
     newPassword: "",
     repeatPassword: "",
   });
@@ -28,16 +28,8 @@ const PasswordReset = ({ closeModal, closeResetCodeModal }) => {
       <form className="overflow-hidden m-3">
         <div>
           <div className="form-group mt-3">
-            <label htmlFor="username">Username</label>
-            <input
-              id="username"
-              className="form-control mt-1"
-              name="username"
-              type="text"
-              placeholder="Enter username"
-              defaultValue={passResetInfo?.username}
-              onChange={onChange}
-            />
+            <label>Username</label>
+            <p className="mt-1">{username}</p>
           </div>
           <div className="form-group mt-3">
             <label htmlFor="newPassword">New Password</label>

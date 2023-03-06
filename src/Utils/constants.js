@@ -31,10 +31,11 @@ export default Object.freeze({
   STORAGE_ERROR:
     ' not a valid storage action. Try "set, get, remove, or clear"',
   SORT_OPTIONS: [
-    { text: "Newest", sortBy: "-id" },
-    { text: "Oldest", sortBy: "id" },
-    { text: "A to Z", sortBy: "title" },
-    { text: "Z to A", sortBy: "-title" },
+    { text: "Newest", sortBy: ["-id"] },
+    { text: "Oldest", sortBy: ["id"] },
+    { text: "A to Z", sortBy: ["title"] },
+    { text: "Z to A", sortBy: ["-title"] },
+    { text: "Completed", sortBy: ["-isCompleted"] },
   ],
   EMAIL_REQUEST_OPTIONS: {
     serviceID: "service_p17yenv",
