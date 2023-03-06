@@ -1,8 +1,6 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { signin, signup } from "../../../services/AuthService";
-import { clearValues } from "../../../utils/clearValues";
 
 const SignUpForm = ({
   changeAuthMode,
@@ -14,7 +12,6 @@ const SignUpForm = ({
   const handleSignUp = (e) => {
     e.preventDefault();
     signup(apiPath, signUpInfo);
-    changeIsLoggedIn(true);
 
     signin(
       apiPath,

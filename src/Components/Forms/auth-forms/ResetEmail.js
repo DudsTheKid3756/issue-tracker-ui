@@ -5,7 +5,7 @@ import PasswordReset from "./PasswordReset";
 import "../form.css";
 
 const ResetEmail = ({ resetCode, email, closeResetCodeModal }) => {
-  const [showModal, setShowModal] = useState(false);
+  const [showPasswordResetModal, setShowPasswordResetModal] = useState(false);
   const [code, setCode] = useState("");
   const [error, setError] = useState("");
 
@@ -14,11 +14,16 @@ const ResetEmail = ({ resetCode, email, closeResetCodeModal }) => {
     setError("");
   };
 
-  const openModal = () => {
-    if (resetCode === code) setShowModal(true);
-    else setError("Incorrect code!");
+  const openPasswordResetModal = () => {
+    if (resetCode === code) {
+      setShowPasswordResetModal(true);
+    } else setError("Incorrect code!");
   };
-  const closeModal = () => setShowModal(false);
+
+  const closePasswordResetModal = () => {
+    closeResetCodeModal();
+    setShowPasswordResetModal(false);
+  };
 
   return (
     <>
@@ -52,17 +57,25 @@ const ResetEmail = ({ resetCode, email, closeResetCodeModal }) => {
             <button className="btn btn-secondary" onClick={closeResetCodeModal}>
               Cancel
             </button>
-            <button className="btn btn-primary ms-2" onClick={openModal}>
+            <button
+              className="btn btn-primary ms-2"
+              onClick={openPasswordResetModal}
+            >
               Submit
             </button>
           </div>
         </div>
       </div>
       <ModalComponent
-        isOpen={showModal}
-        onRequestClose={closeModal}
+        isOpen={showPasswordResetModal}
+        onRequestClose={closePasswordResetModal}
         label="Password Reset"
-        component={<PasswordReset />}
+        component={
+          <PasswordReset
+            closeModal={closePasswordResetModal}
+            closeResetCodeModal={closeResetCodeModal}
+          />
+        }
       />
     </>
   );

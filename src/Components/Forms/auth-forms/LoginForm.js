@@ -1,20 +1,18 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { ToastContainer } from "react-toastify";
-import { signin } from "../../../services/AuthService";
+import { handleEmail, signin } from "../../../services/AuthService";
 import randCode from "../../../utils/randCode";
 import ModalComponent from "../../ModalComponent";
 import PasswordInput from "../PasswordInput";
 import ResetConfirmation from "./ResetConfirmation";
 import ResetEmail from "./ResetEmail";
-import emailjs from "@emailjs/browser";
-import constants from "../../../utils/constants";
-import { useRef } from "react";
 
 const LoginForm = ({
   changeAuthMode,
   loginInfo,
   onChange,
   changeIsLoggedIn,
+  apiPath,
 }) => {
   const resetCode = useRef("");
 
@@ -24,40 +22,31 @@ const LoginForm = ({
   const [isDisabled, setIsDisabled] = useState(false);
   const [color, setColor] = useState("gray");
   const [username, setUsername] = useState("");
-  
-  const { serviceID, templateID, publicKey } = constants.EMAIL_REQUEST_OPTIONS;
-  
-  const email = "curlyq3756@gmail.com";
-  
+  const [email, setEmail] = useState("");
+
   const onUsernameChange = (e) => setUsername(e.target.value);
 
   const sendResetCode = () => {
     resetCode.current = randCode(7);
-    emailjs.send(
-      serviceID,
-      templateID,
-      {
-        to_email: email, // change this later to get email from backend
-        to_name: username,
-        from_name: "Issue Tracker Password Reset",
-        reset_code: resetCode.current,
-      },
-      publicKey
-    );
+    handleEmail(username, resetCode.current, apiPath, setEmail); // set errors later
   };
 
   const openConfirmationModal = () => setShowConfirmationModal(true);
   const closeConfirmationModal = (e) => {
     if (e.currentTarget.innerHTML === "Send code") {
-      // check username and get email from backend before sending code and handle errors
+      // handle errors
       sendResetCode();
       setShowResetCodeModal(true);
     }
 
+    setUsername("");
     setShowConfirmationModal(false);
   };
 
-  const closeResetCodeModal = () => setShowResetCodeModal(false);
+  const closeResetCodeModal = () => {
+    resetCode.current = "";
+    setShowResetCodeModal(false);
+  };
 
   const toggleShowPassword = () => {
     if (loginInfo.password) {

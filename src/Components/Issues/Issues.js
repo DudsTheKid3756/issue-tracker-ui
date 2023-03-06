@@ -37,7 +37,7 @@ const Issues = () => {
   const userRole = () => {
     let role;
     try {
-      role = decodedToken[constants.ROLE_KEY];
+      role = decodedToken?.[constants.ROLE_KEY];
     } catch (e) {
       console.error("Error: JWT token invalid", e);
     }

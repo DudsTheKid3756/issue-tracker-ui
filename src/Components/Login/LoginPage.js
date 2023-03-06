@@ -1,12 +1,12 @@
 import React, { useContext, useState } from "react";
-import { ApiContext } from "../../contexts/ApiContext";
 import { LoginContext } from "../../contexts/LoginContext";
+import handleStorage from "../../utils/storage";
 import LoginForm from "../forms/auth-forms/LoginForm";
 import SignUpForm from "../forms/auth-forms/SignUpForm";
 
 const LoginPage = () => {
   const { changeIsLoggedIn } = useContext(LoginContext);
-  const { apiPath } = useContext(ApiContext);
+  const apiPath = handleStorage("get", "local", "api");
 
   const [authMode, setAuthMode] = useState("signin");
   const [loginInfo, setLoginInfo] = useState({
@@ -22,6 +22,7 @@ const LoginPage = () => {
   });
 
   const changeAuthMode = () => {
+    console.log(apiPath);
     setAuthMode(authMode == "signin" ? "signup" : "signin");
   };
 

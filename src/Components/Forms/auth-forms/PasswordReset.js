@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { resetPassword } from "../../../services/AuthService";
 import { toaster } from "../../../utils/toaster";
 
-const PasswordReset = ({ closeModal }) => {
+const PasswordReset = ({ closeModal, closeResetCodeModal }) => {
   const resetResponse = useRef("");
   const [passResetInfo, setPassResetInfo] = useState({
     username: "",
@@ -18,6 +18,7 @@ const PasswordReset = ({ closeModal }) => {
   const onReset = (e) => {
     e.preventDefault();
     resetPassword("dotnet", passResetInfo, resetResponse);
+    closeResetCodeModal();
     closeModal();
     setTimeout(() => toaster(resetResponse.current, "success"), 1500);
   };

@@ -1,3 +1,4 @@
+import emailjs from "@emailjs/browser";
 import constants from "../utils/constants";
 import httpHelper from "../utils/httpHelper";
 import { toaster } from "../utils/toaster";
@@ -56,8 +57,36 @@ const resetPassword = async (apiPath, passResetInfo, resetResponse) => {
       }
       return response.json();
     })
-    .then((data) => resetResponse.current = data.message)
+    .then((data) => (resetResponse.current = data.message))
     .catch((error) => toaster(error, "error"));
 };
 
-export { signup, signin, resetPassword };
+const handleEmail = async (username, resetCode, apiPath, setEmail) => {
+  const { serviceID, templateID, publicKey } = constants.EMAIL_REQUEST_OPTIONS;
+
+  await httpHelper(`${constants.AUTH_PATH}/user/${username}`, apiPath, "GET")
+    .then((response) => {
+      if (!response.ok) {
+        toaster(constants.API_ERROR, "error");
+        throw new Error(constants.API_ERROR);
+      }
+      return response.json();
+    })
+    .then((data) => {
+      setEmail(data.email);
+      emailjs.send(
+        serviceID,
+        templateID,
+        {
+          to_email: data.email,
+          to_name: username,
+          from_name: "Issue Tracker Password Reset",
+          reset_code: resetCode,
+        },
+        publicKey
+      );
+    })
+    .catch((error) => toaster(error, "error"));
+};
+
+export { signup, signin, resetPassword, handleEmail };
