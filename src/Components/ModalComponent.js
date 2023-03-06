@@ -16,6 +16,7 @@ const ModalComponent = ({ isOpen, onRequestClose, label, component }) => {
       borderRadius: "12px",
       padding: "10px",
     },
+    overlay: { zIndex: 999999 },
   };
   return (
     <div>

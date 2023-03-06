@@ -1,6 +1,4 @@
-import React from "react";
-import { useRef } from "react";
-import { useState } from "react";
+import React, { useRef, useState } from "react";
 import { resetPassword } from "../../../services/AuthService";
 import { toaster } from "../../../utils/toaster";
 

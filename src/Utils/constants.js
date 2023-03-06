@@ -36,4 +36,9 @@ export default Object.freeze({
     { text: "A to Z", sortBy: "title" },
     { text: "Z to A", sortBy: "-title" },
   ],
+  EMAIL_REQUEST_OPTIONS: {
+    serviceID: "service_p17yenv",
+    templateID: "template_0gj60g8",
+    publicKey: "Rp-fNzeGqmdJVKdT8",
+  },
 });

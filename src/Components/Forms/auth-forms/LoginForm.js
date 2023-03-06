@@ -1,10 +1,14 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { signin } from "../../../services/AuthService";
+import randCode from "../../../utils/randCode";
 import ModalComponent from "../../ModalComponent";
 import PasswordInput from "../PasswordInput";
-import PasswordReset from "./PasswordReset";
+import ResetConfirmation from "./ResetConfirmation";
+import ResetEmail from "./ResetEmail";
+import emailjs from "@emailjs/browser";
+import constants from "../../../utils/constants";
+import { useRef } from "react";
 
 const LoginForm = ({
   changeAuthMode,
@@ -12,13 +16,48 @@ const LoginForm = ({
   onChange,
   changeIsLoggedIn,
 }) => {
-  const [showModal, setShowModal] = useState(false);
+  const resetCode = useRef("");
+
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+  const [showResetCodeModal, setShowResetCodeModal] = useState(false);
   const [showPassword, setShowPassword] = useState("password");
   const [isDisabled, setIsDisabled] = useState(false);
   const [color, setColor] = useState("gray");
+  const [username, setUsername] = useState("");
+  
+  const { serviceID, templateID, publicKey } = constants.EMAIL_REQUEST_OPTIONS;
+  
+  const email = "curlyq3756@gmail.com";
+  
+  const onUsernameChange = (e) => setUsername(e.target.value);
 
-  const openModal = () => setShowModal(true);
-  const closeModal = () => setShowModal(false);
+  const sendResetCode = () => {
+    resetCode.current = randCode(7);
+    emailjs.send(
+      serviceID,
+      templateID,
+      {
+        to_email: email, // change this later to get email from backend
+        to_name: username,
+        from_name: "Issue Tracker Password Reset",
+        reset_code: resetCode.current,
+      },
+      publicKey
+    );
+  };
+
+  const openConfirmationModal = () => setShowConfirmationModal(true);
+  const closeConfirmationModal = (e) => {
+    if (e.currentTarget.innerHTML === "Send code") {
+      // check username and get email from backend before sending code and handle errors
+      sendResetCode();
+      setShowResetCodeModal(true);
+    }
+
+    setShowConfirmationModal(false);
+  };
+
+  const closeResetCodeModal = () => setShowResetCodeModal(false);
 
   const toggleShowPassword = () => {
     if (loginInfo.password) {
@@ -86,20 +125,47 @@ const LoginForm = ({
             </div>
             <div className="text-center mt-2">
               Forgot{" "}
-              <span className="link-primary link-auth-mode" onClick={openModal}>
+              <span
+                className="link-primary link-auth-mode"
+                onClick={openConfirmationModal}
+              >
                 password?
               </span>
               <ModalComponent
-                isOpen={showModal}
-                onRequestClose={closeModal}
-                label="Reset Password"
-                component={<PasswordReset closeModal={closeModal} />}
+                isOpen={showResetCodeModal}
+                onRequestClose={closeResetCodeModal}
+                label="Password Reset Code"
+                component={
+                  <ResetEmail
+                    resetCode={resetCode.current}
+                    email={email}
+                    closeResetCodeModal={closeResetCodeModal}
+                  />
+                }
+              />
+              <ModalComponent
+                isOpen={showConfirmationModal}
+                onRequestClose={closeConfirmationModal}
+                label="Forgot Password"
+                component={
+                  <ResetConfirmation
+                    username={username}
+                    onChange={onUsernameChange}
+                    closeModal={closeConfirmationModal}
+                  />
+                }
               />
             </div>
           </div>
         </form>
       </div>
       <ToastContainer />
+      <script
+        type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"
+      ></script>
+
+      <script type="text/javascript">emailjs.init(publicKey)</script>
     </>
   );
 };
