@@ -71,7 +71,7 @@ const SignUpForm = ({
                 value={signUpInfo.password}
                 onChange={onChange}
                 className="form-control mt-1"
-                placeholder="Password"
+                placeholder="Create Password"
               />
             </div>
             <div className="d-grid gap-2 mt-3">
