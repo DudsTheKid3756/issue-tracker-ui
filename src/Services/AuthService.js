@@ -1,15 +1,17 @@
 import emailjs from "@emailjs/browser";
-import constants from "../utils/constants";
+import {
+  API_ERROR, AUTH_PATH, EMAIL_REQUEST_OPTIONS
+} from "../utils/constants";
 import httpHelper from "../utils/httpHelper";
 import { toaster } from "../utils/toaster";
 import { removeSession, setSession } from "../utils/tokenHelper";
 
 const signup = async (apiPath, signUpInfo) => {
-  await httpHelper(`${constants.AUTH_PATH}/signup`, apiPath, "POST", signUpInfo)
+  await httpHelper(`${AUTH_PATH}/signup`, apiPath, "POST", signUpInfo)
     .then((response) => {
       if (!response.ok) {
-        toaster(constants.API_ERROR, "error");
-        throw new Error(constants.API_ERROR);
+        toaster(API_ERROR, "error");
+        throw new Error(API_ERROR);
       }
       return response.json();
     })
@@ -21,11 +23,11 @@ const signup = async (apiPath, signUpInfo) => {
 };
 
 const signin = async (apiPath, loginInfo, changeIsLoggedIn) => {
-  await httpHelper(`${constants.AUTH_PATH}/signin`, apiPath, "POST", loginInfo)
+  await httpHelper(`${AUTH_PATH}/signin`, apiPath, "POST", loginInfo)
     .then((response) => {
       if (!response.ok) {
-        toaster(constants.API_ERROR, "error");
-        throw new Error(constants.API_ERROR);
+        toaster(API_ERROR, "error");
+        throw new Error(API_ERROR);
       }
       return response.json();
     })
@@ -44,16 +46,11 @@ const signin = async (apiPath, loginInfo, changeIsLoggedIn) => {
 };
 
 const resetPassword = async (apiPath, passResetInfo, resetResponse) => {
-  await httpHelper(
-    `${constants.AUTH_PATH}/reset-pass`,
-    apiPath,
-    "PUT",
-    passResetInfo
-  )
+  await httpHelper(`${AUTH_PATH}/reset-pass`, apiPath, "PUT", passResetInfo)
     .then((response) => {
       if (!response.ok) {
-        toaster(constants.API_ERROR, "error");
-        throw new Error(constants.API_ERROR);
+        toaster(API_ERROR, "error");
+        throw new Error(API_ERROR);
       }
       return response.json();
     })
@@ -62,13 +59,13 @@ const resetPassword = async (apiPath, passResetInfo, resetResponse) => {
 };
 
 const handleEmail = async (username, resetCode, apiPath, setEmail) => {
-  const { serviceID, templateID, publicKey } = constants.EMAIL_REQUEST_OPTIONS;
+  const { serviceID, templateID, publicKey } = EMAIL_REQUEST_OPTIONS;
 
-  await httpHelper(`${constants.AUTH_PATH}/user/${username}`, apiPath, "GET")
+  await httpHelper(`${AUTH_PATH}/user/${username}`, apiPath, "GET")
     .then((response) => {
       if (!response.ok) {
-        toaster(constants.API_ERROR, "error");
-        throw new Error(constants.API_ERROR);
+        toaster(API_ERROR, "error");
+        throw new Error(API_ERROR);
       }
       return response.json();
     })
@@ -90,3 +87,4 @@ const handleEmail = async (username, resetCode, apiPath, setEmail) => {
 };
 
 export { signup, signin, resetPassword, handleEmail };
+

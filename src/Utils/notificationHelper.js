@@ -1,5 +1,5 @@
-import constants from "./constants";
 import { notificationToast } from "./toaster";
+import { ALERT_OPTIONS } from "./constants";
 
 function handleNotification(issues, dateData, removeReminder) {
   const _day = dateData.get("day");
@@ -16,7 +16,7 @@ function handleNotification(issues, dateData, removeReminder) {
   issues.forEach((issue) => {
     if (issue.reminder != null) {
       const { time, date, alert } = issue?.reminder;
-      const option = constants.ALERT_OPTIONS.find(
+      const option = ALERT_OPTIONS.find(
         (option) => option.text == alert
       );
 

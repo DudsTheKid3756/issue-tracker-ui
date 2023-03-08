@@ -1,4 +1,10 @@
-import constants from "../utils/constants";
+import {
+  API_ERROR,
+  BAD_REQUEST_ERROR,
+  ISSUE_PATH,
+  NEW_ISSUE_SUCCESS_MESSAGE,
+  UPDATE_SUCCESS_MESSAGE,
+} from "../utils/constants";
 import httpHelper from "../utils/httpHelper";
 import { toaster } from "../utils/toaster";
 
@@ -10,10 +16,10 @@ const getIssues = async (
   setIsDisabled,
   path = ""
 ) => {
-  await httpHelper(`${constants.ISSUE_PATH}${path}`, apiPath, "GET")
+  await httpHelper(`${ISSUE_PATH}${path}`, apiPath, "GET")
     .then((response) => {
       if (!response.ok) {
-        throw new Error(constants.API_ERROR);
+        throw new Error(API_ERROR);
       }
       return response.json();
     })
@@ -33,16 +39,16 @@ const getIssues = async (
 };
 
 const addIssue = async (newIssue, navigate, apiPath) => {
-  await httpHelper(constants.ISSUE_PATH, apiPath, "POST", newIssue)
+  await httpHelper(ISSUE_PATH, apiPath, "POST", newIssue)
     .then((response) => {
       if (!response.ok) {
-        toaster(constants.BAD_REQUEST_ERROR, "error");
+        toaster(BAD_REQUEST_ERROR, "error");
         throw new Error("Bad request");
       }
       return response.json();
     })
     .then(() => {
-      toaster(constants.NEW_ISSUE_SUCCESS_MESSAGE, "success");
+      toaster(NEW_ISSUE_SUCCESS_MESSAGE, "success");
       setTimeout(() => navigate("/issues", { state: apiPath }), 2000);
     })
     .catch((error) => console.error(error));
@@ -55,33 +61,26 @@ const updateIssue = async (
   apiPath,
   reminderPosted
 ) => {
-  await httpHelper(
-    `${constants.ISSUE_PATH}/${issueId}`,
-    apiPath,
-    "PUT",
-    updatedIssue
-  )
+  await httpHelper(`${ISSUE_PATH}/${issueId}`, apiPath, "PUT", updatedIssue)
     .then((response) => {
       if (!response.ok) {
-        toaster(constants.BAD_REQUEST_ERROR, "error");
+        toaster(BAD_REQUEST_ERROR, "error");
         throw new Error("Bad request");
       }
       return response.json();
     })
     .then(() => {
-      !reminderPosted
-        ? toaster(constants.UPDATE_SUCCESS_MESSAGE, "success")
-        : null;
+      !reminderPosted ? toaster(UPDATE_SUCCESS_MESSAGE, "success") : null;
       setTimeout(() => navigate("/issues", { state: apiPath }), 2000);
     })
     .catch((error) => console.error(error));
 };
 
 const deleteIssue = async (issueId, apiPath, setIsDeleted) => {
-  await httpHelper(`${constants.ISSUE_PATH}/${issueId}`, apiPath, "DELETE")
+  await httpHelper(`${ISSUE_PATH}/${issueId}`, apiPath, "DELETE")
     .then((response) => {
       if (!response.ok) {
-        throw new Error(constants.API_ERROR);
+        throw new Error(API_ERROR);
       }
       setIsDeleted(true);
       setTimeout(

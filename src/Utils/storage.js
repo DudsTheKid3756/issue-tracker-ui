@@ -1,4 +1,4 @@
-import constants from "./constants";
+import { STORAGE_ERROR } from "./constants";
 
 export default function handleStorage(action, storageType, key, item) {
   const _storage = window[`${storageType}Storage`];
@@ -20,6 +20,6 @@ export default function handleStorage(action, storageType, key, item) {
       break;
 
     default:
-      console.error(`${action}${constants.STORAGE_ERROR}`);
+      console.error(`${action}${STORAGE_ERROR}`);
   }
 }

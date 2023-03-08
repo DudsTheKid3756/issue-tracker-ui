@@ -1,4 +1,4 @@
-export default Object.freeze({
+module.exports = Object.freeze({
   BASE_URLS: {
     dotnet: "https://localhost:7082/api",
     springboot: "http://localhost:8080/api",
@@ -14,7 +14,7 @@ export default Object.freeze({
     "Unable to submit request. Please fix errors and submit again",
   NEW_ISSUE_SUCCESS_MESSAGE: "New Issue successfully added!",
   UPDATE_SUCCESS_MESSAGE: "Issue updated successfully!",
-  ALPHANUMERIC_REGEX: /^([\d\w-'_,.][\s]*)+\s*$/,
+  REGEX_OPTIONS: [{ type: "string", regex: /^([\d\w-'/&_,.][\s]*)+\s*$/ }],
   ALERT_OPTIONS: [
     { text: "No alert", duration: null },
     { text: "On time", duration: 0 },
@@ -36,6 +36,7 @@ export default Object.freeze({
     { text: "A to Z", sortBy: ["title"] },
     { text: "Z to A", sortBy: ["-title"] },
     { text: "Completed", sortBy: ["-isCompleted"] },
+    { text: "Incomplete", sortBy: ["isCompleted"] },
   ],
   EMAIL_REQUEST_OPTIONS: {
     serviceID: "service_p17yenv",

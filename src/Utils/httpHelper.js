@@ -1,8 +1,8 @@
-import constants from "./constants";
+import { BASE_URLS } from "./constants";
 import { getToken } from "./tokenHelper";
 
 async function httpHelper(path, api, method, payload) {
-  return await fetch(`${constants.BASE_URLS[api]}${path}`, {
+  return await fetch(`${BASE_URLS[api]}${path}`, {
     method,
     headers: {
       "Content-Type": "application/json",

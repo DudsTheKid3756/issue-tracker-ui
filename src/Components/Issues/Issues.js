@@ -9,7 +9,12 @@ import {
   getIssues,
   updateIssue,
 } from "../../services/IssueServices";
-import constants from "../../utils/constants";
+import {
+  API_ERROR,
+  ROLE_KEY,
+  SORT_OPTIONS,
+  USERNAME_KEY,
+} from "../../utils/constants";
 import { dateData, handleTimeout } from "../../utils/counterHelper";
 import Signout from "../../utils/icons/Signout";
 import handleNotification from "../../utils/notificationHelper";
@@ -37,13 +42,13 @@ const Issues = () => {
   const userRole = () => {
     let role;
     try {
-      role = decodedToken?.[constants.ROLE_KEY];
+      role = decodedToken?.[ROLE_KEY];
     } catch (e) {
       console.error("Error: JWT token invalid", e);
     }
     return role;
   };
-  const sortOptions = constants.SORT_OPTIONS;
+  const sortOptions = SORT_OPTIONS;
 
   const [issues, setIssues] = useState([]);
   const [showAllIssues, setShowAllIssues] = useState(false);
@@ -69,7 +74,7 @@ const Issues = () => {
       apiPath,
       setIsLoading,
       setIsDisabled,
-      showAllIssues ? "" : `/user/${decodedToken?.[constants.USERNAME_KEY]}`
+      showAllIssues ? "" : `/user/${decodedToken?.[USERNAME_KEY]}`
     );
     checkToken();
   }, [
@@ -213,13 +218,13 @@ const Issues = () => {
                       handleDelete={handleDelete}
                     />
                   ) : apiError ? (
-                    <p className="noIssues">{constants.API_ERROR}</p>
+                    <p className="noIssues">{API_ERROR}</p>
                   ) : (
                     <p className="noIssues">
                       No issues to show. Add a new one!
                     </p>
                   )}
-                  {apiError ? toaster(constants.API_ERROR, "error") : null}
+                  {apiError ? toaster(API_ERROR, "error") : null}
                   <CommentCollapse
                     showComment={showComment}
                     collapseAllComments={collapseAllComments}
@@ -232,7 +237,9 @@ const Issues = () => {
               isOpen={showSessionEndModal}
               onRequestClose={() => setShowSessionEndModal(false)}
               component={
-                <SessionEndModal closeModal={() => setShowSessionEndModal(false)} />
+                <SessionEndModal
+                  closeModal={() => setShowSessionEndModal(false)}
+                />
               }
             />
             <ToastContainer />

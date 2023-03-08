@@ -4,7 +4,7 @@ import { TwitterPicker } from "react-color";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { addIssue } from "../../services/IssueServices";
-import constants from "../../utils/constants";
+import { INITIAL_REMINDER, USERNAME_KEY } from "../../utils/constants";
 import handleStorage from "../../utils/storage";
 import { getToken } from "../../utils/tokenHelper";
 import validateStrings from "../../utils/validation";
@@ -29,7 +29,7 @@ const CreateIssue = () => {
     isCompleted: false,
   });
   const defaultReminder = {
-    ...JSON.parse(JSON.stringify(constants.INITIAL_REMINDER)),
+    ...JSON.parse(JSON.stringify(INITIAL_REMINDER)),
     ["alert"]: "---Select an option---",
   };
   const [reminder, setReminder] = useState(defaultReminder);
@@ -68,7 +68,7 @@ const CreateIssue = () => {
 
     let username;
     try {
-      username = decodedToken[constants.USERNAME_KEY];
+      username = decodedToken[USERNAME_KEY];
     } catch (e) {
       console.error(e);
     }

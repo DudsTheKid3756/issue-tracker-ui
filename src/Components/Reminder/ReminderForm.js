@@ -1,11 +1,11 @@
 import React from "react";
-import constants from "../../utils/constants";
+import { ALERT_OPTIONS } from "../../utils/constants";
 import "../forms/form.css";
 import FormComponent from "../forms/FormComponent";
 import SelectComponent from "../forms/SelectComponent";
 
 const ReminderForm = ({ closeModal, values, onChanges }) => {
-  const options = constants.ALERT_OPTIONS.map((option) => option.text);
+  const options = ALERT_OPTIONS.map((option) => option.text);
   return (
     <div className="formContainer">
       <div className="reminderInput">

@@ -3,7 +3,7 @@ import { TwitterPicker } from "react-color";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { updateIssue } from "../../services/IssueServices";
-import constants from "../../utils/constants";
+import { INITIAL_REMINDER } from "../../utils/constants";
 import handleStorage from "../../utils/storage";
 import validateStrings from "../../utils/validation";
 import "../forms/form.css";
@@ -34,7 +34,7 @@ const UpdateIssue = () => {
   });
   const [showColorPicker, setShowColorPicker] = useState(false);
   const defaultReminder = {
-    ...JSON.parse(JSON.stringify(constants.INITIAL_REMINDER)),
+    ...JSON.parse(JSON.stringify(INITIAL_REMINDER)),
     ["alert"]: "---Select an option---",
   };
   const [reminder, setReminder] = useState({

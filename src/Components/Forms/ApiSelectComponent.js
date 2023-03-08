@@ -1,10 +1,10 @@
 import React from "react";
-import constants from "../../utils/constants";
-import "./form.css";
+import { BASE_URLS } from "../../utils/constants";
 import Refresh from "../../utils/icons/Refresh";
+import "./form.css";
 
 const ApiSelectComponent = ({ apiPath, toggleApiPath }) => {
-  const urls = constants.BASE_URLS;
+  const urls = BASE_URLS;
   const options = Object.entries(urls);
 
   // replce with modal prompting login for springboot api
