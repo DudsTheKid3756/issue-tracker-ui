@@ -14,12 +14,12 @@ function handleNotification(issues, dateData, removeReminder) {
   const _seconds = dateData.get("seconds");
 
   issues.forEach((issue) => {
+    // console.log(issue);
     if (issue.reminder != null) {
       const { time, date, alert } = issue?.reminder;
       const option = ALERT_OPTIONS.find(
         (option) => option.text == alert
       );
-
       if (option.duration != null) {
         const _time = `${
           _hours.toString().length == 2 ? _hours : `0${_hours}`
@@ -30,6 +30,7 @@ function handleNotification(issues, dateData, removeReminder) {
         }:${_seconds.toString().length == 2 ? _seconds : `0${_seconds}`}`;
         const t = time.length == 8 ? time.toString() : `${time.toString()}:00`;
         if (t == _time && date == _date) {
+          console.log(t, _time, date, _date);
           const reminderPosted = true;
           notificationToast(issue, reminderPosted, removeReminder);
         }

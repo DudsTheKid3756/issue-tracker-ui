@@ -1,19 +1,21 @@
-import React from "react";
-import "./notification.css";
+import { useEffect } from "react";
+import { handleTimeout } from "../../utils/counterHelper";
+import handleNotification from "../../utils/notificationHelper";
 
-const Notification = ({ info }) => {
-  return (
-    <>
-      <h3 className="toastHeader">Issue Alert</h3>
-      <div className="toastContainer">
-        <h5 className="title">{info.title}</h5>
-        <p className="comment">{info.comment}</p>
-        <span className="reminderInfo">
-          {info.reminder.date} {info.reminder.time}
-        </span>
-      </div>
-    </>
-  );
+const Notification = ({
+  issues,
+  apiError,
+  resetToday,
+  dateData,
+  removeReminder,
+}) => {
+  useEffect(() => {
+    handleTimeout(issues, apiError, resetToday);
+  }, [issues]);
+
+  handleNotification(issues, dateData, removeReminder);
+
+  //   return <></>;
 };
 
 export default Notification;

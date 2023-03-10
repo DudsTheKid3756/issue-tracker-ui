@@ -35,10 +35,10 @@ const ReminderForm = ({ closeModal, values, onChanges }) => {
           options={options}
         />
       </div>
-      <button className="cancel" onClick={closeModal}>
+      <button className="btn btn-secondary cancel" onClick={closeModal}>
         Cancel
       </button>
-      <button className="submit" type="submit" onClick={closeModal}>
+      <button className="btn btn-primary submit" type="submit" onClick={closeModal}>
         Set Reminder
       </button>
     </div>

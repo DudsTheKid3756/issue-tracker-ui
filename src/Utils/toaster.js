@@ -1,11 +1,8 @@
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Notification from "../components/reminder/Notification";
-import once from "./once";
+import AlertComponent from "../components/reminder/AlertComponent";
 
-var toaster = once(toastHelper);
-
-function toastHelper(text, type) {
+function toaster(text, type) {
   toast(text, {
     position: "bottom-right",
     autoClose: 2000,
@@ -19,7 +16,7 @@ function toastHelper(text, type) {
 }
 
 function notificationToast(info, reminderPosted, removeReminder) {
-  toast(<Notification info={info} />, {
+  toast(<AlertComponent info={info} />, {
     position: "bottom-right",
     autoClose: false,
     hideProgressBar: true,
@@ -36,3 +33,4 @@ function notificationToast(info, reminderPosted, removeReminder) {
 }
 
 export { toaster, notificationToast };
+

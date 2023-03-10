@@ -24,10 +24,19 @@ const IssuesList = ({
       <div className="titleContainer d-flex justify-content-between">
         <div className="d-flex justify-content-start">
           <h3 className="d-inline">{issue.title}</h3>
-          {issue.isCompleted ? <Check style="check ms-1 mt-1" title="Completed" /> : null}
+          {issue.isCompleted ? (
+            <Check style="check ms-1 mt-1" title="Completed" />
+          ) : null}
         </div>
         <div className="d-flex justify-content-end me-3">
           <div className="d-inline">
+            {issue?.reminder ? (
+              <Alert
+                style="icon"
+                title="Reminder Info"
+                onClick={() => setAlertInfoShown(true)}
+              />
+            ) : null}
             <Info
               style="icon"
               title="Issue Comment"
@@ -37,7 +46,7 @@ const IssuesList = ({
             <Pencil
               style="icon"
               title="Edit Issue"
-              onClick={() => toEdit(issue, issue.reminder)}
+              onClick={() => toEdit(issue, issue?.reminder)}
             />
             <TrashCan
               style="icon"
@@ -45,23 +54,14 @@ const IssuesList = ({
               onClick={() => handleDelete(issue.id)}
             />
           </div>
-          {issue.reminder ? (
-            <>
-              <Alert
-                style="icon"
-                title="Reminder Info"
-                onClick={() => setAlertInfoShown(true)}
-              />
-              <ModalComponent
-                component={<ReminderComponent reminder={issue?.reminder} />}
-                label="Reminder Info"
-                isOpen={alertInfoShown}
-                onRequestClose={() => setAlertInfoShown(false)}
-              />
-            </>
-          ) : null}
         </div>
       </div>
+      <ModalComponent
+        component={<ReminderComponent reminder={issue?.reminder} />}
+        label="Reminder Info"
+        isOpen={alertInfoShown}
+        onRequestClose={() => setAlertInfoShown(false)}
+      />
       {showComment[issue.id] ? (
         <p className="comment" style={{ borderColor: issue.color }}>
           {issue.comment}

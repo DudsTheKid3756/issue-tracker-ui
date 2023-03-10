@@ -26,8 +26,10 @@ import ApiSelectComponent from "../forms/ApiSelectComponent";
 import LoadingSpinner from "../LoadingSpinner";
 import LoginPage from "../login/LoginPage";
 import ModalComponent from "../ModalComponent";
+import Notification from "../reminder/Notification";
 import SessionEndModal from "../SessionEndModal";
-import SortComponent from "../SortComponent";
+import SortComponent from "../sorting/SortComponent";
+import SortWrapper from "../sorting/SortingWrapper";
 import "./issues.css";
 import IssuesList from "./IssuesList";
 
@@ -65,18 +67,20 @@ const Issues = () => {
   const collapseAllComments = () => setShowComment({});
 
   useEffect(() => {
-    setIsDisabled(true);
-    setIssues([]);
-    setIsLoading(true);
-    getIssues(
-      setIssues,
-      toggleApiError,
-      apiPath,
-      setIsLoading,
-      setIsDisabled,
-      showAllIssues ? "" : `/user/${decodedToken?.[USERNAME_KEY]}`
-    );
-    checkToken();
+    if (!!storedToken) {
+      setIsDisabled(true);
+      setIssues([]);
+      setIsLoading(true);
+      getIssues(
+        setIssues,
+        toggleApiError,
+        apiPath,
+        setIsLoading,
+        setIsDisabled,
+        showAllIssues ? "" : `/user/${decodedToken?.[USERNAME_KEY]}`
+      );
+      checkToken();
+    }
   }, [
     apiPath,
     isDeleted,
@@ -85,10 +89,6 @@ const Issues = () => {
     setIsLoading,
     showAllIssues,
   ]);
-
-  useEffect(() => {
-    handleTimeout(issues, apiError, resetToday);
-  }, [issues]);
 
   function onSortChange(e) {
     const option = sortOptions.find((option) => option.text == e.target.value);
@@ -143,7 +143,7 @@ const Issues = () => {
     location.reload();
   }
 
-  handleNotification(issues, dateData(today), removeReminder);
+  // handleNotification(issues, dateData(today), removeReminder);
 
   return (
     <>
@@ -183,10 +183,11 @@ const Issues = () => {
               </div>
               <div className="d-flex justify-content-between">
                 <div className="d-inline ms-1">
-                  {!isDisabled ? (
-                    <SortComponent
-                      onChange={onSortChange}
-                      options={sortOptions}
+                  {issues.length > 0 ? (
+                    <SortWrapper
+                      isDisabled={isDisabled}
+                      onSortChange={onSortChange}
+                      sortOptions={sortOptions}
                     />
                   ) : null}
                 </div>
@@ -243,6 +244,13 @@ const Issues = () => {
               }
             />
             <ToastContainer />
+            <Notification
+              issues={issues}
+              apiError={apiError}
+              resetToday={resetToday}
+              dateData={dateData(today)}
+              removeReminder={removeReminder}
+            />
           </>
         )}
       </div>
