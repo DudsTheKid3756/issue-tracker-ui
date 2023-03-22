@@ -37,10 +37,23 @@ module.exports = Object.freeze({
     { text: "Z to A", sortBy: ["-title"] },
     { text: "Completed", sortBy: ["-isCompleted"] },
     { text: "Incomplete", sortBy: ["isCompleted"] },
+    { text: "Color", sortBy: ["-color"] },
   ],
   EMAIL_REQUEST_OPTIONS: {
     serviceID: "service_p17yenv",
     templateID: "template_0gj60g8",
     publicKey: "Rp-fNzeGqmdJVKdT8",
   },
+  COLORS: new Set([
+    "#eb144c", // red
+    "#ff6900", // orange
+    "#fcb900", // yellow
+    "#7bdcb5", // lite green
+    "#00d084", // green
+    "#8ed1fc", // lite blue
+    "#0693e3", // blue
+    "#9900ef", // purple
+    "#f78da7", // pink
+    "#abb8c3", // gray
+  ]),
 });

@@ -3,7 +3,7 @@ import React from "react";
 const ResetConfirmation = ({ username, onChange, closeModal }) => {
   return (
     <>
-      <div className="overflow-hidden">
+      <div className="overflow-hidden p-3">
         <div className="row">
           <h5>Reset your password?</h5>
           <p>
@@ -25,7 +25,7 @@ const ResetConfirmation = ({ username, onChange, closeModal }) => {
           </form>
           <div className="d-flex justify-content-center mt-4">
             <button
-              className="btn btn-secondary d-inline ps-3 pe-3"
+              className="btn btn-secondary d-inline ps-3 pe-3 me-2"
               onClick={closeModal}
             >
               Cancel

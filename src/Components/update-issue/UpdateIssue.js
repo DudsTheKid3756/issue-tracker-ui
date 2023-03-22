@@ -1,9 +1,9 @@
 import { useRef, useState } from "react";
-import { TwitterPicker } from "react-color";
+import { CirclePicker } from "react-color";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { updateIssue } from "../../services/IssueServices";
-import { INITIAL_REMINDER } from "../../utils/constants";
+import { COLORS, INITIAL_REMINDER } from "../../utils/constants";
 import handleStorage from "../../utils/storage";
 import validateStrings from "../../utils/validation";
 import "../forms/form.css";
@@ -127,16 +127,18 @@ const UpdateIssue = () => {
         closeModal={closeReminderModal}
         setShowColorPicker={setShowColorPicker}
       />
-      <div className="pickerContainer">
-        {showColorPicker ? (
-          <TwitterPicker
+      {showColorPicker ? (
+        <div className="pickerContainer">
+          <p className="p-1 text-md-center">Color Picker</p>
+          <CirclePicker
             className="picker"
-            triangle="hide"
+            colors={Array.from(COLORS.values())}
+            circleSize={32}
             color={colorToUpdate.color}
             onChangeComplete={onColorChange}
           />
-        ) : null}
-      </div>
+        </div>
+      ) : null}
       <ModalComponent
         isOpen={removeReminderModal}
         onRequestClose={closeRemoveReminderModal}

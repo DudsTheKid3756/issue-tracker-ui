@@ -80,17 +80,19 @@ const UpdateForm = ({
       />
     </div>
     {" | "}
-    <label className="label">Color</label>
-    <Paintbrush
-      style="icon"
-      title="Change Color"
-      onClick={() => setShowColorPicker((prevState) => !prevState)}
-    />
+    <div className="d-inline">
+      <label className="label">Color</label>
+      <Paintbrush
+        style="ms-1 point"
+        title="Change Color"
+        onClick={() => setShowColorPicker((prevState) => !prevState)}
+      />
+    </div>
     <div className="buttonDiv">
       <button className="btn btn-secondary" onClick={handleCancel}>
         Cancel
       </button>
-      <button className="btn btn-primary" type="submit" onClick={handleUpdate}>
+      <button className="btn btn-primary ms-2" type="submit" onClick={handleUpdate}>
         Update
       </button>
     </div>

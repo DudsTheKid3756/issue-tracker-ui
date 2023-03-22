@@ -15,9 +15,8 @@ import {
   SORT_OPTIONS,
   USERNAME_KEY,
 } from "../../utils/constants";
-import { dateData, handleTimeout } from "../../utils/counterHelper";
+import { dateData } from "../../utils/counterHelper";
 import Signout from "../../utils/icons/Signout";
-import handleNotification from "../../utils/notificationHelper";
 import handleStorage from "../../utils/storage";
 import { toaster } from "../../utils/toaster";
 import { getToken, removeSession } from "../../utils/tokenHelper";
@@ -28,7 +27,6 @@ import LoginPage from "../login/LoginPage";
 import ModalComponent from "../ModalComponent";
 import Notification from "../reminder/Notification";
 import SessionEndModal from "../SessionEndModal";
-import SortComponent from "../sorting/SortComponent";
 import SortWrapper from "../sorting/SortingWrapper";
 import "./issues.css";
 import IssuesList from "./IssuesList";
@@ -105,8 +103,6 @@ const Issues = () => {
       const currentTimeMs = (Date.now() / 1000).toFixed(0);
       if (tokenExpirationMs < currentTimeMs) {
         setShowSessionEndModal(true);
-        removeSession();
-        changeIsLoggedIn(false);
       } else changeIsLoggedIn(true);
     }
   }
@@ -143,7 +139,11 @@ const Issues = () => {
     location.reload();
   }
 
-  // handleNotification(issues, dateData(today), removeReminder);
+  function closeSessionEndModal() {
+    setShowSessionEndModal(false);
+    removeSession();
+    changeIsLoggedIn(false);
+  }
 
   return (
     <>
@@ -206,7 +206,9 @@ const Issues = () => {
             </div>
             <div className="issues">
               {isLoading ? (
-                <LoadingSpinner />
+                <div className="d-flex justify-content-center ps-3 pe-3">
+                  <LoadingSpinner />
+                </div>
               ) : (
                 <span className="issuesContainer">
                   {issues.length > 0 ? (
@@ -236,12 +238,8 @@ const Issues = () => {
             <ModalComponent
               label="Session Expired"
               isOpen={showSessionEndModal}
-              onRequestClose={() => setShowSessionEndModal(false)}
-              component={
-                <SessionEndModal
-                  closeModal={() => setShowSessionEndModal(false)}
-                />
-              }
+              onRequestClose={closeSessionEndModal}
+              component={<SessionEndModal closeModal={closeSessionEndModal} />}
             />
             <ToastContainer />
             <Notification
@@ -253,6 +251,10 @@ const Issues = () => {
             />
           </>
         )}
+        <br />
+        <p className="text-center text-secondary pt-3 border-top">
+          Created by Duds, The Kid. &copy; 2023
+        </p>
       </div>
     </>
   );

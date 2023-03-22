@@ -1,10 +1,10 @@
 import jwtDecode from "jwt-decode";
 import { useState } from "react";
-import { TwitterPicker } from "react-color";
+import { CirclePicker } from "react-color";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { addIssue } from "../../services/IssueServices";
-import { INITIAL_REMINDER, USERNAME_KEY } from "../../utils/constants";
+import { COLORS, INITIAL_REMINDER, USERNAME_KEY } from "../../utils/constants";
 import handleStorage from "../../utils/storage";
 import { getToken } from "../../utils/tokenHelper";
 import validateStrings from "../../utils/validation";
@@ -108,16 +108,18 @@ const CreateIssue = () => {
         closeModal={closeModal}
         setShowColorPicker={setShowColorPicker}
       />
-      <div className="pickerContainer">
-        {showColorPicker ? (
-          <TwitterPicker
+      {showColorPicker ? (
+        <div className="pickerContainer">
+          <p className="p-1 text-md-center">Color Picker</p>
+          <CirclePicker
             className="picker"
-            triangle="hide"
+            colors={Array.from(COLORS.values())}
+            circleSize={32}
             color={color}
             onChangeComplete={onColorChange}
           />
-        ) : null}
-      </div>
+        </div>
+      ) : null}
       <ToastContainer />
     </div>
   );

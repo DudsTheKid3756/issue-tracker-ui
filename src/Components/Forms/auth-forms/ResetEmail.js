@@ -27,7 +27,7 @@ const ResetEmail = ({ resetCode, email, username, closeResetCodeModal }) => {
 
   return (
     <>
-      <div className="overflow-hidden">
+      <div className="overflow-hidden p-3">
         <div className="row">
           <p>
             A password reset email was sent to <u>{email}</u>. Check your email

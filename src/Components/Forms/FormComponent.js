@@ -2,6 +2,7 @@ import React from "react";
 import "./form.css";
 
 const FormComponent = ({
+  addtlStyles,
   label,
   field,
   type,
@@ -24,7 +25,7 @@ const FormComponent = ({
         {!isMultiline ? (
           <>
             <input
-              className={`formInput ${errLength != 0 ? "errBorder" : ""}`}
+              className={`formInput ${errLength != 0 ? "errBorder" : ""} ${addtlStyles}`}
               id={field}
               name={field}
               type={type}

@@ -59,7 +59,7 @@ const SignUpForm = ({
                 value={signUpInfo.email}
                 onChange={onChange}
                 className="form-control mt-1"
-                placeholder="Email Address"
+                placeholder="Email address"
               />
             </div>
             <div className="form-group mt-3">
@@ -71,7 +71,7 @@ const SignUpForm = ({
                 value={signUpInfo.password}
                 onChange={onChange}
                 className="form-control mt-1"
-                placeholder="Create Password"
+                placeholder="Create password"
               />
             </div>
             <div className="d-grid gap-2 mt-3">

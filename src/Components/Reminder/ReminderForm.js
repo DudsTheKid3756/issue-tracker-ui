@@ -10,6 +10,7 @@ const ReminderForm = ({ closeModal, values, onChanges }) => {
     <div className="formContainer">
       <div className="reminderInput">
         <FormComponent
+          addtlStyles="p-1"
           label="Date"
           field="date"
           type="date"
@@ -19,6 +20,7 @@ const ReminderForm = ({ closeModal, values, onChanges }) => {
       </div>
       <div className="reminderInput">
         <FormComponent
+          addtlStyles="p-1"
           label="Time"
           field="time"
           type="time"
@@ -28,6 +30,7 @@ const ReminderForm = ({ closeModal, values, onChanges }) => {
       </div>
       <div className="reminderInput">
         <SelectComponent
+          addtlStyles="p-1"
           label="Alert"
           field="alert"
           values={values}
@@ -35,12 +38,14 @@ const ReminderForm = ({ closeModal, values, onChanges }) => {
           options={options}
         />
       </div>
-      <button className="btn btn-secondary cancel" onClick={closeModal}>
-        Cancel
-      </button>
-      <button className="btn btn-primary submit" type="submit" onClick={closeModal}>
-        Set Reminder
-      </button>
+      <div className="buttonDiv">
+        <button className="btn btn-secondary" onClick={closeModal}>
+          Cancel
+        </button>
+        <button className="btn btn-primary ms-2" type="submit" onClick={closeModal}>
+          Set Reminder
+        </button>
+      </div>
     </div>
   );
 };
