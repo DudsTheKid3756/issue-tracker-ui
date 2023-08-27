@@ -2,7 +2,6 @@ import jwtDecode from "jwt-decode";
 import { useState } from "react";
 import { CirclePicker } from "react-color";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
 import { addIssue } from "../../services/IssueServices";
 import { COLORS, INITIAL_REMINDER, USERNAME_KEY } from "../../utils/constants";
 import handleStorage from "../../utils/storage";
@@ -120,7 +119,6 @@ const CreateIssue = () => {
           />
         </div>
       ) : null}
-      <ToastContainer />
     </div>
   );
 };

@@ -21,6 +21,6 @@ export const orderedList = (list, sortBy) => {
   if (sortBy.includes("-color")) {
     return sortColors(list);
   }
-  
+
   return list.sort(fieldSorter(sortBy));
 };

@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react";
-import { ToastContainer } from "react-toastify";
 import { handleEmail, signin } from "../../../services/AuthService";
 import randCode from "../../../utils/randCode";
 import ModalComponent from "../../ModalComponent";
@@ -151,7 +150,6 @@ const LoginForm = ({
           </div>
         </form>
       </div>
-      <ToastContainer />
       <script
         type="text/javascript"
         src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"

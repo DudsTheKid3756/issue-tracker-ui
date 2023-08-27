@@ -1,5 +1,4 @@
 import React from "react";
-import { ToastContainer } from "react-toastify";
 import { signin, signup } from "../../../services/AuthService";
 
 const SignUpForm = ({
@@ -7,7 +6,7 @@ const SignUpForm = ({
   signUpInfo,
   onChange,
   changeIsLoggedIn,
-  apiPath
+  apiPath,
 }) => {
   const handleSignUp = (e) => {
     e.preventDefault();
@@ -86,7 +85,6 @@ const SignUpForm = ({
           </div>
         </form>
       </div>
-      <ToastContainer />
     </>
   );
 };

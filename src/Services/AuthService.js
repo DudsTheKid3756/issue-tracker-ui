@@ -1,6 +1,8 @@
 import emailjs from "@emailjs/browser";
 import {
-  API_ERROR, AUTH_PATH, EMAIL_REQUEST_OPTIONS
+  API_ERROR,
+  AUTH_PATH,
+  EMAIL_REQUEST_OPTIONS,
 } from "../utils/constants";
 import httpHelper from "../utils/httpHelper";
 import { toaster } from "../utils/toaster";
@@ -87,4 +89,3 @@ const handleEmail = async (username, resetCode, apiPath, setEmail) => {
 };
 
 export { signup, signin, resetPassword, handleEmail };
-

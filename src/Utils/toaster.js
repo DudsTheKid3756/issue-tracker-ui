@@ -33,4 +33,3 @@ function notificationToast(info, reminderPosted, removeReminder) {
 }
 
 export { toaster, notificationToast };
-

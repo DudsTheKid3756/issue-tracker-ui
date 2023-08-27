@@ -6,7 +6,7 @@ async function httpHelper(path, api, method, payload) {
     method,
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${getToken()}`
+      Authorization: `Bearer ${getToken()}`,
     },
     body: JSON.stringify(payload),
   });

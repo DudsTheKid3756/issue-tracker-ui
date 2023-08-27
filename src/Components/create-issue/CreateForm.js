@@ -30,7 +30,7 @@ const CreateForm = ({
         onChanges={onChanges}
         errors={errors}
         errLength={errLength}
-        maxLength={30}
+        maxLength={28}
       />
       <FormComponent
         label="Comment"

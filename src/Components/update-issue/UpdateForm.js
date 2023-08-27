@@ -32,7 +32,7 @@ const UpdateForm = ({
         onChanges={onChanges}
         errors={errors}
         errLength={errLength}
-        maxLength={30}
+        maxLength={28}
       />
       <FormComponent
         label="Comment"
@@ -92,7 +92,11 @@ const UpdateForm = ({
       <button className="btn btn-secondary" onClick={handleCancel}>
         Cancel
       </button>
-      <button className="btn btn-primary ms-2" type="submit" onClick={handleUpdate}>
+      <button
+        className="btn btn-primary ms-2"
+        type="submit"
+        onClick={handleUpdate}
+      >
         Update
       </button>
     </div>

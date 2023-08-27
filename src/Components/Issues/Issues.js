@@ -1,19 +1,18 @@
 import jwtDecode from "jwt-decode";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
 import { ApiContext } from "../../contexts/ApiContext";
 import { LoginContext } from "../../contexts/LoginContext";
 import {
   deleteIssue,
   getIssues,
-  updateIssue,
+  updateIssue
 } from "../../services/IssueServices";
 import {
   API_ERROR,
   ROLE_KEY,
   SORT_OPTIONS,
-  USERNAME_KEY,
+  USERNAME_KEY
 } from "../../utils/constants";
 import { dateData } from "../../utils/counterHelper";
 import Signout from "../../utils/icons/Signout";
@@ -241,7 +240,6 @@ const Issues = () => {
               onRequestClose={closeSessionEndModal}
               component={<SessionEndModal closeModal={closeSessionEndModal} />}
             />
-            <ToastContainer />
             <Notification
               issues={issues}
               apiError={apiError}

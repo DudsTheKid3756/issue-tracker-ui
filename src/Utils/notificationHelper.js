@@ -17,9 +17,7 @@ function handleNotification(issues, dateData, removeReminder) {
     // console.log(issue);
     if (issue.reminder != null) {
       const { time, date, alert } = issue?.reminder;
-      const option = ALERT_OPTIONS.find(
-        (option) => option.text == alert
-      );
+      const option = ALERT_OPTIONS.find((option) => option.text == alert);
       if (option.duration != null) {
         const _time = `${
           _hours.toString().length == 2 ? _hours : `0${_hours}`

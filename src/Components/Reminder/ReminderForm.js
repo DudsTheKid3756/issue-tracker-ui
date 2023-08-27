@@ -42,7 +42,11 @@ const ReminderForm = ({ closeModal, values, onChanges }) => {
         <button className="btn btn-secondary" onClick={closeModal}>
           Cancel
         </button>
-        <button className="btn btn-primary ms-2" type="submit" onClick={closeModal}>
+        <button
+          className="btn btn-primary ms-2"
+          type="submit"
+          onClick={closeModal}
+        >
           Set Reminder
         </button>
       </div>

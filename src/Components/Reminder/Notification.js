@@ -14,8 +14,6 @@ const Notification = ({
   }, [issues]);
 
   handleNotification(issues, dateData, removeReminder);
-
-  //   return <></>;
 };
 
 export default Notification;

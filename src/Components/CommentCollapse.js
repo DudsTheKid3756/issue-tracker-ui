@@ -13,7 +13,11 @@ const CommentCollapse = ({ showComment, collapseAllComments }) => {
   return (
     <div className="barsContainer">
       {commentsShown.true > 1 ? (
-        <Bars style="icon" title="Collapse Comments" onClick={() => collapseAllComments()} />
+        <Bars
+          style="icon"
+          title="Collapse Comments"
+          onClick={() => collapseAllComments()}
+        />
       ) : null}
     </div>
   );

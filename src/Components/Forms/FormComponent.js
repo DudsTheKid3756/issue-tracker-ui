@@ -25,7 +25,9 @@ const FormComponent = ({
         {!isMultiline ? (
           <>
             <input
-              className={`formInput ${errLength != 0 ? "errBorder" : ""} ${addtlStyles}`}
+              className={`formInput ${
+                errLength != 0 ? "errBorder" : ""
+              } ${addtlStyles}`}
               id={field}
               name={field}
               type={type}

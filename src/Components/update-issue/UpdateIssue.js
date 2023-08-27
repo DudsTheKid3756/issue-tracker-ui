@@ -1,7 +1,6 @@
 import { useRef, useState } from "react";
 import { CirclePicker } from "react-color";
 import { useLocation, useNavigate } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
 import { updateIssue } from "../../services/IssueServices";
 import { COLORS, INITIAL_REMINDER } from "../../utils/constants";
 import handleStorage from "../../utils/storage";
@@ -155,7 +154,6 @@ const UpdateIssue = () => {
           </>
         }
       />
-      <ToastContainer />
     </div>
   );
 };
